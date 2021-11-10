@@ -33,7 +33,7 @@
         <a class="nav-link" href="gerenciar_usuarios.do?acao=listar">
             <i class="fas fa-users"></i>
             <span>Usuários</span></a>
-        <a class="nav-link" href="listar_clientes.jsp">
+        <a class="nav-link" href="listar_cliente.jsp">
             <i class="fas fa fa-child"></i>
             <span>Clientes</span></a>
     </li>
