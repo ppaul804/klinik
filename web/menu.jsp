@@ -33,7 +33,6 @@
         <a class="nav-link" href="gerenciar_usuarios.do?acao=listar">
             <i class="fas fa-users"></i>
             <span>Usuários</span></a>
-            <span>Usuários</span></a>
         <a class="nav-link" href="gerenciar_clientes.do?acao=listar">
             <i class="fas fa fa-child"></i>
             <span>Clientes</span></a>
