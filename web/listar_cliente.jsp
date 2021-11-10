@@ -74,9 +74,9 @@
                                         <tbody>
                                             <tr>
                                                 <td>0</td>
-                                                <td>Zero Badarass</td>
-                                                <td>ADEMIRO</td>
-                                                <td>ademiro@ademoro.com</td>
+                                                <td>MaestroMilGrauUp</td>
+                                                <td>ADEMIR</td>
+                                                <td>bronze@gmail.com</td>
                                                 <td>ATIVO</td>
                                                 <td  class="text-right">
                                                     <a title="Editar" href="#" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
