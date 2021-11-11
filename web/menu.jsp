@@ -25,14 +25,17 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            MÛdulos
+            M√≥dulos
         </div>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item <c:if test="${!empty(activeU)}">active</c:if>">
         <a class="nav-link" href="gerenciar_usuarios.do?acao=listar">
             <i class="fas fa-users"></i>
-            <span>Usu·rios</span></a>
+            <span>Usu√°rios</span></a>
+        <a class="nav-link" href="listar_cliente.jsp">
+            <i class="fas fa fa-child"></i>
+            <span>Clientes</span></a>
     </li>
 
     <!-- Divider -->
