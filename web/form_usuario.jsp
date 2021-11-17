@@ -53,7 +53,7 @@
                 <div class="card shadow mb-4">
 
                     <div class="card-body">
-                        <form method="post" name="form_add">
+                        <form method="post" name="form_add" action="gerenciar_usuarios.do">
 
                             <fieldset class="mt-5 border p-2 mb-4">
                                 <legend class="font-small form-control text-center text-primary"> <i class="fas fa-user-tie text-primary"></i>&nbsp;Dados Pessoais </legend>
@@ -61,51 +61,52 @@
                                 <div class="form-group row mb-4">
                                     <div class="col-md-5">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control" name="nome" placeholder="Seu nome" value="${usuario.nome}"> 
+                                        <input type="text" class="form-control" name="nome" placeholder="Seu nome" value="${usuario.nome}" required=""> 
                                     </div>
                                     <div class="col-md-4">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" name="email" placeholder="Seu email" value="${usuario.email}">
+                                        <input type="email" class="form-control" name="email" placeholder="Seu email" value="${usuario.email}" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Data de Nascimento</label>
-                                        <input type="date" class="form-control" name="dataDeNascimento" value="${usuario.dataDeNascimento}">
+                                        <input type="date" class="form-control" name="data_de_nascimento" value="${usuario.data_de_nascimento}" required="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-3">
                                         <label>CPF</label>
-                                        <input type="text" class="form-control" name="cpf" placeholder="Seu CPF" value="${usuario.cpf}"> 
+                                        <input type="text" class="form-control" name="cpf" placeholder="Seu CPF" value="${usuario.cpf}" required=""> 
                                     </div>
                                     <div class="col-md-3">
                                         <label>RG</label>
-                                        <input type="text" class="form-control" name="rg" placeholder="Seu RG" value="${usuario.rg}">
+                                        <input type="text" class="form-control" name="rg" placeholder="Seu RG" value="${usuario.rg}" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Telefone</label>
-                                        <input type="text" class="form-control" name="telefone" placeholder="Seu telefone" value="${usuario.telefone}">
+                                        <input type="text" class="form-control" name="telefone" placeholder="Seu telefone" value="${usuario.telefone}" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Sexo</label>
-                                        <select class="custom-select" name="sexo">
-                                            <option value="0" <c:if test="${usuario.sexo == 0}">selected=""</c:if> >Feminino</option>
-                                            <option value="1" <c:if test="${usuario.sexo == 1}">selected=""</c:if> >Masculino</option>
-                                            <option value="2" <c:if test="${usuario.sexo == 2}">selected=""</c:if> >Outros</option>
+                                        <select class="custom-select" name="sexo"  required="">
+                                            <option value="" disabled="" selected="">Escolha um Sexo</option>
+                                            <option value="F" <c:if test="${usuario.sexo == 0}">selected=""</c:if> >Feminino</option>
+                                            <option value="M" <c:if test="${usuario.sexo == 1}">selected=""</c:if> >Masculino</option>
+                                            <option value="O" <c:if test="${usuario.sexo == 2}">selected=""</c:if> >Outros</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
                                     <div class="col-md-5">
                                         <label>Endereço</label>
-                                        <input type="text" class="form-control" name="endereco" placeholder="Seu endereço" value="${usuario.endereco}"> 
+                                        <input type="text" class="form-control" name="endereco" placeholder="Seu endereço" value="${usuario.endereco}" required=""> 
                                     </div>
                                     <div class="col-md-4">
                                         <label>Complemento</label>
-                                        <input type="email" class="form-control" name="complemento" placeholder="Seu complemento" value="${usuario.complemento}">
+                                        <input type="text" class="form-control" name="complemento" placeholder="Seu complemento" value="${usuario.complemento}">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Cidade</label>
-                                        <input type="text" class="form-control" name="cidade" placeholder="Sua cidade" value="${usuario.cidade}">
+                                        <input type="text" class="form-control" name="cidade" placeholder="Sua cidade" value="${usuario.cidade}" required="">
                                     </div>
                                 </div>
                             </fieldset>
@@ -114,26 +115,28 @@
                                 <div class="form-group row">
                                     <div class="col-md-3">
                                         <label>Login</label>
-                                        <input type="text" class="form-control" name="login" placeholder="Seu login" value="${usuario.login}">
+                                        <input type="text" class="form-control" name="login" placeholder="Seu login" value="${usuario.login}" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Senha</label>
-                                        <input type="password" class="form-control" name="senha" placeholder="Sua senha" value="${usuario.senha}">
+                                        <input type="password" class="form-control" name="senha" placeholder="Sua senha" value="${usuario.senha}" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Status</label>
-                                        <select class="custom-select" name="status">
-                                            <option value="0">Inativo</option>
-                                            <option value="1">Ativo</option>
+                                        <select class="custom-select" name="status" required="">
+                                            <option value="" disabled="" selected="">Escolha um Status</option>
+                                            <option value="0" <c:if test="${usuario.status == 0}">selected=""</c:if>>Inativo</option>
+                                            <option value="1" <c:if test="${usuario.status == 1}">selected=""</c:if>>Ativo</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Perfil</label>
-                                        <select class="custom-select" name="perfil">
-                                            <option value="4">Dentista</option>
-                                            <option value="3">Atendente</option>
-                                            <option value="2">Gerente</option>
-                                            <option value="1">Administrador</option>
+                                        <select class="custom-select" name="idPerfil" required="">
+                                            <option value="" disabled="" selected="">Escolha um Perfil</option>
+                                            <jsp:useBean class="model.PerfilDAO" id="perfil"/>
+                                            <c:forEach var="p" items="${perfil.lista}">
+                                                <option value="${p.idPerfil}" <c:if test="${p.idPerfil == usuario.perfil.idPerfil}"> selected=""</c:if> >${p.nome}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -152,15 +155,7 @@
         </div>
         <!-- End of Main Content -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; KLINIK <%= LocalDate.now().getYear()%></span>
-    </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+        <jsp:include page="footer.jsp"/>
 
     </div>
     <!-- End of Content Wrapper -->
