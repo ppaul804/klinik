@@ -14,7 +14,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>KLINIK | ${titulo}</title>
+        <title>KLINIK | Listar Menu</title>
 
         <!-- Custom fonts for this template-->
         <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

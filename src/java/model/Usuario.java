@@ -1,16 +1,15 @@
 package model;
 
 import java.util.Date;
-import lombok.*;
+//import lombok.*;
 
-@Setter
-@Getter
-@ToString
+//@Setter
+//@Getter
+//@ToString
 public class Usuario {
     
     private int idUsuario;
-    //private int idPerfil;
-    private Perfil idPerfil;
+    //private Perfil idPerfil;
     private String nome;
     private String login;
     private String senha;
