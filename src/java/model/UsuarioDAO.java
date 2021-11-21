@@ -1,4 +1,4 @@
-/* package model;
+package model;
 
 import java.sql.PreparedStatement;
 import java.sql.Date;
@@ -88,7 +88,7 @@ public class UsuarioDAO extends DataBaseDAO {
             u.setIdUsuario(rs.getInt("u.idUSUARIO"));
             /*
             u.setIdPerfil(rs.getInt("idPERFIL"));
-            
+            */
             
             Perfil p = new Perfil();
             p.setIdPerfil(rs.getInt("u.idPERFIL"));
@@ -131,7 +131,7 @@ public class UsuarioDAO extends DataBaseDAO {
             u.setIdUsuario(rs.getInt("u.idUSUARIO"));
             /*
             u.setIdPerfil(rs.getInt("idPERFIL"));
-            
+            */
             
             Perfil p = new Perfil();
             p.setIdPerfil(rs.getInt("u.idPERFIL"));
@@ -160,4 +160,3 @@ public class UsuarioDAO extends DataBaseDAO {
     }
 }
 
-*/
