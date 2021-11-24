@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.time.LocalDate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -61,11 +62,11 @@
                                 <div class="form-group row mb-4">
                                     <div class="col-md-5">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control" name="nome" placeholder="Seu nome" value="${usuario.nome}" required=""> 
+                                        <input type="text" class="form-control" name="nome" placeholder="Seu nome" value="${usuario.nome}" maxlength="45" required=""> 
                                     </div>
                                     <div class="col-md-4">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" name="email" placeholder="Seu email" value="${usuario.email}" required="">
+                                        <input type="email" class="form-control" name="email" placeholder="Seu email" value="${usuario.email}" maxlength="45" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Data de Nascimento</label>
@@ -75,38 +76,38 @@
                                 <div class="form-group row">
                                     <div class="col-md-3">
                                         <label>CPF</label>
-                                        <input type="text" class="form-control" name="cpf" placeholder="Seu CPF" value="${usuario.cpf}" required=""> 
+                                        <input type="text" class="form-control" name="cpf" placeholder="Seu CPF" value="${usuario.cpf}" maxlength="11" required=""> 
                                     </div>
                                     <div class="col-md-3">
                                         <label>RG</label>
-                                        <input type="text" class="form-control" name="rg" placeholder="Seu RG" value="${usuario.rg}" required="">
+                                        <input type="text" class="form-control" name="rg" placeholder="Seu RG" value="${usuario.rg}" maxlength="9" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Telefone</label>
-                                        <input type="text" class="form-control" name="telefone" placeholder="Seu telefone" value="${usuario.telefone}" required="">
+                                        <input type="text" class="form-control" name="telefone" placeholder="Seu telefone" value="${usuario.telefone}" maxlength="16" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Sexo</label>
                                         <select class="custom-select" name="sexo"  required="">
                                             <option value="" disabled="" selected="">Escolha um Sexo</option>
-                                            <option value="F" <c:if test="${usuario.sexo == 0}">selected=""</c:if> >Feminino</option>
-                                            <option value="M" <c:if test="${usuario.sexo == 1}">selected=""</c:if> >Masculino</option>
-                                            <option value="O" <c:if test="${usuario.sexo == 2}">selected=""</c:if> >Outros</option>
+                                            <option value="F" <c:if test="${usuario.sexo == 'F'}">selected=""</c:if> >Feminino</option>
+                                            <option value="M" <c:if test="${usuario.sexo == 'M'}">selected=""</c:if> >Masculino</option>
+                                            <option value="O" <c:if test="${usuario.sexo == 'O'}">selected=""</c:if> >Outros</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
                                     <div class="col-md-5">
                                         <label>Endereço</label>
-                                        <input type="text" class="form-control" name="endereco" placeholder="Seu endereço" value="${usuario.endereco}" required=""> 
+                                        <input type="text" class="form-control" name="endereco" placeholder="Seu endereço" value="${usuario.endereco}" maxlength="45" required=""> 
                                     </div>
                                     <div class="col-md-4">
                                         <label>Complemento</label>
-                                        <input type="text" class="form-control" name="complemento" placeholder="Seu complemento" value="${usuario.complemento}">
+                                        <input type="text" class="form-control" name="complemento" placeholder="Seu complemento" value="${usuario.complemento}" maxlength="45">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Cidade</label>
-                                        <input type="text" class="form-control" name="cidade" placeholder="Sua cidade" value="${usuario.cidade}" required="">
+                                        <input type="text" class="form-control" name="cidade" placeholder="Sua cidade" value="${usuario.cidade}" maxlength="45" required="">
                                     </div>
                                 </div>
                             </fieldset>
@@ -115,11 +116,11 @@
                                 <div class="form-group row">
                                     <div class="col-md-3">
                                         <label>Login</label>
-                                        <input type="text" class="form-control" name="login" placeholder="Seu login" value="${usuario.login}" required="">
+                                        <input type="text" class="form-control" name="login" placeholder="Seu login" value="${usuario.login}" maxlength="20" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Senha</label>
-                                        <input type="password" class="form-control" name="senha" placeholder="Sua senha" value="${usuario.senha}" required="">
+                                        <input type="password" class="form-control" name="senha" placeholder="Sua senha" value="${usuario.senha}" maxlength="20" required="">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Status</label>
@@ -135,7 +136,7 @@
                                             <option value="" disabled="" selected="">Escolha um Perfil</option>
                                             <jsp:useBean class="model.PerfilDAO" id="perfil"/>
                                             <c:forEach var="p" items="${perfil.lista}">
-                                                <option value="${p.idPerfil}" <c:if test="${p.idPerfil == usuario.perfil.idPerfil}"> selected=""</c:if> >${p.nome}</option>
+                                                <option value="${p.idPerfil}" <c:if test="${p.idPerfil == usuario.idPerfil.idPerfil}"> selected=""</c:if> >${p.nome}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -143,7 +144,7 @@
                             </fieldset>
 
                             <input type="hidden" name="idUsuario" value="${usuario.idUsuario}">
-                            <button type="submit" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Salvar</button>
+                            <button type="submit" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Gravar</button>
                             <a title="Voltar" href="gerenciar_usuarios.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
                         </form>
                     </div>

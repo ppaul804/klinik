@@ -9,37 +9,36 @@ public class UsuarioDAO extends DataBaseDAO {
 
     public UsuarioDAO() throws Exception {}
     
-    public boolean Gravar(Usuario u) {
+    public boolean gravar(Usuario usuario) {
 
         try {
             
             String sql;
             this.conectar();
             
-            if (u.getIdUsuario() == 0) {
+            if (usuario.getIdUsuario() == 0) {
                 sql = "INSERT INTO usuario (NOME, LOGIN, SENHA, STATUS, CPF, RG, EMAIL, TELEFONE, ENDERECO, COMPLEMENTO, CIDADE, SEXO, DATA_DE_NASCIMENTO, idPERFIL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             } else {
                 sql = "UPDATE usuario SET NOME = ?, LOGIN = ?, SENHA = ?, STATUS = ?, CPF = ?, RG = ?, EMAIL = ?, TELEFONE = ?, ENDERECO = ?, COMPLEMENTO = ?, CIDADE = ?, SEXO = ?, DATA_DE_NASCIMENTO = ?, idPERFIL = ? WHERE idUSUARIO = ?";
             }
             
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, u.getNome());
-            pstm.setString(2, u.getLogin());
-            pstm.setString(3, u.getSenha());
-            pstm.setInt(4, u.getStatus());
-            pstm.setString(5, u.getCpf());
-            pstm.setString(6, u.getRg());
-            pstm.setString(7, u.getEmail());
-            pstm.setString(8, u.getTelefone());
-            pstm.setString(9, u.getEndereco());
-            pstm.setString(10, u.getComplemento());
-            pstm.setString(11, u.getCidade());
-            pstm.setString(12, Character.toString(u.getSexo()));
-            Date dataPadraoSql = new Date(u.getData_de_nascimento().getTime());
-            pstm.setDate(13, dataPadraoSql);
-            pstm.setInt(14, u.getIdPerfil().getIdPerfil());
-            if(u.getIdUsuario() > 0) {
-                pstm.setInt(15, u.getIdUsuario());
+            pstm.setString(1, usuario.getNome());
+            pstm.setString(2, usuario.getLogin());
+            pstm.setString(3, usuario.getSenha());
+            pstm.setInt(4, usuario.getStatus());
+            pstm.setString(5, usuario.getCpf());
+            pstm.setString(6, usuario.getRg());
+            pstm.setString(7, usuario.getEmail());
+            pstm.setString(8, usuario.getTelefone());
+            pstm.setString(9, usuario.getEndereco());
+            pstm.setString(10, usuario.getComplemento());
+            pstm.setString(11, usuario.getCidade());
+            pstm.setString(12, Character.toString(usuario.getSexo()));
+            pstm.setDate(13, new Date(usuario.getData_de_nascimento().getTime()));
+            pstm.setInt(14, usuario.getIdPerfil().getIdPerfil());
+            if(usuario.getIdUsuario() > 0) {
+                pstm.setInt(15, usuario.getIdUsuario());
             }
             
             pstm.execute();
@@ -52,14 +51,14 @@ public class UsuarioDAO extends DataBaseDAO {
         }
     }
     
-    public boolean deletar(Usuario u) {
+    public boolean deletar(Usuario usuario) {
         
         try {
             
             String sql = "UPDATE usuario SET STATUS = 0 WHERE idUSUARIO = ?";
             this.conectar();
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, u.getIdUsuario());
+            pstm.setInt(1, usuario.getIdUsuario());
             pstm.execute();
             
             this.desconectar();
@@ -74,88 +73,124 @@ public class UsuarioDAO extends DataBaseDAO {
     
     public Usuario getCarregaPorId(int idUsuario) throws Exception {
         
-        Usuario u = new Usuario();
+        Usuario usuario = new Usuario();
         
-        String sql = "SELECT u.*, p.nome FROM usuario u "
-                + "INNER JOIN perfil p ON p.idPERFIL = u.idPERFIL "
-                + "WHERE u.idUSUARIO = ? ";
+        String sql = "SELECT usuario.*, perfil.nome FROM usuario usuario "
+                + "INNER JOIN perfil perfil ON perfil.idPERFIL = usuario.idPERFIL "
+                + "WHERE usuario.idUSUARIO = ? ";
         this.conectar();
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, idUsuario);
         ResultSet rs = pstm.executeQuery();
         
         if (rs.next()) {
-            u.setIdUsuario(rs.getInt("u.idUSUARIO"));
-            /*
-            u.setIdPerfil(rs.getInt("idPERFIL"));
-            */
+            usuario.setIdUsuario(rs.getInt("usuario.idUSUARIO"));
             
-            Perfil p = new Perfil();
-            p.setIdPerfil(rs.getInt("u.idPERFIL"));
-            p.setNome(rs.getString("p.nome"));
-            u.setIdPerfil(p);
+            Perfil perfil = new Perfil();
+            perfil.setIdPerfil(rs.getInt("usuario.idPERFIL"));
+            perfil.setNome(rs.getString("perfil.nome"));
+            usuario.setIdPerfil(perfil);
             
-            u.setNome(rs.getString("u.NOME"));
-            u.setLogin(rs.getString("u.LOGIN"));
-            u.setSenha(rs.getString("u.SENHA"));
-            u.setStatus(rs.getInt("u.STATUS"));
-            u.setCpf(rs.getString("u.CPF"));
-            u.setRg(rs.getString("u.RG"));
-            u.setEmail(rs.getString("u.EMAIL"));
-            u.setTelefone(rs.getString("u.TELEFONE"));
-            u.setEndereco(rs.getString("u.ENDERECO"));
-            u.setComplemento(rs.getString("u.COMPLEMENTO"));
-            u.setCidade(rs.getString("u.CIDADE"));
-            u.setSexo(rs.getString("u.SEXO").charAt(0));
-            u.setData_de_nascimento(rs.getDate("u.DATA_DE_NASCIMENTO"));
+            usuario.setNome(rs.getString("usuario.NOME"));
+            usuario.setLogin(rs.getString("usuario.LOGIN"));
+            usuario.setSenha(rs.getString("usuario.SENHA"));
+            usuario.setStatus(rs.getInt("usuario.STATUS"));
+            usuario.setCpf(rs.getString("usuario.CPF"));
+            usuario.setRg(rs.getString("usuario.RG"));
+            usuario.setEmail(rs.getString("usuario.EMAIL"));
+            usuario.setTelefone(rs.getString("usuario.TELEFONE"));
+            usuario.setEndereco(rs.getString("usuario.ENDERECO"));
+            usuario.setComplemento(rs.getString("usuario.COMPLEMENTO"));
+            usuario.setCidade(rs.getString("usuario.CIDADE"));
+            usuario.setSexo(rs.getString("usuario.SEXO").charAt(0));
+            usuario.setData_de_nascimento(rs.getDate("usuario.DATA_DE_NASCIMENTO"));
         }
         
         this.desconectar();
-        return u;
+        return usuario;
         
     }
 
     public ArrayList<Usuario> getLista() throws Exception{
         
         ArrayList<Usuario> lista = new ArrayList<Usuario>();
-        String sql = "SELECT u.*, p.nome FROM usuario u "
-                + "INNER JOIN perfil p ON p.idPERFIL = u.idPERFIL";
-        //String sql = "SELECT * FROM usuario";
+        String sql = "SELECT usuario.*, perfil.nome FROM usuario usuario "
+                + "INNER JOIN perfil perfil ON perfil.idPERFIL = usuario.idPERFIL";
         
         this.conectar();
         PreparedStatement pstm = conn.prepareStatement(sql);
         ResultSet rs = pstm.executeQuery();
         
         while (rs.next()) {            
-            Usuario u = new Usuario();
-            u.setIdUsuario(rs.getInt("u.idUSUARIO"));
-            /*
-            u.setIdPerfil(rs.getInt("idPERFIL"));
-            */
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(rs.getInt("usuario.idUSUARIO"));
             
-            Perfil p = new Perfil();
-            p.setIdPerfil(rs.getInt("u.idPERFIL"));
-            p.setNome(rs.getString("p.nome"));
-            u.setIdPerfil(p);
+            Perfil perfil = new Perfil();
+            perfil.setIdPerfil(rs.getInt("usuario.idPERFIL"));
+            perfil.setNome(rs.getString("perfil.nome"));
+            usuario.setIdPerfil(perfil);
             
-            u.setNome(rs.getString("u.NOME"));
-            u.setLogin(rs.getString("u.LOGIN"));
-            u.setSenha(rs.getString("u.SENHA"));
-            u.setStatus(rs.getInt("u.STATUS"));
-            u.setCpf(rs.getString("u.CPF"));
-            u.setRg(rs.getString("u.RG"));
-            u.setEmail(rs.getString("u.EMAIL"));
-            u.setTelefone(rs.getString("u.TELEFONE"));
-            u.setEndereco(rs.getString("u.ENDERECO"));
-            u.setComplemento(rs.getString("u.COMPLEMENTO"));
-            u.setCidade(rs.getString("u.CIDADE"));
-            u.setSexo(rs.getString("u.SEXO").charAt(0));
-            u.setData_de_nascimento(rs.getDate("u.DATA_DE_NASCIMENTO"));
-            lista.add(u);
+            usuario.setNome(rs.getString("usuario.NOME"));
+            usuario.setLogin(rs.getString("usuario.LOGIN"));
+            usuario.setSenha(rs.getString("usuario.SENHA"));
+            usuario.setStatus(rs.getInt("usuario.STATUS"));
+            usuario.setCpf(rs.getString("usuario.CPF"));
+            usuario.setRg(rs.getString("usuario.RG"));
+            usuario.setEmail(rs.getString("usuario.EMAIL"));
+            usuario.setTelefone(rs.getString("usuario.TELEFONE"));
+            usuario.setEndereco(rs.getString("usuario.ENDERECO"));
+            usuario.setComplemento(rs.getString("usuario.COMPLEMENTO"));
+            usuario.setCidade(rs.getString("usuario.CIDADE"));
+            usuario.setSexo(rs.getString("usuario.SEXO").charAt(0));
+            usuario.setData_de_nascimento(rs.getDate("usuario.DATA_DE_NASCIMENTO"));
+            lista.add(usuario);
         }
         
         this.desconectar();
         return lista;
+        
+    }
+    
+    public Usuario getRecuperarUsuario(String login) {
+        
+        Usuario usuario = new Usuario();
+        String sql = "SELECT usuario.* FROM usuario usuario "
+                + "WHERE usuario.login = ?";
+        
+        try {
+            
+            this.conectar();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, login);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                usuario.setIdUsuario(rs.getInt("usuario.idUSUARIO"));
+            
+                PerfilDAO pDAO = new PerfilDAO();
+                usuario.setIdPerfil(pDAO.getCarregaPorId(rs.getInt("usuario.idPERFIL")));
+
+                usuario.setNome(rs.getString("usuario.NOME"));
+                usuario.setLogin(rs.getString("usuario.LOGIN"));
+                usuario.setSenha(rs.getString("usuario.SENHA"));
+                usuario.setStatus(rs.getInt("usuario.STATUS"));
+                usuario.setCpf(rs.getString("usuario.CPF"));
+                usuario.setRg(rs.getString("usuario.RG"));
+                usuario.setEmail(rs.getString("usuario.EMAIL"));
+                usuario.setTelefone(rs.getString("usuario.TELEFONE"));
+                usuario.setEndereco(rs.getString("usuario.ENDERECO"));
+                usuario.setComplemento(rs.getString("usuario.COMPLEMENTO"));
+                usuario.setCidade(rs.getString("usuario.CIDADE"));
+                usuario.setSexo(rs.getString("usuario.SEXO").charAt(0));
+                usuario.setData_de_nascimento(rs.getDate("usuario.DATA_DE_NASCIMENTO"));
+            }
+            
+            this.desconectar();
+            return usuario;
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
         
     }
 }

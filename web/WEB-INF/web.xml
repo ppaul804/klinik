@@ -9,6 +9,10 @@
         <servlet-class>controller.GerenciarUsuarios</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GerenciarPerfil</servlet-name>
+        <servlet-class>controller.GerenciarPerfil</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>GerenciarMenu</servlet-name>
         <servlet-class>controller.GerenciarMenu</servlet-class>
     </servlet>
@@ -19,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>GerenciarUsuarios</servlet-name>
         <url-pattern>/gerenciar_usuarios.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarPerfil</servlet-name>
+        <url-pattern>/gerenciar_perfil.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GerenciarMenu</servlet-name>
