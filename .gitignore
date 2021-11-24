@@ -1,7 +1,7 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
 
-# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,eclipse,intellij+all,java,linux,macos,maven,netbeans
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,eclipse,intellij+all,java,linux,macos,maven,netbeans
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,netbeans,maven,macos,linux,java,intellij+all,eclipse
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,netbeans,maven,macos,linux,java,intellij+all,eclipse
 
 ### Eclipse ###
 .metadata
@@ -210,6 +210,7 @@ hs_err_pid*
 # Icon must end with two \r
 Icon
 
+
 # Thumbnails
 ._*
 
@@ -275,6 +276,9 @@ nbdist/
 .history
 .ionide
 
+# Support for Project snippet scope
+!.vscode/*.code-snippets
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -301,6 +305,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,eclipse,intellij+all,java,linux,macos,maven,netbeans
+# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,netbeans,maven,macos,linux,java,intellij+all,eclipse
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+!lib/*
