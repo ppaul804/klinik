@@ -6,107 +6,103 @@ import java.util.ArrayList;
 
 public class MenuDAO extends DataBaseDAO {
 
-    public MenuDAO() throws Exception {
-    }
-
-    public boolean gravar(Menu m) {
+    public MenuDAO() throws Exception {}
+    
+    public boolean gravar(Menu menu) {
         try {
-
+            
             String sql;
             this.conectar();
-
-            if (m.getIdMenu() == 0) {
-
+            
+            if (menu.getIdMenu() == 0) {
                 sql = "INSERT INTO menu (NOME, LINK, ICONE, EXIBIR) VALUES (?,?,?,?)";
             } else {
-                sql = "UPDATE menu SET NOME=?, LINK=?, ICONE=?, EXIBIR=? WHERE idMENU=?";
+                sql = "UPDATE menu SET NOME = ?, LINK = ?, ICONE = ?, EXIBIR = ? WHERE idMENU = ?";
             }
-
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, m.getNome());
-            pst.setString(2, m.getLink());
-            pst.setString(3, m.getIcone());
-            pst.setInt(4, m.getExibir());
-
-            if (m.getIdMenu() > 0) {
-                pst.setInt(5, m.getIdMenu());
+            
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, menu.getNome());
+            pstm.setString(2, menu.getLink());
+            pstm.setString(3, menu.getIcone());
+            pstm.setInt(4, menu.getExibir());
+            if(menu.getIdMenu() > 0) {
+                pstm.setInt(5, menu.getIdMenu());
             }
-
-            pst.execute();
+            pstm.execute();
+            this.desconectar();
+            
+            return true;
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return false;
+    }
+    
+    public boolean deletar(Menu menu) {
+        
+        try {
+            
+            String sql = "DELETE FROM menu WHERE idMENU = ?";
+            this.conectar();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, menu.getIdMenu());
+            pstm.execute();
+            
             this.desconectar();
             return true;
-
+            
         } catch (Exception e) {
-            System.out.println("Error en:" + e);
+            System.out.println(e);
             return false;
         }
+        
     }
-
-    public ArrayList<Menu> getLista() throws Exception {
-
-        ArrayList<Menu> lista = new ArrayList<Menu>();
-
-        String sql = "SELECT * FROM menu";
-
+    
+    public Menu getCarregaPorId(int idMenu) throws Exception{
+        
+        Menu menu = new Menu();
+        
+        String sql = "SELECT * FROM menu WHERE idMENU = ?";
         this.conectar();
-        PreparedStatement pst = conn.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
-
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, idMenu);
+        ResultSet rs = pstm.executeQuery();
+        
+        if (rs.next()) {
+            menu.setIdMenu(idMenu);
+            menu.setNome(rs.getString("NOME"));
+            menu.setLink(rs.getString("LINK"));
+            menu.setIcone(rs.getString("ICONE"));
+            menu.setExibir(rs.getInt("EXIBIR"));
+        }
+        
+        this.desconectar();
+        return menu;
+        
+    }
+    
+    public ArrayList<Menu> getLista() throws Exception {
+        
+        ArrayList<Menu> lista = new ArrayList<Menu>();
+        String sql = "SELECT * FROM menu";
+        this.conectar();
+        PreparedStatement pstm = conn.prepareCall(sql);
+        ResultSet rs = pstm.executeQuery();
+        
         while (rs.next()) {
             Menu m = new Menu();
-            m.setIdMenu(rs.getInt("idMenu"));
-            m.setNome(rs.getString("nome"));
-            m.setLink(rs.getString("link"));
-            m.setIcone(rs.getString("icone"));
-            m.setExibir(rs.getInt("exibir"));
+            m.setIdMenu(rs.getInt("idMENU"));
+            m.setNome(rs.getString("NOME"));
+            m.setLink(rs.getString("LINK"));
+            m.setIcone(rs.getString("ICONE"));
+            m.setExibir(rs.getInt("EXIBIR"));
             lista.add(m);
         }
-
         this.desconectar();
+        
         return lista;
     }
-
-    public Menu getCarregarPorID(int idMenu) throws Exception {
-
-        Menu m = new Menu();
-        String sql = "SELECT * FROM menu WHERE idMENU=?";
-
-        this.conectar();
-        PreparedStatement pst = conn.prepareStatement(sql);
-
-        pst.setInt(1, idMenu);
-        ResultSet rs = pst.executeQuery();
-
-        if (rs.next()) {
-            m.setIdMenu(idMenu);
-            m.setNome(rs.getString("nome"));
-            m.setLink(rs.getString("link"));
-            m.setIcone(rs.getString("icone"));
-            m.setExibir(rs.getInt("exibir"));
-        }
-
-        this.desconectar();
-        return m;
-    }
-
-    public boolean deletarMenu(Menu m) {
-
-        try {
-
-            String sql = "DELETE FROM menu WHERE idMENU=?";
-
-            this.conectar();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, m.getIdMenu());
-
-            pst.execute();
-
-            this.desconectar();
-            return true;
-
-        } catch (Exception e) {
-            System.out.println("Error en: " + e);
-            return false;
-        }
-    }
+    
 }

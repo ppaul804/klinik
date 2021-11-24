@@ -30,18 +30,27 @@
 
         <!-- Nav Item - Tables -->
         <li class="nav-item <c:if test="${!empty(activeU)}">active</c:if>">
-        <a class="nav-link" href="gerenciar_usuarios.do?acao=listar">
-            <i class="fas fa-users"></i>
-            <span>Usuario</span></a>
-        <a class="nav-link" href="listar_cliente.jsp">
-            <i class="fas fa fa-child"></i>
-            <span>Clientes</span>
-        </a>
-        <a class="nav-link" href="listar_menu.jsp">
-            <i class="fas fa fa-list"></i>
-            <span>Gerenciar Menu</span>
-        </a>
-    </li>
+            <a class="nav-link" href="gerenciar_usuarios.do?acao=listar">
+                <i class="fas fa-users"></i>
+                <span>Usuario</span>
+            </a>
+        </li>
+        
+        <!-- Nav Item - Tables -->
+        <li class="nav-item <c:if test="${!empty(activeC)}">active</c:if>">
+            <a class="nav-link" href="gerenciar_cliente.do?acao=listar">
+                <i class="fas fa fa-child"></i>
+                <span>Clientes</span>
+            </a>
+        </li>
+        
+        <!-- Nav Item - Tables -->
+        <li class="nav-item <c:if test="${!empty(activeM)}">active</c:if>">
+            <a class="nav-link" href="gerenciar_menu.do?acao=listar">
+                <i class="fas fa fa-list"></i>
+                <span>Menu</span>
+            </a>
+        </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
