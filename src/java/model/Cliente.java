@@ -165,9 +165,7 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    /**
-     * @return the data_de_nascimento
-     */
+
     public Date getData_de_nascimento() {
         return data_de_nascimento;
     }
