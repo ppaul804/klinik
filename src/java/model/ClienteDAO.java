@@ -33,6 +33,7 @@ public class ClienteDAO extends DataBaseDAO {
             cliente.setCidade(rs.getString("cliente.CIDADE"));
             cliente.setSexo(rs.getString("cliente.SEXO").charAt(0));
             cliente.setData_de_nascimento(rs.getDate("cliente.DATA_DE_NASCIMENTO"));
+            cliente.setObservacao(rs.getString("cliente.OBSERVACAO"));
             lista.add(cliente);
         }
         
@@ -50,9 +51,9 @@ public class ClienteDAO extends DataBaseDAO {
             this.conectar();
             
             if (cliente.getIdCliente() == 0) {
-                sql = "INSERT INTO cliente (NOME,CPF, RG, EMAIL, TELEFONE, ENDERECO, COMPLEMENTO, CIDADE, SEXO, DATA_DE_NASCIMENTO) VALUES (?,?,?,?,?,?,?,?,?,?,)";
+                sql = "INSERT INTO cliente (NOME,CPF, RG, EMAIL, TELEFONE, ENDERECO, COMPLEMENTO, CIDADE, SEXO, DATA_DE_NASCIMENTO) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             } else {
-                sql = "UPDATE cliente SET NOME = ?, CPF = ?, RG = ?, EMAIL = ?, TELEFONE = ?, ENDERECO = ?, COMPLEMENTO = ?, CIDADE = ?, SEXO = ?, DATA_DE_NASCIMENTO = ? WHERE idCLIENTE";
+                sql = "UPDATE cliente SET NOME = ?, CPF = ?, RG = ?, EMAIL = ?, TELEFONE = ?, ENDERECO = ?, COMPLEMENTO = ?, CIDADE = ?, SEXO = ?, DATA_DE_NASCIMENTO = ?,OBSERVACAO = ? WHERE idCLIENTE";
             }
             
             PreparedStatement pstm = conn.prepareStatement(sql);
@@ -65,10 +66,11 @@ public class ClienteDAO extends DataBaseDAO {
             pstm.setString(7, cliente.getComplemento());
             pstm.setString(8, cliente.getCidade());
             pstm.setString(9, Character.toString(cliente.getSexo()));
-            pstm.setDate(20, new Date(cliente.getData_de_nascimento().getTime()));
+            pstm.setDate(10, new Date(cliente.getData_de_nascimento().getTime()));
+            pstm.setString(11, cliente.getObservacao());
            
             if(cliente.getIdCliente() > 0) {
-                pstm.setInt(15, cliente.getIdCliente());
+                pstm.setInt(12, cliente.getIdCliente());
             }
             
             pstm.execute();
@@ -120,6 +122,7 @@ public class ClienteDAO extends DataBaseDAO {
             cliente.setCidade(rs.getString("cliente.CIDADE"));
             cliente.setSexo(rs.getString("cliente.SEXO").charAt(0));
             cliente.setData_de_nascimento(rs.getDate("cliente.DATA_DE_NASCIMENTO"));
+            cliente.setObservacao(rs.getString("cliente.OBSERVACAO"));
         }
         
         this.desconectar();
