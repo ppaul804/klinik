@@ -13,12 +13,12 @@
         <servlet-class>controller.GerenciarPerfil</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GerenciarMenu</servlet-name>
-        <servlet-class>controller.GerenciarMenu</servlet-class>
+        <servlet-name>GerenciarCliente</servlet-name>
+        <servlet-class>controller.GerenciarClientes</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GerenciarLogin</servlet-name>
-        <servlet-class>controller.GerenciarLogin</servlet-class>
+        <servlet-name>GerenciarMenu</servlet-name>
+        <servlet-class>controller.GerenciarMenu</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GerenciarIndex</servlet-name>
@@ -28,6 +28,10 @@
         <servlet-name>GerenciarUsuarios</servlet-name>
         <url-pattern>/gerenciar_usuarios.do</url-pattern>
     </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>GerenciarCliente</servlet-name>
+        <url-pattern>/gerenciar_cliente.do</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GerenciarPerfil</servlet-name>
         <url-pattern>/gerenciar_perfil.do</url-pattern>
@@ -35,10 +39,6 @@
     <servlet-mapping>
         <servlet-name>GerenciarMenu</servlet-name>
         <url-pattern>/gerenciar_menu.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GerenciarLogin</servlet-name>
-        <url-pattern>/gerenciar_login.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
