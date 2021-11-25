@@ -51,6 +51,14 @@
                 <span>Menu</span>
             </a>
         </li>
+        
+        <!-- Nav Item - Tables -->
+        <li class="nav-item <c:if test="${!empty(activeP)}">active</c:if>">
+            <a class="nav-link" href="gerenciar_perfil.do?acao=listar">
+                <i class="fas fa-user-alt"></i>
+                <span>Perfil</span>
+            </a>
+        </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

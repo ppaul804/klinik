@@ -12,7 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>KLINIK | ${titulo}</title>
+        <title>KLINIK | Login</title>
 
         <!-- Custom fonts for this template-->
         <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -43,12 +43,12 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Seja bem vindo!</h1>
                                         </div>
-                                        <form class="user" name="form_auth" method="POST" action="">
+                                        <form class="user" method="POST" action="gerenciar_login.do">
                                             <div class="form-group">
-                                                <input type="text" name="login" class="form-control form-control-user" placeholder="Entre com seu login...">
+                                                <input type="text" name="login" class="form-control form-control-user" placeholder="Entre com seu login..." required="">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="senha" class="form-control form-control-user" placeholder="Digite sua senha">
+                                                <input type="password" name="senha" class="form-control form-control-user" placeholder="Digite sua senha" required="">
                                             </div>
 
                                             <button type="submit" class="btn btn-primary btn-user btn-block">Entrar</button>

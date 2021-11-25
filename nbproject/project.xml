@@ -18,9 +18,6 @@
                     <file>${file.reference.lombok-1.18.8.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
-                <library dirs="200">
-                    <file>${file.reference.lombok-1.18.8.jar-1}</file>
-                </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>

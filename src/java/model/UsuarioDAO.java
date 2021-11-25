@@ -155,7 +155,7 @@ public class UsuarioDAO extends DataBaseDAO {
         
         Usuario usuario = new Usuario();
         String sql = "SELECT usuario.* FROM usuario usuario "
-                + "WHERE usuario.login = ?";
+                + "WHERE usuario.LOGIN = ?";
         
         try {
             
