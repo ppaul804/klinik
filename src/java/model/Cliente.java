@@ -1,4 +1,6 @@
+
 package model;
+
 
 import java.util.Date;
 
@@ -15,14 +17,24 @@ public class Cliente {
     private char sexo;
     private String telefone;
     private Date data_de_nascimento;
+    private String observacao;
 
     public Cliente(){
         
     }
-    public Cliente(int idCliente, String nome, String telefone) {
+    public Cliente(int idCliente, String nome,String cpf,String rg,String email,String endereco,String complemento,String cidade,char sexo, String telefone,Date data_de_nascimento,String observacao) {
         this.idCliente = idCliente;
         this.nome = nome;
+        this.cpf=cpf;
+        this.rg=rg;
+        this.email=email;
+        this.endereco=endereco;
+        this.complemento=complemento;
+        this.cidade=cidade;
+        this.sexo=sexo;
         this.telefone = telefone;
+        this.data_de_nascimento= data_de_nascimento;
+        this.observacao=observacao;
     }
     
     /**
@@ -165,7 +177,9 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-
+    /**
+     * @return the data_de_nascimento
+     */
     public Date getData_de_nascimento() {
         return data_de_nascimento;
     }
@@ -175,6 +189,20 @@ public class Cliente {
      */
     public void setData_de_nascimento(Date data_de_nascimento) {
         this.data_de_nascimento = data_de_nascimento;
+    }
+
+    /**
+     * @return the observacao
+     */
+    public String getObservacao() {
+        return observacao;
+    }
+
+    /**
+     * @param observacao the observacao to set
+     */
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
     
     
