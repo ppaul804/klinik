@@ -83,16 +83,15 @@ public class ClienteDAO extends DataBaseDAO {
         }
     }
     
-    public boolean deletar(Cliente cliente) {
+  public boolean deletar(Cliente cliente) {
         
-        try {
-            
-            String sql = "UPDATE cliente SET STATUS = 0 WHERE idCLIENTE = ?";
+       
+        try{
             this.conectar();
+            String sql = "DELETE FROM cliente WHERE idCliente=?";
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, cliente.getIdCliente());
+            pstm.setInt(1,cliente.getIdCliente());
             pstm.execute();
-            
             this.desconectar();
             return true;
             
