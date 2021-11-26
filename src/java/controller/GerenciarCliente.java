@@ -54,16 +54,15 @@ public class GerenciarCliente extends HttpServlet {
                 
                 ClienteDAO cDAO = new ClienteDAO();
 
-                if (acao.equals("alterar")) {
-                    c = cDAO.getCarregaPorId(Integer.parseInt(idCliente));              
-                    if (c.getIdCliente() > 0) {
-                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_cliente.jsp");
-                        request.setAttribute("cliente", c);
-                        request.setAttribute("titulo", "Alterar Cliente");
-                        request.setAttribute("activeU", "active");
-                        disp.forward(request, response);
-
-                    } else {
+             
+            if(acao.equals("alterar")){
+                c=cDAO.getCarregaPorId(Integer.parseInt(idCliente));
+                if(c.getIdCliente()>0){
+                    RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_cliente.jsp");
+                    request.setAttribute("cliente", c);
+                    disp.forward(request, response);
+                }
+                 else {
                         mensagem = "Cliente não encontrado";
                     }
                 }
@@ -100,6 +99,7 @@ public class GerenciarCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         PrintWriter out = response.getWriter();
         String idCliente = request.getParameter("idCliente");
         String nome = request.getParameter("nome");
@@ -123,7 +123,9 @@ public class GerenciarCliente extends HttpServlet {
         if (!idCliente.isEmpty()) {
             c.setIdCliente(Integer.parseInt(idCliente));
         }
-        
+        if (nome.equals("") || cpf.equals("") || rg.equals("")) {
+            mensagem = "Campos obrigatórios devem ser preenchidos!";
+        }
        
          else {  
             
