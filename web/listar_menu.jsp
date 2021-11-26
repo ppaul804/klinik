@@ -91,8 +91,8 @@
                                                         </c:if>
                                                     </td>
                                                     <td  class="text-right">
-                                                        <a title="Editar" href="gerenciar_menu.do?acao=alterar&idMenu=${menu.idMenu}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
-                                                        <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#menu-${menu.idMenu}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
+                                                        <a title="Editar" href="gerenciar_menu.do?acao=alterar&idMenu=${menu.idMenu}" class="btn btn sm btn-primary pr-2"> <i class="fas fa-edit"></i> </a>
+                                                        <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#menu-${menu.idMenu}" class="btn btn sm btn-danger"> <i class="fas fa-trash-alt"></i> </a>
                                                     </td>
                                                 </tr>
                                             

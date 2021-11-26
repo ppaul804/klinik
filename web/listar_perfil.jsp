@@ -78,6 +78,7 @@
                                                     <td>${perfil.idPerfil}</td>
                                                     <td>${perfil.nome}</td>
                                                     <td  class="text-right">
+                                                        <a title="Gerenciar Menus" href="gerenciar_menu_perfil.do?acao=gerenciar&idPerfil=${perfil.idPerfil}" class="btn btn sm btn-dark"> <i class="fas fa-tasks"></i> </a>
                                                         <a title="Editar" href="gerenciar_perfil.do?acao=alterar&idPerfil=${perfil.idPerfil}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
                                                         <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#perfil-${perfil.idPerfil}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
                                                     </td>

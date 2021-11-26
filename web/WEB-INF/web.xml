@@ -20,6 +20,10 @@
         <servlet-name>GerenciarMenu</servlet-name>
         <servlet-class>controller.GerenciarMenu</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GerenciarMenuPerfil</servlet-name>
+        <servlet-class>controller.GerenciarMenuPerfil</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GerenciarIndex</servlet-name>
         <url-pattern>/gerenciar_index.do</url-pattern>
@@ -39,6 +43,14 @@
     <servlet-mapping>
         <servlet-name>GerenciarMenu</servlet-name>
         <url-pattern>/gerenciar_menu.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarLogin</servlet-name>
+        <url-pattern>/gerenciar_login.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarMenuPerfil</servlet-name>
+        <url-pattern>/gerenciar_menu_perfil.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
