@@ -67,23 +67,25 @@
                                                 <th>Nome</th>
                                                 <th>Perfil</th>
                                                 <th>Email</th>
-                                                <th>Status</th>
+                                                <th>Observação</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
                                         </thead>
+                                        <jsp:useBean class="model.ClienteDAO" id="cDAO" />
                                         <tbody>
+                                             <c:forEach var="c" items="${cDAO.lista}">
                                             <tr>
                                                 <td>0</td>
-                                                <td>MaestroMilGrauUp</td>
-                                                <td>ADEMIR</td>
-                                                <td>bronze@gmail.com</td>
-                                                <td>ATIVO</td>
+                                                <td>${c.idCliente}</td>
+                                                <td>${c.nome}</td>
+                                                <td>${c.email}</td>
+                                                <td>${c.observacao}</td>
                                                 <td  class="text-right">
-                                                    <a title="Editar" href="#" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
-                                                    <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#usuario-${usuario.idUsuario}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
+                                                    <a title="Editar" href="gerenciar_cliente.do?acao=alterar&idCliente=${c.idCliente}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
+                                                    <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#cliente-${cliente.idCliente}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
                                                 </td>
                                             </tr>
-                                        <div class="modal fade" id="usuario-${usuario.idUsuario}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="cliente-${cliente.idCliente}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -95,11 +97,12 @@
                                                     <div class="modal-body">Você realmente deseja excluir este usuário?</div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
-                                                        <a class="btn btn-danger" href="gerenciar_aluno.do?acao=deletar&aluno_id=${usuario.idUsuario}">Sim</a>
+                                                        <a class="btn btn-danger" href="gerenciar_cliente.do?acao=deletar&cliente_id=${cliente.idCliente}">Sim</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                             </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
