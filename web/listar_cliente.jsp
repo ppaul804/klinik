@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
+       
 
         <title>KLINIK | ${titulo}</title>
 
@@ -23,7 +24,13 @@
 
         <!-- Custom styles for this page -->
         <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+ <script type="text/javascript">
+    function confirmarExclusao(id,nome){
+        if(confirm('Deseja Realmente excluir os dados do Cliente'+nome+'?')){
+            location.href='gerenciar_cliente.do?acao=deletar&idCliente='+id;
+        }
+    }
+    </script>
     </head>
 
     <body id="page-top">
@@ -65,7 +72,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nome</th>
-                                                <th>Perfil</th>
+                                                <th>Telefone</th>
                                                 <th>Email</th>
                                                 <th>Observação</th>
                                                 <th class="text-right">Ação</th>
@@ -75,14 +82,15 @@
                                         <tbody>
                                              <c:forEach var="c" items="${cDAO.lista}">
                                             <tr>
-                                                <td>0</td>
+                                                
                                                 <td>${c.idCliente}</td>
                                                 <td>${c.nome}</td>
+                                                <td>${c.telefone}</td>
                                                 <td>${c.email}</td>
                                                 <td>${c.observacao}</td>
                                                 <td  class="text-right">
                                                     <a title="Editar" href="gerenciar_cliente.do?acao=alterar&idCliente=${c.idCliente}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
-                                                    <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#cliente-${cliente.idCliente}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
+                                                    <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#cliente-${cliente.idCliente}" class="btn btn sm btn-danger"onclick="confirmarExclusao (${c.idCliente} , '${c.nome}')"> <i class="fas fa-user-times"></i> </a>
                                                 </td>
                                             </tr>
                                         <div class="modal fade" id="cliente-${cliente.idCliente}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -94,7 +102,7 @@
                                                             <span aria-hidden="true">×</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">Você realmente deseja excluir este usuário?</div>
+                                                   
                                                     <div class="modal-footer">
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
                                                         <a class="btn btn-danger" href="gerenciar_cliente.do?acao=deletar&cliente_id=${cliente.idCliente}">Sim</a>
