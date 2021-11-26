@@ -57,7 +57,7 @@ public class GerenciarCliente extends HttpServlet {
                 if (acao.equals("alterar")) {
                     c = cDAO.getCarregaPorId(Integer.parseInt(idCliente));              
                     if (c.getIdCliente() > 0) {
-                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_Cliente.jsp");
+                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_cliente.jsp");
                         request.setAttribute("cliente", c);
                         request.setAttribute("titulo", "Alterar Cliente");
                         request.setAttribute("activeU", "active");
