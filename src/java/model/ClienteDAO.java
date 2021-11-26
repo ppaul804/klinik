@@ -51,7 +51,7 @@ public class ClienteDAO extends DataBaseDAO {
             this.conectar();
             
             if (cliente.getIdCliente() == 0) {
-                sql = "INSERT INTO cliente (NOME,CPF, RG, EMAIL, TELEFONE, ENDERECO, COMPLEMENTO, CIDADE, SEXO, DATA_DE_NASCIMENTO) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "INSERT INTO cliente (NOME,CPF, RG, EMAIL, TELEFONE, ENDERECO, COMPLEMENTO, CIDADE, SEXO, DATA_DE_NASCIMENTO,OBSERVACAO) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             } else {
                 sql = "UPDATE cliente SET NOME = ?, CPF = ?, RG = ?, EMAIL = ?, TELEFONE = ?, ENDERECO = ?, COMPLEMENTO = ?, CIDADE = ?, SEXO = ?, DATA_DE_NASCIMENTO = ?,OBSERVACAO = ? WHERE idCLIENTE";
             }
@@ -83,20 +83,24 @@ public class ClienteDAO extends DataBaseDAO {
         }
     }
     
-     public boolean deletar (Cliente cliente){
-        try{
+    public boolean deletar(Cliente cliente) {
+        
+        try {
+            
+            String sql = "UPDATE cliente SET STATUS = 0 WHERE idCLIENTE = ?";
             this.conectar();
-            String sql = "DELETE FROM cliente WHERE idCliente=?";
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setInt(1,cliente.getIdCliente());
+            pstm.setInt(1, cliente.getIdCliente());
             pstm.execute();
+            
             this.desconectar();
             return true;
             
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return false;
         }
+        
     }
       public Cliente getCarregaPorId(int idCliente) throws Exception {
         
