@@ -53,7 +53,7 @@ public class ClienteDAO extends DataBaseDAO {
             if (cliente.getIdCliente() == 0) {
                 sql = "INSERT INTO cliente (NOME,CPF, RG, EMAIL, TELEFONE, ENDERECO, COMPLEMENTO, CIDADE, SEXO, DATA_DE_NASCIMENTO,OBSERVACAO) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             } else {
-                sql = "UPDATE cliente SET NOME = ?, CPF = ?, RG = ?, EMAIL = ?, TELEFONE = ?, ENDERECO = ?, COMPLEMENTO = ?, CIDADE = ?, SEXO = ?, DATA_DE_NASCIMENTO = ?,OBSERVACAO = ? WHERE idCLIENTE";
+                sql = "UPDATE cliente SET NOME = ?, CPF = ?, RG = ?, EMAIL = ?, TELEFONE = ?, ENDERECO = ?, COMPLEMENTO = ?, CIDADE = ?, SEXO = ?, DATA_DE_NASCIMENTO = ?,OBSERVACAO = ? WHERE idCLIENTE=?";
             }
             
             PreparedStatement pstm = conn.prepareStatement(sql);
@@ -83,7 +83,7 @@ public class ClienteDAO extends DataBaseDAO {
         }
     }
     
-  public boolean deletar(Cliente cliente) {
+    public boolean deletar(Cliente cliente) {
         
        
         try{
@@ -105,7 +105,7 @@ public class ClienteDAO extends DataBaseDAO {
         
         Cliente cliente = new Cliente();
         
-        String sql = "SELECT * FROM cliente WHERE idCliente=? ";
+        String sql = "SELECT * FROM cliente WHERE idCliente= ?";    
         this.conectar();
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, idCliente);
