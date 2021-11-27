@@ -28,6 +28,10 @@
         <servlet-name>GerenciarLogin</servlet-name>
         <servlet-class>controller.GerenciarLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GerenciarServico</servlet-name>
+        <servlet-class>controller.GerenciarServico</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GerenciarIndex</servlet-name>
         <url-pattern>/gerenciar_index.do</url-pattern>
@@ -36,7 +40,7 @@
         <servlet-name>GerenciarUsuarios</servlet-name>
         <url-pattern>/gerenciar_usuarios.do</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>GerenciarCliente</servlet-name>
         <url-pattern>/gerenciar_cliente.do</url-pattern>
     </servlet-mapping>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>GerenciarMenuPerfil</servlet-name>
         <url-pattern>/gerenciar_menu_perfil.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarServico</servlet-name>
+        <url-pattern>/gerenciar_servico.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
