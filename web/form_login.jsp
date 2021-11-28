@@ -39,6 +39,24 @@
                                 <!-- Div abaixo de imagem. OBS: Caso venha a por, configure o col-lg-12 e ponha 6 -->
                                 <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
                                 <div class="col-lg-12">
+                                    <%
+                                        String mensagem = (String)request.getSession().getAttribute("mensagem");
+                                        if (mensagem != null) {
+                                            request.getSession().removeAttribute("mensagem");
+                                    %>
+                                            <div class="row" style="width: 80%; margin-left: 10%;">
+                                                <div class="col-md-12">
+                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        <strong><i class="fas fa-exclamation-triangle"></i><%=mensagem%></strong>
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">x</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <%
+                                        }
+                                    %>
                                     <div class="p-5">
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Seja bem vindo!</h1>

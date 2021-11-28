@@ -5,6 +5,7 @@ import lombok.*;
 
 @Setter
 @Getter
+@ToString
 public class Usuario {
     
     private int idUsuario;
@@ -30,11 +31,6 @@ public class Usuario {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.telefone = telefone;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" + "nome=" + nome + '}';
     }
     
 }

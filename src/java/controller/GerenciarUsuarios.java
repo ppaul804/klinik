@@ -45,16 +45,24 @@ public class GerenciarUsuarios extends HttpServlet {
         Usuario u = new Usuario();
         
         if (acao.equals("listar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_usuario.jsp");
-            request.setAttribute("titulo", "Listar Usuários");
-            request.setAttribute("activeU", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_usuario.jsp");
+                request.setAttribute("titulo", "Listar Usuários");
+                request.setAttribute("activeU", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }
         }
         if (acao.equals("cadastrar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_usuario.jsp");
-            request.setAttribute("titulo", "Cadastrar Usuário");
-            request.setAttribute("activeU", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_usuario.jsp");
+                request.setAttribute("titulo", "Cadastrar Usuário");
+                request.setAttribute("activeU", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }
         }
         
             try {
@@ -62,26 +70,34 @@ public class GerenciarUsuarios extends HttpServlet {
                 UsuarioDAO uDAO = new UsuarioDAO();
 
                 if (acao.equals("alterar")) {
-                    u = uDAO.getCarregaPorId(Integer.parseInt(idUsuario));              
-                    if (u.getIdUsuario() > 0) {
-                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_usuario.jsp");
-                        request.setAttribute("usuario", u);
-                        request.setAttribute("titulo", "Alterar Usuário");
-                        request.setAttribute("activeU", "active");
-                        disp.forward(request, response);
+                    if (GerenciarLogin.verificarPermissao(request, response)) {
+                        u = uDAO.getCarregaPorId(Integer.parseInt(idUsuario));              
+                        if (u.getIdUsuario() > 0) {
+                            RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_usuario.jsp");
+                            request.setAttribute("usuario", u);
+                            request.setAttribute("titulo", "Alterar Usuário");
+                            request.setAttribute("activeU", "active");
+                            disp.forward(request, response);
 
+                        } else {
+                            mensagem = "Usuário não encontrado";
+                        }
                     } else {
-                        mensagem = "Usuário não encontrado";
+                        mensagem = "Acesso Negado a está função!";
                     }
                 }
                 
                 if (acao.equals("deletar")) {
-                    u.setIdUsuario(Integer.parseInt(idUsuario));
-                    if (uDAO.deletar(u)) {
-                        mensagem = "Usuário desativado com sucesso!";
-                        
+                    if (GerenciarLogin.verificarPermissao(request, response)) {
+                        u.setIdUsuario(Integer.parseInt(idUsuario));
+                        if (uDAO.deletar(u)) {
+                            mensagem = "Usuário desativado com sucesso!";
+
+                        } else {
+                            mensagem = "Erro ao desativar o usuário!";
+                        }
                     } else {
-                        mensagem = "Erro ao desativar o usuário!";
+                        mensagem = "Acesso Negado a está função!";
                     }
                 }
                 

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Menu;
 import model.Usuario;
 import model.UsuarioDAO;
 
@@ -37,7 +38,8 @@ public class GerenciarLogin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
+        request.getSession().removeAttribute("usuarioLogado");
+        response.sendRedirect("form_login.jsp");
         
     }
 
@@ -109,6 +111,89 @@ public class GerenciarLogin extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public static Usuario verificarAcesso(HttpServletRequest request, HttpServletResponse response) {
+        
+        Usuario usu = null;
+        GerenciarLogin.response = response;
+        
+        try {
+            
+            HttpSession sessao = request.getSession();
+            if (sessao.getAttribute("usuarioLogado") == null) {
+                response.sendRedirect("form_login.jsp");
+            } else {
+                String uri = request.getRequestURI();
+                String queryString = request.getQueryString();
+                
+                if (queryString != null) {
+                    uri += "?"+ queryString;
+                }
+                
+                usu = (Usuario) request.getSession().getAttribute("usuarioLogado");
+                if (usu == null) {
+                    sessao.setAttribute("mensagem", "Você não está autenticado!");
+                    response.sendRedirect("form_login.jsp");
+                } else {
+                    boolean possuiAcesso = false;
+                    for (Menu m: usu.getIdPerfil().getMenus()) {
+                        if (uri.contains(m.getLink())) {
+                            possuiAcesso = true;
+                            break;
+                        }
+                    }
+                    if (!possuiAcesso) {
+                        exibirMensagem("Acesso Negado!");
+                    }
+                }
+            }
+            
+        } catch (Exception e) {
+            exibirMensagem("Exceção: "+ e.getMessage());
+        }
+        return usu;
+    }
+    
+    public static boolean verificarPermissao(HttpServletRequest request, HttpServletResponse response) {
+        
+        Usuario usu = null;
+        GerenciarLogin.response = response;
+        boolean possuiAcesso = false;
+        
+        try {
+            
+            HttpSession sessao = request.getSession();
+            if (sessao.getAttribute("usuarioLogado") == null) {
+                response.sendRedirect("form_login.jsp");
+                
+            } else {
+                String uri = request.getRequestURI();
+                String queryString = request.getQueryString();
+                
+                if (queryString != null) {
+                    uri += "?"+ queryString;
+                }
+                
+                usu = (Usuario) request.getSession().getAttribute("usuarioLogado");
+                if (usu == null) {
+                    sessao.setAttribute("mensagem", "Você não está autenticado!");
+                    response.sendRedirect("form_login.jsp");
+                    
+                } else {
+                    for (Menu m: usu.getIdPerfil().getMenus()) {
+                        if (uri.contains(m.getLink())) {
+                            possuiAcesso = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+        } catch (Exception e) {
+            exibirMensagem("Exceção: "+ e.getMessage());
+        }
+        return possuiAcesso;
     }
 
     /**

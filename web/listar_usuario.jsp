@@ -67,7 +67,7 @@
                                                 <th>ID</th>
                                                 <th>Nome</th>
                                                 <th>Perfil</th>
-                                                <th>Email</th>
+                                                <th>Login</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
@@ -76,28 +76,27 @@
                                         <jsp:useBean class="model.UsuarioDAO" id="uDAO" />
                                         <tbody>
                                             
-                                            <c:forEach var="u" items="${uDAO.lista}">
+                                            <c:forEach var="usuario" items="${uDAO.lista}">
                                                 <tr>
-                                                    <td>${u.idUsuario}</td>
-                                                    <td>${u.nome}</td>
-                                                    <!--<td>u.idPerfil</td>-->
-                                                    <td>${u.idPerfil.nome}</td> 
-                                                    <td>${u.email}</td>
+                                                    <td>${usuario.idUsuario}</td>
+                                                    <td>${usuario.nome}</td>
+                                                    <td>${usuario.idPerfil.nome}</td> 
+                                                    <td>${usuario.login}</td>
                                                     <td class="text-center">
-                                                        <c:if test="${u.status == 1}">
+                                                        <c:if test="${usuario.status == 1}">
                                                             <span class="btn badge badge-primary">ATIVO</span>
                                                         </c:if>
-                                                        <c:if test="${u.status == 0}">
+                                                        <c:if test="${usuario.status == 0}">
                                                             <span class="btn badge badge-secondary">INATIVO</span>
                                                         </c:if>
                                                     </td>
                                                     <td  class="text-right">
-                                                        <a title="Editar" href="gerenciar_usuarios.do?acao=alterar&idUsuario=${u.idUsuario}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
-                                                        <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#usuario-${u.idUsuario}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
+                                                        <a title="Editar" href="gerenciar_usuarios.do?acao=alterar&idUsuario=${usuario.idUsuario}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
+                                                        <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#usuario-${usuario.idUsuario}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
                                                     </td>
                                                 </tr>
                                             
-                                                <div class="modal fade" id="usuario-${u.idUsuario}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="usuario-${usuario.idUsuario}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -106,10 +105,10 @@
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">Você realmente deseja desativar o usuário ${u.nome}?</div>
+                                                            <div class="modal-body">Você realmente deseja desativar o usuário ${usuario.nome}?</div>
                                                             <div class="modal-footer">
                                                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
-                                                                <a class="btn btn-danger" href="gerenciar_usuarios.do?acao=deletar&idUsuario=${u.idUsuario}">Sim</a>
+                                                                <a class="btn btn-danger" href="gerenciar_usuarios.do?acao=deletar&idUsuario=${usuario.idUsuario}">Sim</a>
                                                             </div>
                                                         </div>
                                                     </div>

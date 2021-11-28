@@ -33,14 +33,25 @@ public class GerenciarIndex extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        PrintWriter out = response.getWriter();
         String acao = request.getParameter("acao");
+        String mensagem = "";
         
         if (acao.equals("index")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/index.jsp");
-            request.setAttribute("titulo", "Home");
-            request.setAttribute("activeI", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/index.jsp");
+                request.setAttribute("titulo", "Home");
+                request.setAttribute("activeI", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }    
         }
+        
+        out.println("<script type='text/javascript'>");
+        out.println("alert('"+mensagem+"');");
+        out.println("location.href = 'gerenciar_login.do';");
+        out.println("</script>");
         
     }
 

@@ -46,8 +46,8 @@ public class PerfilDAO extends DataBaseDAO {
             PreparedStatement pstm = conn.prepareStatement(SQL);
             pstm.setInt(1, perfil.getIdPerfil());
             pstm.execute();
-            this.desconectar();
             
+            this.desconectar();
             return true;
             
         } catch (Exception e) {
@@ -117,7 +117,7 @@ public class PerfilDAO extends DataBaseDAO {
             Menu menu = new Menu();
             menu.setIdMenu(rs.getInt("menu.idMENU"));
             menu.setNome(rs.getString("menu.NOME"));
-            menu.setLink(rs.getString("menu.ICONE"));
+            menu.setLink(rs.getString("menu.LINK"));
             menu.setIcone(rs.getString("menu.ICONE"));
             menu.setExibir(rs.getInt("menu.EXIBIR"));
             lista.add(menu);

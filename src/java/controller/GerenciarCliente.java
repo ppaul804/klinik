@@ -39,41 +39,55 @@ public class GerenciarCliente extends HttpServlet {
         Cliente c = new Cliente();
         
         if (acao.equals("listar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_cliente.jsp");
-            request.setAttribute("titulo", "Listar Cliente");
-            request.setAttribute("activeU", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_cliente.jsp");
+                request.setAttribute("titulo", "Listar Cliente");
+                request.setAttribute("activeU", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }
         }
         if (acao.equals("cadastrar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_cliente.jsp");
-            request.setAttribute("titulo", "Cadastrar Cliente");
-            request.setAttribute("activeU", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_cliente.jsp");
+                request.setAttribute("titulo", "Cadastrar Cliente");
+                request.setAttribute("activeU", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }    
         }
         try {
                 
                 ClienteDAO cDAO = new ClienteDAO();
-
              
-            if(acao.equals("alterar")){
-                c=cDAO.getCarregaPorId(Integer.parseInt(idCliente));
-                if(c.getIdCliente()>0){
-                    RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_cliente.jsp");
-                    request.setAttribute("cliente", c);
-                    disp.forward(request, response);
-                }
-                 else {
-                        mensagem = "Cliente não encontrado";
+                if(acao.equals("alterar")){
+                    if (GerenciarLogin.verificarPermissao(request, response)) {
+                        c=cDAO.getCarregaPorId(Integer.parseInt(idCliente));
+                        if(c.getIdCliente()>0){
+                            RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_cliente.jsp");
+                            request.setAttribute("cliente", c);
+                            disp.forward(request, response);
+                        } else {
+                            mensagem = "Cliente não encontrado";
+                        }
+                    } else {
+                        mensagem = "Acesso Negado a está função!";
                     }
                 }
                 
                 if (acao.equals("deletar")) {
-                    c.setIdCliente(Integer.parseInt(idCliente));
-                    if (cDAO.deletar(c)) {
-                        mensagem = "Cliente desativado com sucesso!";
-                        
+                    if (GerenciarLogin.verificarPermissao(request, response)) {
+                        c.setIdCliente(Integer.parseInt(idCliente));
+                        if (cDAO.deletar(c)) {
+                            mensagem = "Cliente desativado com sucesso!";
+
+                        } else {
+                            mensagem = "Erro ao desativar o Cliente!";
+                        }
                     } else {
-                        mensagem = "Erro ao desativar o Cliente!";
+                        mensagem = "Acesso Negado a está função!";
                     }
                 }
                 

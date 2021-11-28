@@ -44,16 +44,24 @@ public class GerenciarServico extends HttpServlet {
         Servico servico = new Servico();
         
         if (acao.equals("listar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_servico.jsp");
-            request.setAttribute("titulo", "Listar Serviços");
-            request.setAttribute("activeU", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_servico.jsp");
+                request.setAttribute("titulo", "Listar Serviços");
+                request.setAttribute("activeU", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }    
         }
         if (acao.equals("cadastrar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_servico.jsp");
-            request.setAttribute("titulo", "Cadastrar Serviço");
-            request.setAttribute("activeU", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_servico.jsp");
+                request.setAttribute("titulo", "Cadastrar Serviço");
+                request.setAttribute("activeU", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }    
         }
         
         try{
@@ -61,23 +69,30 @@ public class GerenciarServico extends HttpServlet {
             ServicoDAO servicoDAO = new ServicoDAO();
             
             if(acao.equals("alterar")){
-                servico = servicoDAO.getCarregaPorID(Integer.parseInt(idServico));
-                if(servico.getIdServico()>0){
-                    RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_produto.jsp");
-                    request.setAttribute("servico", servico);
-                    disp.forward(request, response);
-                }else{
-                    mensagem = "Serviço não encontrado";
-                }
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    servico = servicoDAO.getCarregaPorID(Integer.parseInt(idServico));
+                    if(servico.getIdServico()>0){
+                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_produto.jsp");
+                        request.setAttribute("servico", servico);
+                        disp.forward(request, response);
+                    }else{
+                        mensagem = "Serviço não encontrado";
+                    }
+                } else {
+                    mensagem = "Acesso Negado a está função!";
+                }   
             }
             if(servico.equals("deletar")){
-                servico.setIdServico(Integer.parseInt(idServico));
-                if(servicoDAO.deletar(servico)){
-                    mensagem = "Produto deletado com sucesso";
-                }else{
-                    mensagem = "Erro ao deletar o produto do banco de dados";
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    servico.setIdServico(Integer.parseInt(idServico));
+                    if(servicoDAO.deletar(servico)){
+                        mensagem = "Produto deletado com sucesso";
+                    }else{
+                        mensagem = "Erro ao deletar o produto do banco de dados";
+                    }
+                } else {
+                    mensagem = "Acesso Negado a está função!";
                 }
-                
             }
         }catch(Exception e){
             out.print(e);

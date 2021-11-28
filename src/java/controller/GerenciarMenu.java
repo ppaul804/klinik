@@ -43,16 +43,24 @@ public class GerenciarMenu extends HttpServlet {
         Menu menu = new Menu();
         
         if (acao.equals("listar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_menu.jsp");
-            request.setAttribute("titulo", "Listar Menus");
-            request.setAttribute("activeM", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_menu.jsp");
+                request.setAttribute("titulo", "Listar Menus");
+                request.setAttribute("activeM", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }
         }
         if (acao.equals("cadastrar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_menu.jsp");
-            request.setAttribute("titulo", "Cadastrar Menu");
-            request.setAttribute("activeM", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_menu.jsp");
+                request.setAttribute("titulo", "Cadastrar Menu");
+                request.setAttribute("activeM", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }    
         } 
         
         try {
@@ -60,26 +68,34 @@ public class GerenciarMenu extends HttpServlet {
             MenuDAO mDAO = new MenuDAO();
 
             if (acao.equals("alterar")) {
-                menu = mDAO.getCarregaPorId(Integer.parseInt(idMenu));              
-                if (menu.getIdMenu()> 0) {
-                    RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_menu.jsp");
-                    request.setAttribute("menu", menu);
-                    request.setAttribute("titulo", "Alterar Menu");
-                    request.setAttribute("activeM", "active");
-                    disp.forward(request, response);
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    menu = mDAO.getCarregaPorId(Integer.parseInt(idMenu));              
+                    if (menu.getIdMenu()> 0) {
+                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_menu.jsp");
+                        request.setAttribute("menu", menu);
+                        request.setAttribute("titulo", "Alterar Menu");
+                        request.setAttribute("activeM", "active");
+                        disp.forward(request, response);
 
+                    } else {
+                        mensagem = "Menu não encontrado!";
+                    }
                 } else {
-                    mensagem = "Menu não encontrado!";
+                    mensagem = "Acesso Negado a está função!";
                 }
             }
 
             if (acao.equals("deletar")) {
-                menu.setIdMenu(Integer.parseInt(idMenu));
-                if (mDAO.deletar(menu)) {
-                    mensagem = "Menu excluido com sucesso!";
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    menu.setIdMenu(Integer.parseInt(idMenu));
+                    if (mDAO.deletar(menu)) {
+                        mensagem = "Menu excluido com sucesso!";
 
+                    } else {
+                        mensagem = "Erro ao desativar o menu!";
+                    }
                 } else {
-                    mensagem = "Erro ao desativar o menu!";
+                    mensagem = "Acesso Negado a está função!";
                 }
             }
 

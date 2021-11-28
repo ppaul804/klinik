@@ -46,31 +46,39 @@ public class GerenciarMenuPerfil extends HttpServlet {
             Perfil perfil = new Perfil();
             
             if (acao.equals("gerenciar")) {
-                perfil = pDAO.getCarregaPorId(Integer.parseInt(idPerfil));
-                if (perfil.getIdPerfil() > 0) {
-                    RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_menu_perfil.jsp");
-                    request.setAttribute("titulo", "Gerenciar Perfil/Menu");
-                    request.setAttribute("activeP", "active");
-                    request.setAttribute("perfilVinculado", perfil);
-                    disp.forward(request, response);
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    perfil = pDAO.getCarregaPorId(Integer.parseInt(idPerfil));
+                    if (perfil.getIdPerfil() > 0) {
+                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_menu_perfil.jsp");
+                        request.setAttribute("titulo", "Gerenciar Perfil/Menu");
+                        request.setAttribute("activeP", "active");
+                        request.setAttribute("perfilVinculado", perfil);
+                        disp.forward(request, response);
 
+                    } else {
+                        mensagem = "Perfil não encontrado!";
+                    }
                 } else {
-                    mensagem = "Perfil não encontrado!";
-                }
+                    mensagem = "Acesso Negado a está função!";
+                }      
             }
             if (acao.equals("desvincular")) {
-                String idMenu = request.getParameter("idMenu");
-                if (idMenu.equals("")) {
-                    mensagem = "O campo idMenu deve ser preenchido!";
-                    
-                } else {
-                    if (pDAO.desvincular(Integer.parseInt(idPerfil), Integer.parseInt(idMenu))) {
-                        mensagem = "Menu desvinculado com sucesso!";
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    String idMenu = request.getParameter("idMenu");
+                    if (idMenu.equals("")) {
+                        mensagem = "O campo idMenu deve ser preenchido!";
+
                     } else {
-                        mensagem = "Erro ao desvincular!";
+                        if (pDAO.desvincular(Integer.parseInt(idPerfil), Integer.parseInt(idMenu))) {
+                            mensagem = "Menu desvinculado com sucesso!";
+                        } else {
+                            mensagem = "Erro ao desvincular!";
+                        }
+
                     }
-                    
-                }
+                } else {
+                    mensagem = "Acesso Negado a está função!";
+                }      
             } 
 
         } catch (Exception e) {

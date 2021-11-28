@@ -40,7 +40,7 @@ public class MenuDAO extends DataBaseDAO {
         return false;
     }
     
-    public boolean deletar(Menu menu) {
+    public boolean deletar(Menu menu) throws Exception {
         
         try {
             

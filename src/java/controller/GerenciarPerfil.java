@@ -43,43 +43,59 @@ public class GerenciarPerfil extends HttpServlet {
         Perfil perfil = new Perfil();
         
         if (acao.equals("listar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_perfil.jsp");
-            request.setAttribute("titulo", "Listar Perfis");
-            request.setAttribute("activeP", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_perfil.jsp");
+                request.setAttribute("titulo", "Listar Perfis");
+                request.setAttribute("activeP", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }
         }
         if (acao.equals("cadastrar")) {
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_perfil.jsp");
-            request.setAttribute("titulo", "Cadastrar Perfil");
-            request.setAttribute("activeP", "active");
-            disp.forward(request, response);
+            if (GerenciarLogin.verificarPermissao(request, response)) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_perfil.jsp");
+                request.setAttribute("titulo", "Cadastrar Perfil");
+                request.setAttribute("activeP", "active");
+                disp.forward(request, response);
+            } else {
+                mensagem = "Acesso Negado a está função!";
+            }
         }   
         
         try {
                 
-            PerfilDAO uDAO = new PerfilDAO();
+            PerfilDAO pDAO = new PerfilDAO();
 
             if (acao.equals("alterar")) {
-                perfil = uDAO.getCarregaPorId(Integer.parseInt(idPerfil));              
-                if (perfil.getIdPerfil()> 0) {
-                    RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_perfil.jsp");
-                    request.setAttribute("perfil", perfil);
-                    request.setAttribute("titulo", "Alterar Perfil");
-                    request.setAttribute("activeP", "active");
-                    disp.forward(request, response);
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    perfil = pDAO.getCarregaPorId(Integer.parseInt(idPerfil));              
+                    if (perfil.getIdPerfil()> 0) {
+                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_perfil.jsp");
+                        request.setAttribute("perfil", perfil);
+                        request.setAttribute("titulo", "Alterar Perfil");
+                        request.setAttribute("activeP", "active");
+                        disp.forward(request, response);
 
+                    } else {
+                        mensagem = "Perfil não encontrado";
+                    }
                 } else {
-                    mensagem = "Perfil não encontrado";
+                    mensagem = "Acesso Negado a está função!";
                 }
             }
 
             if (acao.equals("deletar")) {
-                perfil.setIdPerfil(Integer.parseInt(idPerfil));
-                if (uDAO.deletar(perfil)) {
-                    mensagem = "Perfil excluido com sucesso!";
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    perfil.setIdPerfil(Integer.parseInt(idPerfil));
+                    if (pDAO.deletar(perfil)) {
+                        mensagem = "Perfil excluido com sucesso!";
 
+                    } else {
+                        mensagem = "Erro ao desativar o perfil!";
+                    }
                 } else {
-                    mensagem = "Erro ao desativar o perfil!";
+                    mensagem = "Acesso Negado a está função!";
                 }
             }
 
