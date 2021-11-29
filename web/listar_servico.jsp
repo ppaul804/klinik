@@ -73,10 +73,8 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nome</th>
-                                                <th>Quantidade</th>
                                                 <th>Valor</th>
                                                 <th>Opções</th>
-                                                <th class="text-center">Status</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
                                         </thead>
@@ -88,17 +86,16 @@
                                                 <tr>
                                                     <td>${servico.idServico}</td>
                                                     <td>${servico.nome}</td>
-                                                    <td>${servico.quantidade}</td> 
                                                     <td>${servico.valor}</td>
                                                     <td><fmt:formatNumber pattern="#,##0.00" value="${servico.valor}"></fmt:formatNumber></td>
     
                                                     <td  class="text-right">
                                                         <a title="Editar" href="gerenciar_servico.do?acao=alterar&idServico=${servico.idServico}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
-                                                        <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#servico-${u.idServico}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
+                                                        <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#servico-${servico.idServico}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
                                                     </td>
                                                 </tr>
                                             
-                                                <div class="modal fade" id="servico-${u.idServico}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="servico-${servico.idServico}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -107,10 +104,10 @@
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">Você realmente deseja desativar o serviço ${u.nome}?</div>
+                                                            <div class="modal-body">Você realmente deseja desativar o serviço ${servico.nome}?</div>
                                                             <div class="modal-footer">
                                                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
-                                                                <a class="btn btn-danger" href="gerenciar_servicos.do?acao=deletar&idServico=${u.idServico}">Sim</a>
+                                                                <a class="btn btn-danger" href="gerenciar_servico.do?acao=deletar&idServico=${servico.idServico}">Sim</a>
                                                             </div>
                                                         </div>
                                                     </div>

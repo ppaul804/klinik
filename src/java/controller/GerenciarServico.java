@@ -72,8 +72,10 @@ public class GerenciarServico extends HttpServlet {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     servico = servicoDAO.getCarregaPorID(Integer.parseInt(idServico));
                     if(servico.getIdServico()>0){
-                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_produto.jsp");
+                        RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_servico.jsp");
                         request.setAttribute("servico", servico);
+                        request.setAttribute("titulo", "Alterar Serviço");
+                        request.setAttribute("activeS", "active");
                         disp.forward(request, response);
                     }else{
                         mensagem = "Serviço não encontrado";
@@ -82,7 +84,7 @@ public class GerenciarServico extends HttpServlet {
                     mensagem = "Acesso Negado a está função!";
                 }   
             }
-            if(servico.equals("deletar")){
+            if(acao.equals("deletar")){
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     servico.setIdServico(Integer.parseInt(idServico));
                     if(servicoDAO.deletar(servico)){

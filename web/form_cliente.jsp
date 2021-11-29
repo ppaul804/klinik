@@ -115,7 +115,7 @@
                                 <legend class="font-small form-control text-center text-primary"> <i class="far fa-comments text-primary"></i></i>&nbsp;Observações </legend>
                                 <div class="col-md-13 ">
                                     <label>Observações</label>
-                                    <textarea class="form-control" name="observacao" placeholder="Observações sobre o cliente..." required="">${cliente.observacao}</textarea>
+                                    <textarea class="form-control" name="observacao" placeholder="Observações sobre o cliente...">${cliente.observacao}</textarea>
                                 </div>
                             </fieldset>
 

@@ -1,3 +1,8 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.ContratoServico"%>
+<%@page import="model.ClienteDAO"%>
+<%@page import="model.Cliente"%>
+<%@page import="model.Contrato"%>
 <%@page import="java.time.LocalDate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -44,7 +49,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="gerenciar_index.do?acao=index">Home</a></li>
-                        <li class="breadcrumb-item"><a href="gerenciar_menu.do?acao=listar">Menu</a></li>
+                        <li class="breadcrumb-item"><a href="gerenciar_perfil.do?acao=listar">Perfis</a></li>
                         <li class="breadcrumb-item active" aria-current="page">${titulo}</li>
                     </ol>
                 </nav>
@@ -53,39 +58,54 @@
                 <div class="card shadow mb-4">
 
                     <div class="card-body">
-                        <form method="post" name="form_add" action="gerenciar_menu.do">
-
-                            <fieldset class="mt-5 border p-2 mb-4">
-                                <legend class="font-small form-control text-center text-primary"> <i class="fas fa-user-tie text-primary"></i>&nbsp;Dados Menu </legend>
-
-                                <div class="form-group row mb-4">
-                                    <div class="col-md-6">
-                                        <label>Nome Menu</label>
-                                        <input type="text" class="form-control" name="nome" placeholder="Nome do Menu" value="${menu.nome}" required=""> 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Link</label>
-                                        <input type="text" class="form-control" name="link" placeholder="Link" value="${menu.link}" required=""> 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Ícone</label>
-                                        <input type="text" class="form-control" name="icone" placeholder="Ícone" value="${menu.icone}"> 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Exibir</label>
-                                        <select class="custom-select" name="exibir"  required="">
-                                            <option value="${menu.exibir}" disabled="" selected="">Escolha...</option>
-                                            <option value="1" <c:if test="${menu.exibir == 1}">selected=""</c:if> >Sim</option>
-                                            <option value="0" <c:if test="${menu.exibir == 0}">selected=""</c:if> >Não</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <input type="hidden" name="idMenu" value="${menu.idMenu}">
-                            <button type="submit" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Gravar</button>
-                            <a title="Voltar" href="gerenciar_menu.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
-                        </form>
+                        
+                        <%
+                            Contrato contrato = new Contrato();
+                            Cliente cliente = new Cliente();
+                            try {
+                                    
+                                String acao = request.getParameter("acao");
+                                ClienteDAO cDAO = new ClienteDAO();
+                                
+                                if (acao.equals("contrato")) {
+                                    int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+                                    cliente = cDAO.getCarregaPorId(idCliente);
+                                    
+                                    contrato.setIdCliente(cliente);
+                                    contrato.setAtendente(usuarioLogado);
+                                    contrato.setCarrinho(new ArrayList<ContratoServico>());
+                                    session.setAttribute("venda", contrato);
+                                    
+                                } else {
+                                    contrato = (Contrato) session.getAttribute("venda");
+                                }
+                                
+                            } catch (Exception e) {
+                                out.println("Erro: "+ e);
+                            }
+                        %>
+                        
+                        <br><br>
+                        Vendedor: <%=contrato.getAtendente().getNome()%>
+                        <br>
+                        Cliente: <%=contrato.getIdCliente().getNome()%>
+                        <br>
+                        <h4>Catálogo: (<%=contrato.getCarrinho().size()%> Itens no Carrinho)</h4>
+                        
+                        <jsp:useBean class="model.Servico" id="servico"/>
+                        <c:forEach var="servico" items="${servico.lista}">
+                            <div id="serv${servico.idServico}">
+                                <form action="gerenciar_carrinho.do" method="GET">
+                                    <input type="hidde" name="idServico" value="${servico.idServico}">
+                                    <input type="hidden" name="acao" value="add">
+                                    ${servico.nome}
+                                    <button type="submit" class="btn btn-primary btn-sm float-right ml-2">Contratar</button>
+                                </form>
+                            </div>
+                        </c:forEach>
+                        
+                        <a title="Voltar" href="gerenciar_cliente.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
+                        <a title="Finalizar Contrato" href="gerenciar_contrato.do?acao=finalizar" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Finalizar Contrato</a>
                     </div>
                 </div>
 

@@ -29,7 +29,6 @@ public class ServicoDAO extends DataBaseDAO{
             Servico servico = new Servico();
             servico.setIdServico(rs.getInt("IdSERVICO"));
             servico.setNome(rs.getString("NOME"));
-            servico.setQuantidade(rs.getInt("QUANTIDADE"));
             servico.setValor(rs.getDouble("VALOR"));
             lista.add(servico);
         }
@@ -42,18 +41,17 @@ public class ServicoDAO extends DataBaseDAO{
            this.conectar();
            String sql;
            if(servico.getIdServico()==0){
-                sql = "INSERT INTO servico(NOME, QUANTIDADE, VALOR)"
+                sql = "INSERT INTO servico (NOME, VALOR)"
                         + "VALUES(?,?,?)";
             }else{
-               sql = "UPDATE servico SET NOME=?, QUANTIDADE=?, VALOR=? "
+               sql = "UPDATE servico SET NOME=?, VALOR=? "
                        +  "WHERE idProduto=?";
            }
            PreparedStatement pstm = conn.prepareStatement(sql);
            pstm.setString(1, servico.getNome());
-           pstm.setInt(2, servico.getQuantidade());
-           pstm.setDouble(3, servico.getValor());
+           pstm.setDouble(2, servico.getValor());
            if(servico.getIdServico()>0){
-               pstm.setInt(4, servico.getIdServico());
+               pstm.setInt(3, servico.getIdServico());
            }
            pstm.execute();
            this.desconectar();
@@ -83,7 +81,7 @@ public class ServicoDAO extends DataBaseDAO{
     public Servico getCarregaPorID(int idServico) throws Exception{
         
         Servico servico = new Servico();
-        String sql = "SELECT * FROM produto WHERE idSERVICO=?";
+        String sql = "SELECT * FROM servico WHERE idSERVICO=?";
         this.conectar();
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, idServico);
@@ -91,8 +89,7 @@ public class ServicoDAO extends DataBaseDAO{
         if(rs.next()){
             servico.setIdServico(rs.getInt("idSERVICO"));
             servico.setNome(rs.getString("NOME"));
-            servico.setQuantidade(rs.getInt("QUANTIDADE"));
-            servico.setValor(rs.getDouble("idVALOR"));
+            servico.setValor(rs.getDouble("VALOR"));
         }
         this.desconectar();
         return servico;

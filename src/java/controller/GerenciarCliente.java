@@ -42,7 +42,7 @@ public class GerenciarCliente extends HttpServlet {
             if (GerenciarLogin.verificarPermissao(request, response)) {
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_cliente.jsp");
                 request.setAttribute("titulo", "Listar Cliente");
-                request.setAttribute("activeU", "active");
+                request.setAttribute("activeC", "active");
                 disp.forward(request, response);
             } else {
                 mensagem = "Acesso Negado a está função!";
@@ -52,7 +52,7 @@ public class GerenciarCliente extends HttpServlet {
             if (GerenciarLogin.verificarPermissao(request, response)) {
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_cliente.jsp");
                 request.setAttribute("titulo", "Cadastrar Cliente");
-                request.setAttribute("activeU", "active");
+                request.setAttribute("activeC", "active");
                 disp.forward(request, response);
             } else {
                 mensagem = "Acesso Negado a está função!";
@@ -68,6 +68,8 @@ public class GerenciarCliente extends HttpServlet {
                         if(c.getIdCliente()>0){
                             RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_cliente.jsp");
                             request.setAttribute("cliente", c);
+                            request.setAttribute("titulo", "Alterar Cliente");
+                            request.setAttribute("activeC", "active");
                             disp.forward(request, response);
                         } else {
                             mensagem = "Cliente não encontrado";

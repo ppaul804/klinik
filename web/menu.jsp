@@ -9,7 +9,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="gerenciar_index.do?acao=index">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -38,7 +38,7 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.exibir == 1}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeC)}">active</c:if>">
+                    <li class="nav-item ${menu.active}">
                         <a class="nav-link" href="${menu.link}">
                             <i class="${menu.icone}"></i>
                             <span>${menu.nome}</span>

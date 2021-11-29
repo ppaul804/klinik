@@ -1,3 +1,4 @@
+<%@page import="controller.GerenciarLogin"%>
 <%@page import="java.time.LocalDate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -46,7 +47,7 @@
                                     %>
                                             <div class="row" style="width: 80%; margin-left: 10%;">
                                                 <div class="col-md-12">
-                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                    <div class="alert alert-info alert-dismissible fade show" role="alert">
                                                         <strong><i class="fas fa-exclamation-triangle"></i><%=mensagem%></strong>
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                             <span aria-hidden="true">x</span>
@@ -54,7 +55,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                    <%
+                                    <%   
                                         }
                                     %>
                                     <div class="p-5">
@@ -70,6 +71,7 @@
                                             </div>
 
                                             <button type="submit" class="btn btn-primary btn-user btn-block">Entrar</button>
+                                            <!--<a href="gerenciar_perfil.do?acao=listar" class="btn btn-primary btn-user btn-block">Entrar</a>-->
                                         </form>
                                     </div>
                                 </div>
