@@ -82,10 +82,14 @@ public class GerenciarLogin extends HttpServlet {
                 
                 usuario = uDAO.getRecuperarUsuario(login);
                 if (usuario.getIdUsuario() > 0 && usuario.getSenha().equals(senha)) {
-                    HttpSession sessao = request.getSession();
-                    sessao.setAttribute("usuarioLogado", usuario);
-                    response.sendRedirect("gerenciar_index.do?acao=index");
-                            
+                    if (usuario.getStatus() == 1) {
+                        HttpSession sessao = request.getSession();
+                        sessao.setAttribute("usuarioLogado", usuario);
+                        response.sendRedirect("gerenciar_index.do?acao=index");
+                    
+                    } else {
+                        exibirMensagem("Seu usuário não está ativo!");
+                    }
                 } else {
                     exibirMensagem("Login ou Senha inválidos!");
                 }

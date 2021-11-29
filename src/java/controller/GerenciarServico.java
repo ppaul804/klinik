@@ -47,7 +47,7 @@ public class GerenciarServico extends HttpServlet {
             if (GerenciarLogin.verificarPermissao(request, response)) {
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/listar_servico.jsp");
                 request.setAttribute("titulo", "Listar Serviços");
-                request.setAttribute("activeU", "active");
+                request.setAttribute("activeS", "active");
                 disp.forward(request, response);
             } else {
                 mensagem = "Acesso Negado a está função!";
@@ -57,7 +57,7 @@ public class GerenciarServico extends HttpServlet {
             if (GerenciarLogin.verificarPermissao(request, response)) {
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_servico.jsp");
                 request.setAttribute("titulo", "Cadastrar Serviço");
-                request.setAttribute("activeU", "active");
+                request.setAttribute("activeS", "active");
                 disp.forward(request, response);
             } else {
                 mensagem = "Acesso Negado a está função!";
@@ -86,9 +86,9 @@ public class GerenciarServico extends HttpServlet {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     servico.setIdServico(Integer.parseInt(idServico));
                     if(servicoDAO.deletar(servico)){
-                        mensagem = "Produto deletado com sucesso";
+                        mensagem = "Serviço deletado com sucesso";
                     }else{
-                        mensagem = "Erro ao deletar o produto do banco de dados";
+                        mensagem = "Erro ao deletar o serviço do banco de dados";
                     }
                 } else {
                     mensagem = "Acesso Negado a está função!";
@@ -143,7 +143,7 @@ public class GerenciarServico extends HttpServlet {
                 if(servicoDAO.gravar(servico)){
                     mensagem = "Gravado com sucesso";
                 }else{
-                    mensagem = "Erro ao gravar o produto no banco de dados";
+                    mensagem = "Erro ao gravar o serviço no banco de dados";
                 }
             }catch(Exception e){
                 out.print(e);

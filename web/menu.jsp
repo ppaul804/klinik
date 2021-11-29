@@ -48,7 +48,55 @@
             </c:forEach>
         </c:if>
         
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Configurações
+        </div>
         
+        <c:if test="${usuarioLogado != null && usuarioLogado.idPerfil != null}">
+            <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
+                <c:if test="${menu.nome == 'Usuarios'}">
+                    <!-- Nav Item - Tables -->
+                    <li class="nav-item <c:if test="${!empty(activeU)}">active</c:if>">
+                        <a class="nav-link" href="gerenciar_usuarios.do?acao=listar">
+                            <i class="fas fa-users"></i>
+                            <span>Usuários</span>
+                        </a>
+                    </li>
+                </c:if>
+            </c:forEach>
+        </c:if>
+        
+        <c:if test="${usuarioLogado != null && usuarioLogado.idPerfil != null}">
+            <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
+                <c:if test="${menu.nome == 'Menus'}">
+                    <!-- Nav Item - Tables -->
+                    <li class="nav-item <c:if test="${!empty(activeM)}">active</c:if>">
+                        <a class="nav-link" href="gerenciar_menu.do?acao=listar">
+                            <i class="fas fa fa-list"></i>
+                            <span>Menus</span>
+                        </a>
+                    </li>
+                </c:if>
+            </c:forEach>
+        </c:if>
+        
+        <c:if test="${usuarioLogado != null && usuarioLogado.idPerfil != null}">
+            <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
+                <c:if test="${menu.nome == 'Perfil'}">
+                    <!-- Nav Item - Tables -->
+                    <li class="nav-item <c:if test="${!empty(activeP)}">active</c:if>">
+                        <a class="nav-link" href="gerenciar_perfil.do?acao=listar">
+                            <i class="fas fa-user-alt"></i>
+                            <span>Perfis</span>
+                        </a>
+                    </li>
+                </c:if>
+            </c:forEach>
+        </c:if>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
