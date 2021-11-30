@@ -73,8 +73,8 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nome</th>
+                                                <th>Quantidade</th>
                                                 <th>Valor</th>
-                                                <th>Opções</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
                                         </thead>
@@ -86,8 +86,8 @@
                                                 <tr>
                                                     <td>${servico.idServico}</td>
                                                     <td>${servico.nome}</td>
-                                                    <td>${servico.valor}</td>
-                                                    <td><fmt:formatNumber pattern="#,##0.00" value="${servico.valor}"></fmt:formatNumber></td>
+                                                    <td>${servico.quantidade}</td>
+                                                    <td>R$ <fmt:formatNumber pattern="#,##0.00" value="${servico.valor}"></fmt:formatNumber></td>
     
                                                     <td  class="text-right">
                                                         <a title="Editar" href="gerenciar_servico.do?acao=alterar&idServico=${servico.idServico}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>

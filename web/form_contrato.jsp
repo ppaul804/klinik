@@ -1,3 +1,5 @@
+<%@page import="model.Usuario"%>
+<%@page import="controller.GerenciarLogin"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.ContratoServico"%>
 <%@page import="model.ClienteDAO"%>
@@ -60,7 +62,11 @@
                     <div class="card-body">
                         
                         <%
-                            Contrato contrato = new Contrato();
+                            
+                            Usuario usuarioLogado = GerenciarLogin.verificarAcesso(request, response);
+                            request.setAttribute("usuarioLogado", usuarioLogado);
+                            
+                            Contrato cc = new Contrato();
                             Cliente cliente = new Cliente();
                             try {
                                     
@@ -71,13 +77,13 @@
                                     int idCliente = Integer.parseInt(request.getParameter("idCliente"));
                                     cliente = cDAO.getCarregaPorId(idCliente);
                                     
-                                    contrato.setIdCliente(cliente);
-                                    contrato.setAtendente(usuarioLogado);
-                                    contrato.setCarrinho(new ArrayList<ContratoServico>());
-                                    session.setAttribute("venda", contrato);
+                                    cc.setIdCliente(cliente);
+                                    cc.setAtendente(usuarioLogado);
+                                    cc.setCarrinho(new ArrayList<ContratoServico>());
+                                    session.setAttribute("contrato", cc);
                                     
                                 } else {
-                                    contrato = (Contrato) session.getAttribute("venda");
+                                    cc = (Contrato) session.getAttribute("contrato");
                                 }
                                 
                             } catch (Exception e) {
@@ -86,17 +92,17 @@
                         %>
                         
                         <br><br>
-                        Vendedor: <%=contrato.getAtendente().getNome()%>
+                        Vendedor: <%=cc.getAtendente().getNome()%>
                         <br>
-                        Cliente: <%=contrato.getIdCliente().getNome()%>
+                        Cliente: <%=cc.getIdCliente().getNome()%>
                         <br>
-                        <h4>Catálogo: (<%=contrato.getCarrinho().size()%> Itens no Carrinho)</h4>
+                        <h4>Catálogo: (<%=cc.getCarrinho().size()%> Itens no Carrinho)</h4>
                         
-                        <jsp:useBean class="model.Servico" id="servico"/>
-                        <c:forEach var="servico" items="${servico.lista}">
+                        <jsp:useBean class="model.ServicoDAO" id="servicoDAO"/>
+                        <c:forEach var="servico" items="${servicoDAO.lista}">
                             <div id="serv${servico.idServico}">
                                 <form action="gerenciar_carrinho.do" method="GET">
-                                    <input type="hidde" name="idServico" value="${servico.idServico}">
+                                    <input type="hidden" name="idServico" value="${servico.idServico}">
                                     <input type="hidden" name="acao" value="add">
                                     ${servico.nome}
                                     <button type="submit" class="btn btn-primary btn-sm float-right ml-2">Contratar</button>

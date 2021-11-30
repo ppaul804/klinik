@@ -20,7 +20,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item <c:if test="${!empty(activeI)}">active</c:if>">
+    <li class="nav-item <c:if test="${!empty(activeC)}">active</c:if>">
             <a class="nav-link" href="gerenciar_index.do?acao=index">
                 <i class="fas fa-home"></i>
                 <span>Home</span></a>
@@ -38,7 +38,7 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.exibir == 1}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item ${menu.active}">
+                    <li class="nav-item <c:if test="${!empty(activeC)}">active</c:if>">
                         <a class="nav-link" href="${menu.link}">
                             <i class="${menu.icone}"></i>
                             <span>${menu.nome}</span>

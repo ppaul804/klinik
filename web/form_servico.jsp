@@ -72,11 +72,16 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>Quantidade</label>
-                                        <input type="text" class="form-control" name="quantidade" placeholder="Quantidade do Serviço" value="${servico.quantidade}" maxlength="45" required="">
+                                        <c:if test="${servico.quantidade == null}">
+                                            <input type="text" class="form-control" name="quantidade" placeholder="Quantidade do Serviço" value="0" maxlength="45">
+                                        </c:if>
+                                        <c:if test="${servico.quantidade != null}">
+                                            <input type="text" class="form-control" name="quantidade" placeholder="Quantidade do Serviço" value="${servico.quantidade}" maxlength="45">
+                                        </c:if>
                                     </div>
                                     <div class="col-md-3">
-                                        <label>Valor</label>
-                                        <input type="text" class="form-control" name="valor" placeholder="Valor do Serviço " value="<fmt:formatNumber pattern="#,##0.00" value="${servico.valor}"/>" required="">
+                                        <label>Valor (R$)</label>
+                                        <input type="text" class="form-control" name="valor" placeholder="Valor do Serviço" value="<fmt:formatNumber pattern="#,##0.00" value="${servico.valor}"/>" required="">
                                     </div>
                                 </div>
                                 

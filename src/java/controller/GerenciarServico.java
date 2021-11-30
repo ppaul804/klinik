@@ -127,10 +127,15 @@ public class GerenciarServico extends HttpServlet {
         String mensagem = "";
         
         Servico servico = new Servico();
-        if(idServico.isEmpty()){
-            servico.setIdServico((Integer.parseInt(idServico)));
+        if(!idServico.isEmpty()){
+            servico.setIdServico(Integer.parseInt(idServico));
         }
-        if(nome.equals("")||quantidade.equals("")||valor.equals("")){
+        
+        if (quantidade.isEmpty()) {
+            servico.setQuantidade(0);
+        }
+        
+        if(nome.equals("") || valor.equals("")){
             mensagem = "Campos obrigatórios deverão ser preenchidos.";
         }else{
             servico.setNome(nome);

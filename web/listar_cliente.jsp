@@ -66,9 +66,9 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nome</th>
-                                                <th>Telefone</th>
                                                 <th>Email</th>
-                                                <th>Observação</th>
+                                                <th>Telefone</th>
+                                                <th>CPF</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
                                         </thead>
@@ -79,11 +79,11 @@
                                                 
                                                 <td>${c.idCliente}</td>
                                                 <td>${c.nome}</td>
-                                                <td>${c.telefone}</td>
                                                 <td>${c.email}</td>
-                                                <td>${c.observacao}</td>
+                                                <td>${c.telefone}</td>
+                                                <td>${c.cpf}</td>
                                                 <td  class="text-right">
-                                                    <a title="Contrato" href="gerenciar_contrato.do?acao=contrato&idCliente=${c.idCliente}" class="btn btn sm btn-dark"> <i class="fas fa-tasks"></i> </a>
+                                                    <a title="Cadastrar Contrato" href="form_contrato.jsp?acao=cadastrar&idCliente=${c.idCliente}" class="btn btn sm btn-dark"> <i class="fas fa-file-signature"></i> </a>
                                                     <a title="Editar" href="gerenciar_cliente.do?acao=alterar&idCliente=${c.idCliente}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
                                                     <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#cliente-${c.idCliente}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
                                                 </td>
