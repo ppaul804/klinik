@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,12 +19,12 @@ import lombok.ToString;
 @ToString
 public class Consulta {
 
-    private String idConsulta;
-    private String idCliente;
-    private String idUsuario;
+    private int idConsulta;
+    private Cliente cliente;
+    private Usuario usuario;
     private String status;
-    private String data;
-    private String hora;
+    private LocalDate data;
+    private LocalTime hora;
     private String valor;
 
 }

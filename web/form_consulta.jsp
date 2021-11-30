@@ -62,24 +62,22 @@
                                         <div class="form-group row mb-4">
                                             <div class="col-md-5">
                                                 <label>Cliente</label>
-                                                <input type="text" class="form-control" name="cliente" placeholder="cliente" value="${consulta.cliente}" maxlength="45" required="" <c:if test="${consultaLogado.idUsuario == 1}">readonly=""</c:if>> 
+                                                <input type="text" class="form-control" name="cliente" placeholder="Digite o cliente" value="${consulta.cliente}" maxlength="45" required <c:if test="${consultaLogado.idUsuario == 1}">readonly</c:if>> 
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label>Email</label>
-                                                    <input type="text" class="form-control" name="usuario" placeholder="usuario" value="${consulta.usuario}" maxlength="45" required="" <c:if test="${consultaLogado.idUsuario == 1}">readonly=""</c:if>>
+                                                    <label>Usuário</label>
+                                                    <input type="text" class="form-control" name="usuario" placeholder="Digite o usuario" value="${consulta.usuario}" maxlength="45" required <c:if test="${consultaLogado.idUsuario == 1}">readonly</c:if>>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <label>Data</label>
-                                                    <input type="date" class="form-control" name="data_de_nascimento" value="${consulta.data_de_nascimento}" required="" <c:if test="${consultaLogado.idUsuario == 1}">readonly=""</c:if>>
+                                                    <label>Status</label>
+                                                    <input type="text" class="form-control" name="status" placeholder="Digite o status" value="${consulta.usuario}" maxlength="45" required <c:if test="${consultaLogado.idUsuario == 1}">readonly</c:if>>
                                                 </div>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset class="mt-5 border p-2 mb-4">
-                                            <div class="col-md-5">
-                                                <label>Status</label>
-                                                <input type="text" class="form-control" name="status" placeholder="status" value="${consulta.usuario}" maxlength="45" required="" <c:if test="${consultaLogado.idUsuario == 1}">readonly=""</c:if>>
-                                            </div>
+                                                <div class="col-md-3">
+                                                    <label>Data e Hora da Consulta</label>
+                                                    <input type="datetime-local" class="form-control" name="dataHora" placeholder="Digite a hora da consulta" value="${consulta.dataHora}" maxlength="45" required <c:if test="${consultaLogado.idUsuario == 1}">readonly</c:if>>
+                                                </div>
 
+                                            </div>
                                         </fieldset>
 
                                         <input type="hidden" name="idUsuario" value="${consulta.idUsuario}">
