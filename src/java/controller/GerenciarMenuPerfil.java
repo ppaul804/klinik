@@ -70,7 +70,7 @@ public class GerenciarMenuPerfil extends HttpServlet {
 
                     } else {
                         if (pDAO.desvincular(Integer.parseInt(idPerfil), Integer.parseInt(idMenu))) {
-                            mensagem = "Menu desvinculado com sucesso!";
+                            mensagem = "Desvinculado com sucesso!";
                         } else {
                             mensagem = "Erro ao desvincular!";
                         }
