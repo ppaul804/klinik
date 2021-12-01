@@ -63,33 +63,33 @@
                                     <div class="form-group row mb-4">
                                         <div class="col-md-5">
                                             <label>Nome</label>
-                                            <input type="text" class="form-control" name="nome" placeholder="Seu nome" value="${usuario.nome}" maxlength="45" required="" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>> 
+                                            <input type="text" class="form-control" name="nome" placeholder="Seu nome" value="${usuario.nome}" maxlength="45" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>> 
                                         </div>
                                         <div class="col-md-4">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email" placeholder="Seu email" value="${usuario.email}" maxlength="45" required="" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>>
+                                            <input type="email" class="form-control" name="email" placeholder="Seu email" value="${usuario.email}" maxlength="45" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Data de Nascimento</label>
-                                            <input type="date" class="form-control" name="data_de_nascimento" value="${usuario.data_de_nascimento}" required="" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>>
+                                            <input type="date" class="form-control" name="data_de_nascimento" value="${usuario.data_de_nascimento}" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-3">
                                             <label>CPF</label>
-                                            <input type="text" class="form-control" name="cpf" placeholder="Seu CPF" value="${usuario.cpf}" maxlength="11" required="" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>> 
+                                            <input type="text" class="form-control" name="cpf" placeholder="Seu CPF" value="${usuario.cpf}" maxlength="11" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>> 
                                         </div>
                                         <div class="col-md-3">
                                             <label>RG</label>
-                                            <input type="text" class="form-control" name="rg" placeholder="Seu RG" value="${usuario.rg}" maxlength="9" required="" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>>
+                                            <input type="text" class="form-control" name="rg" placeholder="Seu RG" value="${usuario.rg}" maxlength="9" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Telefone</label>
-                                            <input type="text" class="form-control" name="telefone" placeholder="Seu telefone" value="${usuario.telefone}" maxlength="16" required="" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>>
+                                            <input type="text" class="form-control" name="telefone" placeholder="Seu telefone" value="${usuario.telefone}" maxlength="16" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Sexo</label>
-                                            <select class="custom-select" name="sexo"  required="" <c:if test="${usuarioLogado.idUsuario == 1}">disabled=""</c:if>>
+                                            <select class="custom-select" name="sexo"  required="" <c:if test="${usuarioLogado.idUsuario != 1}">disabled=""</c:if>>
                                                 <option value="" disabled="" selected="">Escolha um Sexo</option>
                                                 <option value="F" <c:if test="${usuario.sexo == 'F'}">selected=""</c:if> >Feminino</option>
                                                 <option value="M" <c:if test="${usuario.sexo == 'M'}">selected=""</c:if> >Masculino</option>
@@ -100,15 +100,15 @@
                                     <div class="form-group row mb-4">
                                         <div class="col-md-5">
                                             <label>Endereço</label>
-                                            <input type="text" class="form-control" name="endereco" placeholder="Seu endereço" value="${usuario.endereco}" maxlength="45" required="" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>> 
+                                            <input type="text" class="form-control" name="endereco" placeholder="Seu endereço" value="${usuario.endereco}" maxlength="45" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>> 
                                         </div>
                                         <div class="col-md-4">
                                             <label>Complemento</label>
-                                            <input type="text" class="form-control" name="complemento" placeholder="Seu complemento" value="${usuario.complemento}" maxlength="45" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>>
+                                            <input type="text" class="form-control" name="complemento" placeholder="Seu complemento" value="${usuario.complemento}" maxlength="45" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Cidade</label>
-                                            <input type="text" class="form-control" name="cidade" placeholder="Sua cidade" value="${usuario.cidade}" maxlength="45" required="" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>>
+                                            <input type="text" class="form-control" name="cidade" placeholder="Sua cidade" value="${usuario.cidade}" maxlength="45" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -117,15 +117,15 @@
                                     <div class="form-group row">
                                         <div class="col-md-3">
                                             <label>Login</label>
-                                            <input type="text" class="form-control" name="login" placeholder="Seu login" value="${usuario.login}" maxlength="20" required="" <c:if test="${usuarioLogado.idUsuario == 1}">readonly=""</c:if>>
+                                            <input type="text" class="form-control" name="login" placeholder="Seu login" value="${usuario.login}" maxlength="20" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Senha</label>
-                                            <input type="password" class="form-control" name="senha" placeholder="Sua senha" value="${usuario.senha}" maxlength="20" required="">
+                                            <input type="password" class="form-control" name="senha" placeholder="Sua senha" value="${usuario.senha}" maxlength="20" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Status</label>
-                                            <select class="custom-select" name="status" required="" <c:if test="${usuarioLogado.idUsuario == 1}">disabled=""</c:if>>
+                                            <select class="custom-select" name="status" required="" <c:if test="${usuarioLogado.idUsuario != 1}">disabled=""</c:if>>
                                                 <option value="" disabled="" selected="">Escolha um Status</option>
                                                 <option value="0" <c:if test="${usuario.status == 0}">selected=""</c:if>>Inativo</option>
                                                 <option value="1" <c:if test="${usuario.status == 1}">selected=""</c:if>>Ativo</option>
@@ -133,7 +133,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <label>Perfil</label>
-                                            <select class="custom-select" name="idPerfil" required="" <c:if test="${usuarioLogado.idUsuario == 1}">disabled=""</c:if>>
+                                            <select class="custom-select" name="idPerfil" required="" <c:if test="${usuarioLogado.idUsuario != 1}">disabled=""</c:if>>
                                                 <option value="" disabled="" selected="">Escolha um Perfil</option>
                                                 <jsp:useBean class="model.PerfilDAO" id="perfil"/>
                                                 <c:forEach var="p" items="${perfil.lista}">

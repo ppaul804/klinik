@@ -51,7 +51,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="gerenciar_index.do?acao=index">Home</a></li>
-                        <li class="breadcrumb-item"><a href="gerenciar_perfil.do?acao=listar">Perfis</a></li>
+                        <li class="breadcrumb-item"><a href="gerenciar_cliente.do?acao=listar">Clientes</a></li>
                         <li class="breadcrumb-item active" aria-current="page">${titulo}</li>
                     </ol>
                 </nav>
@@ -91,27 +91,40 @@
                             }
                         %>
                         
-                        <br><br>
-                        Vendedor: <%=cc.getAtendente().getNome()%>
-                        <br>
-                        Cliente: <%=cc.getIdCliente().getNome()%>
-                        <br>
-                        <h4>Catálogo: (<%=cc.getCarrinho().size()%> Itens no Carrinho)</h4>
+                        
+                        
                         
                         <jsp:useBean class="model.ServicoDAO" id="servicoDAO"/>
+                        <table class="table">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Quantidade</th>
+                                    <th class="text-center">Contratar</th>
+                                </tr>
+                            </thead>
                         <c:forEach var="servico" items="${servicoDAO.lista}">
                             <div id="serv${servico.idServico}">
                                 <form action="gerenciar_carrinho.do" method="GET">
-                                    <input type="hidden" name="idServico" value="${servico.idServico}">
+                                        <tbody>
+                                            <tr>
+                                                <td>${servico.idServico}</td>
+                                                <td>${servico.nome}</td>
+                                                <td><input class="form-control text-center" style="width: 100px;" name="quantidade" value="${servico.quantidade}"></td>
+                                                <td class="text-center"><button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></button></td>
+                                            </tr>
+                                        </tbody>
                                     <input type="hidden" name="acao" value="add">
-                                    ${servico.nome}
-                                    <button type="submit" class="btn btn-primary btn-sm float-right ml-2">Contratar</button>
+                                    <input type="hidden" name="idServico" value="${servico.idServico}">
+                                    
                                 </form>
                             </div>
                         </c:forEach>
+                        </table>
                         
-                        <a title="Voltar" href="gerenciar_cliente.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
                         <a title="Finalizar Contrato" href="gerenciar_contrato.do?acao=finalizar" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Finalizar Contrato</a>
+                        <a title="Voltar" href="gerenciar_cliente.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
                     </div>
                 </div>
 

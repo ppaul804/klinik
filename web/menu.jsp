@@ -4,33 +4,35 @@
 <%
     Usuario usuarioLogado = GerenciarLogin.verificarAcesso(request, response);
     request.setAttribute("usuarioLogado", usuarioLogado);
+    //<i class="fas fa-laugh-wink"></i>
+    //<div class="sidebar-brand-text mx-3">KLINIK</div>
 %>
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="gerenciar_index.do?acao=index">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">KLINIK</div>
-    </a>
-
+    <img src="assets/img/KlinikIconeAlbino.png" style="padding: 10px 20px 10px 20px">
+    
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item <c:if test="${!empty(activeC)}">active</c:if>">
+    <!-- Heading -->
+        <div class="sidebar-heading mt-3 text-center">
+            Home-Page
+        </div>
+    
+        <li class="nav-item">
             <a class="nav-link" href="gerenciar_index.do?acao=index">
                 <i class="fas fa-home"></i>
-                <span>Home</span></a>
+                <span>Página Inicial</span></a>
         </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <div class="sidebar-heading text-center">
             Modulos
         </div>
         
@@ -38,7 +40,7 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.exibir == 1}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeC)}">active</c:if>">
+                    <li class="nav-item ">
                         <a class="nav-link" href="${menu.link}">
                             <i class="${menu.icone}"></i>
                             <span>${menu.nome}</span>
@@ -52,7 +54,7 @@
         <hr class="sidebar-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <div class="sidebar-heading text-center">
             Configurações
         </div>
         
@@ -60,7 +62,7 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.nome == 'Usuarios'}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeU)}">active</c:if>">
+                    <li class="nav-item">
                         <a class="nav-link" href="gerenciar_usuarios.do?acao=listar">
                             <i class="fas fa-users"></i>
                             <span>Usuários</span>
@@ -74,7 +76,7 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.nome == 'Menus'}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeM)}">active</c:if>">
+                    <li class="nav-item ">
                         <a class="nav-link" href="gerenciar_menu.do?acao=listar">
                             <i class="fas fa fa-list"></i>
                             <span>Menus</span>
@@ -88,7 +90,7 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.nome == 'Perfil'}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeP)}">active</c:if>">
+                    <li class="nav-item ">
                         <a class="nav-link" href="gerenciar_perfil.do?acao=listar">
                             <i class="fas fa-user-alt"></i>
                             <span>Perfis</span>
