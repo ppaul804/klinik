@@ -84,7 +84,7 @@
                                                 <td>${c.cpf}</td>
                                                 <td  class="text-right">
                                                     <a title="Cadastrar Consulta" href="#" class="btn btn sm btn-info"> <i class="far fa-address-book"></i> </a>
-                                                    <a title="Cadastrar Contrato" href="gerenciar_contrato.do?acao=cadastrar&idCliente=${c.idCliente}" class="btn btn sm btn-dark"> <i class="fas fa-file-signature"></i> </a>
+                                                    <a title="Cadastrar Contrato" href="gerenciar_contrato.do?acao=contrato&idCliente=${c.idCliente}" class="btn btn sm btn-dark"> <i class="fas fa-file-signature"></i> </a>
                                                     <a title="Editar" href="gerenciar_cliente.do?acao=alterar&idCliente=${c.idCliente}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
                                                     <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#cliente-${c.idCliente}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
                                                 </td>

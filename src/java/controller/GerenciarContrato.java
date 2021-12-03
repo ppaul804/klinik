@@ -41,12 +41,13 @@ public class GerenciarContrato extends HttpServlet {
         
         Contrato contrato = new Contrato();
         
-        if (acao.equals("cadastrar")) {
+        if (acao.equals("contrato")) {
             if (GerenciarLogin.verificarPermissao(request, response)) {
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_contrato.jsp");
                 request.setAttribute("titulo", "Cadastrar Contrato");
                 request.setAttribute("idCliente", idCliente);
                 request.setAttribute("activeCon", "active");
+                request.setAttribute("acao", "contrato");
                 disp.forward(request, response);
             } else {
                 mensagem = "Acesso Negado a está função!";

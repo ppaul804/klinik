@@ -60,7 +60,7 @@
                 <div class="card shadow mb-4">
 
                     <div class="card-body">
-                        
+                                         
                         <%
                             
                             Usuario usuarioLogado = GerenciarLogin.verificarAcesso(request, response);
@@ -91,7 +91,11 @@
                             }
                         %>
                         
+                        <h5><i class="fas fa-user-tie"></i> <strong>Atendente:</strong> <%=cc.getAtendente().getNome()%></h5>
                         
+                        <h5><i class="fas fa-user-tag"></i> <strong>Cliente:</strong> <%=cc.getIdCliente().getNome()%></h5>
+                        
+                        <h5><i class="fas fa-shopping-cart"></i> <strong>Carrinho:</strong> (<%=cc.getCarrinho().size()%> Serviços)</h5>
                         
                         
                         <jsp:useBean class="model.ServicoDAO" id="servicoDAO"/>
@@ -124,7 +128,7 @@
                         </table>
                         
                         <a title="Finalizar Contrato" href="gerenciar_contrato.do?acao=finalizar" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Finalizar Contrato</a>
-                        <a title="Voltar" href="gerenciar_cliente.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
+                        <a title="Voltar" href="gerenciar_cliente.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>                  
                     </div>
                 </div>
 
