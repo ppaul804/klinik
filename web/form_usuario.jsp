@@ -117,11 +117,11 @@
                                     <div class="form-group row">
                                         <div class="col-md-3">
                                             <label>Login</label>
-                                            <input type="text" class="form-control" name="login" placeholder="Seu login" value="${usuario.login}" maxlength="20" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
+                                            <input type="text" class="form-control" name="login" placeholder="Seu login" value="${usuario.login}" minlength="5" maxlength="20" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Senha</label>
-                                            <input type="password" class="form-control" name="senha" placeholder="Sua senha" value="${usuario.senha}" maxlength="20" required="" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
+                                            <input type="password" class="form-control" name="senha" placeholder="Sua senha" value="" minlength="5" maxlength="20" <c:if test="${usuarioLogado.idUsuario != 1}">readonly=""</c:if>>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Status</label>
@@ -146,6 +146,7 @@
                             
 
                             <input type="hidden" name="idUsuario" value="${usuario.idUsuario}">
+                            <input type="hidden" name="acao" value="<c:if test="${empty(usuario.idUsuario)}">cadastrar</c:if>">
                             <button type="submit" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Gravar</button>
                             <a title="Voltar" href="gerenciar_usuarios.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
                         </form>

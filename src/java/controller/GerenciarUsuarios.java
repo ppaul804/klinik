@@ -5,6 +5,8 @@
  */
 package controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+//import org.mindrot.jbcrypt.BCrypt;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -140,21 +142,43 @@ public class GerenciarUsuarios extends HttpServlet {
         String senha = request.getParameter("senha");
         String status = request.getParameter("status");
         String idPerfil = request.getParameter("idPerfil");
+        String acao = request.getParameter("acao");
             
         String mensagem = "";
             
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Usuario u = new Usuario();
+        Usuario uAlterar = new Usuario();
         
         if (!idUsuario.isEmpty()) {
             u.setIdUsuario(Integer.parseInt(idUsuario));
         }
         
-        if (nome.equals("") || login.equals("") || senha.equals("")) {
+        if (nome.equals("") || login.equals("")) {
             mensagem = "Campos obrigatórios devem ser preenchidos!";
+            if (senha.equals("")) {
+                mensagem = "O campo SENHA também deve ser preenchido!";
+            }
         } else {  
             
             try {
+                UsuarioDAO uDAO = new UsuarioDAO();
+                
+                if (acao.equals("cadastrar")) {
+                    //String complexidade = BCrypt.gensalt(10);
+                    //senha = BCrypt.hashpw(senha, complexidade);
+                    u.setSenha(senha);
+                } else {
+                    if (senha.equals("")) {
+                        uAlterar = uDAO.getCarregaPorId(Integer.parseInt(idUsuario));
+                        u.setSenha(uAlterar.getSenha());
+                    } else {
+                        //String complexidade = BCrypt.gensalt(10);
+                        //senha = BCrypt.hashpw(senha, complexidade);
+                        u.setSenha(senha);
+                    }
+                }
+                
                 u.setNome(nome);
                 u.setEmail(email);
                 u.setData_de_nascimento(sdf.parse(data_de_nascimento));
@@ -166,13 +190,13 @@ public class GerenciarUsuarios extends HttpServlet {
                 u.setComplemento(complemento);
                 u.setCidade(cidade);
                 u.setLogin(login);
-                u.setSenha(senha);
+                //u.setSenha(senha);
                 u.setStatus(Integer.parseInt(status));
                 Perfil p = new Perfil();
                 p.setIdPerfil(Integer.parseInt(idPerfil));
                 u.setIdPerfil(p);
                 
-                UsuarioDAO uDAO = new UsuarioDAO();
+                
                 if (uDAO.gravar(u)) {
                     mensagem = "Gravado com sucesso!";
                 } else {
