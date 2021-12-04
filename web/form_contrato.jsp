@@ -19,7 +19,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>KLINIK | ${titulo}</title>
+        <title>KLINIK | Novo Contrato</title>
 
         <!-- Custom fonts for this template-->
         <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -52,7 +52,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="gerenciar_index.do?acao=index">Home</a></li>
                         <li class="breadcrumb-item"><a href="gerenciar_cliente.do?acao=listar">Clientes</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">${titulo}</li>
+                        <li class="breadcrumb-item active" aria-current="page">Novo Contrato</li>
                     </ol>
                 </nav>
 
@@ -66,24 +66,24 @@
                             Usuario usuarioLogado = GerenciarLogin.verificarAcesso(request, response);
                             request.setAttribute("usuarioLogado", usuarioLogado);
                             
-                            Contrato cc = new Contrato();
+                            Contrato con = new Contrato();
                             Cliente cliente = new Cliente();
                             try {
                                     
                                 String acao = request.getParameter("acao");
                                 ClienteDAO cDAO = new ClienteDAO();
                                 
-                                if (acao.equals("contrato")) {
+                                if (acao.equals("novo")) {
                                     int idCliente = Integer.parseInt(request.getParameter("idCliente"));
                                     cliente = cDAO.getCarregaPorId(idCliente);
                                     
-                                    cc.setIdCliente(cliente);
-                                    cc.setAtendente(usuarioLogado);
-                                    cc.setCarrinho(new ArrayList<ContratoServico>());
-                                    session.setAttribute("contrato", cc);
+                                    con.setIdCliente(cliente);
+                                    con.setAtendente(usuarioLogado);
+                                    con.setCarrinho(new ArrayList<ContratoServico>());
+                                    session.setAttribute("contrato", con);
                                     
                                 } else {
-                                    cc = (Contrato) session.getAttribute("contrato");
+                                    con = (Contrato) session.getAttribute("contrato");
                                 }
                                 
                             } catch (Exception e) {
@@ -91,11 +91,11 @@
                             }
                         %>
                         
-                        <h5><i class="fas fa-user-tie"></i> <strong>Atendente:</strong> <%=cc.getAtendente().getNome()%></h5>
+                        <h5><i class="fas fa-user-tie"></i> <strong>Atendente:</strong> <%=con.getAtendente().getNome()%></h5>
                         
-                        <h5><i class="fas fa-user-tag"></i> <strong>Cliente:</strong> <%=cc.getIdCliente().getNome()%></h5>
+                        <h5><i class="fas fa-user-tag"></i> <strong>Cliente:</strong> <%=con.getIdCliente().getNome()%></h5>
                         
-                        <h5><i class="fas fa-shopping-cart"></i> <strong>Carrinho:</strong> (<%=cc.getCarrinho().size()%> Serviços)</h5>
+                        <h5><i class="fas fa-shopping-cart"></i> <strong>Carrinho:</strong> (<%=con.getCarrinho().size()%> Serviços)</h5>
                         
                         
                         <jsp:useBean class="model.ServicoDAO" id="servicoDAO"/>
@@ -127,7 +127,7 @@
                         </c:forEach>
                         </table>
                         
-                        <a title="Finalizar Contrato" href="gerenciar_contrato.do?acao=finalizar" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Finalizar Contrato</a>
+                        <a title="Finalizar Contrato" href="form_finalizar_contrato.jsp?acao=finalizar" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Finalizar Contrato</a>
                         <a title="Voltar" href="gerenciar_cliente.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>                  
                     </div>
                 </div>

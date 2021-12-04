@@ -51,7 +51,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="gerenciar_index.do?acao=index">Home</a></li>
-                        <li class="breadcrumb-item"><a href="gerenciar_servico.do?acao=listar">Serviços</a></li>
+                        <li class="breadcrumb-item"><a href="gerenciar_contrato.do?acao=listar">Contratos</a></li>
                         <li class="breadcrumb-item active" aria-current="page">${titulo}</li>
                     </ol>
                 </nav>
@@ -60,35 +60,31 @@
                 <div class="card shadow mb-4">
 
                     <div class="card-body">
-                        <form method="post" name="form_add" action="gerenciar_servico.do">
-
-                            <fieldset class="mt-5 border p-2 mb-4">
-                                <legend class="font-small form-control text-center text-primary"> <i class="fas fa-user-tie text-primary"></i>&nbsp;Dados do Serviço </legend>
-
+                        <form method="post" name="form_add" action="gerenciar_contrato.do">
+                            <fieldset class="mt-2 border p-2 mb-4">
+                                <legend class="font-small form-control text-center text-primary"> <i class="fas fa-file-signature text-primary"></i>&nbsp;Dados Contrato </legend>
                                 <div class="form-group row mb-4">
-                                    <div class="col-md-5">
-                                        <label>Nome</label>
-                                        <input type="text" class="form-control" name="nome" placeholder="Nome do Serviço " value="${servico.nome}" maxlength="45" required=""> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Quantidade</label>
-                                        <c:if test="${servico.quantidade == null}">
-                                            <input type="text" class="form-control" name="quantidade" placeholder="Quantidade do Serviço" value="0" maxlength="45">
-                                        </c:if>
-                                        <c:if test="${servico.quantidade != null}">
-                                            <input type="text" class="form-control" name="quantidade" placeholder="Quantidade do Serviço" value="${servico.quantidade}" maxlength="45">
-                                        </c:if>
+                                    <div class="col-md-3">
+                                        <label>Data Contrato</label>
+                                        <input type="datetime-local" class="form-control" name="data_contrato" value="${contrato.data_contrato}" required=""> 
                                     </div>
                                     <div class="col-md-3">
-                                        <label>Valor (R$)</label>
-                                        <input type="text" class="form-control" name="valor" placeholder="Valor do Serviço" value="<fmt:formatNumber pattern="#,##0.00" value="${servico.valor}"/>" required="">
+                                        <label>Status</label>
+                                        <select class="custom-select" name="status" required="">
+                                            <option value="" disabled="">Escolha um Status</option>
+                                            <option value="cancelado" <c:if test="${contrato.status == 'cancelado'}">selected=""</c:if>>Cancelado</option>
+                                            <option value="aberto" <c:if test="${contrato.status == 'aberto'}">selected=""</c:if>>Em Aberto</option>
+                                            <option value="finalizado" <c:if test="${contrato.status == 'finalizado'}">selected=""</c:if>>Finalizado</option>
+                                        </select>
                                     </div>
                                 </div>
                             </fieldset>
                                 
-                            <input type="hidden" name="idServico" value="${servico.idServico}">
+                            <input type="hidden" name="idContrato" value="${contrato.idContrato}">
+                            <input type="hidden" name="idCliente" value="${contrato.idCliente}">
+                            <input type="hidden" name="idUsuario" value="${contrato.idUsuario}">
                             <button type="submit" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Gravar</button>
-                            <a title="Voltar" href="gerenciar_servico.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
+                            <a title="Voltar" href="gerenciar_contrato.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
                         </form>
                     </div>
                 </div>

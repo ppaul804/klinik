@@ -1,14 +1,7 @@
-<%-- 
-    Document   : listar_servico
-    Created on : 27/11/2021, 01:39:47
-    Author     : COUGAR
---%>
-
 <%@page import="java.time.LocalDate"%>
 <%@page import="model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,8 +56,7 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary float-left pt-1">Serviços Cadastrados</h6>
-                                <a href="gerenciar_servico.do?acao=cadastrar" class="btn btn-success btn-sm float-right" ><i class="far fa-plus-square"></i>&nbsp;Novo</a>
+                                <h6 class="m-0 font-weight-bold text-primary float-left pt-1">Contratos Cadastrados</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -72,30 +64,41 @@
                                         <thead class="text-primary">
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Nome</th>
-                                                <th>Quantidade</th>
-                                                <th>Valor</th>
+                                                <th>Atendente</th>
+                                                <th>Cliente</th>
+                                                <th>Data Contrato</th>
+                                                <th class="text-center">Status</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
                                         </thead>
                                         
-                                        <jsp:useBean class="model.ServicoDAO" id="servicoDAO" />
+                                        <jsp:useBean class="model.ContratoDAO" id="conDAO" />
                                         <tbody>
                                             
-                                            <c:forEach var="servico" items="${servicoDAO.lista}">
+                                            <c:forEach var="contrato" items="${conDAO.lista}">
                                                 <tr>
-                                                    <td>${servico.idServico}</td>
-                                                    <td>${servico.nome}</td>
-                                                    <td>${servico.quantidade}</td>
-                                                    <td>R$ <fmt:formatNumber pattern="#,##0.00" value="${servico.valor}"></fmt:formatNumber></td>
-    
+                                                    <td>${contrato.idContrato}</td>
+                                                    <td>${contrato.atendente.nome}</td>
+                                                    <td>${contrato.idCliente.nome}</td>
+                                                    <td>${contrato.data_contrato}</td>
+                                                    <td class="text-center">
+                                                        <c:if test="${contrato.status == 'finalizado'}">
+                                                            <span class="btn badge badge-success">Finalizado</span>
+                                                        </c:if>
+                                                        <c:if test="${contrato.status == 'aberto'}">
+                                                            <span class="btn badge badge-warning">Em Aberto</span>
+                                                        </c:if>
+                                                        <c:if test="${contrato.status == 'cancelado'}">
+                                                            <span class="btn badge badge-danger">Cancelado</span>
+                                                        </c:if>
+                                                    </td>
                                                     <td  class="text-right">
-                                                        <a title="Editar" href="gerenciar_servico.do?acao=alterar&idServico=${servico.idServico}" class="btn btn sm btn-primary"> <i class="fas fa-edit"></i> </a>
-                                                        <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#servico-${servico.idServico}" class="btn btn sm btn-danger"> <i class="fas fa-trash-alt"></i> </a>
+                                                        <a title="Editar" href="gerenciar_contrato.do?acao=alterar&idContrato=${contrato.idContrato}" class="btn btn sm btn-primary"> <i class="fas fa-edit"></i> </a>
+                                                        <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#contrato-${contrato.idContrato}" class="btn btn sm btn-danger"> <i class="fas fa-trash-alt"></i> </a>
                                                     </td>
                                                 </tr>
                                             
-                                                <div class="modal fade" id="servico-${servico.idServico}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="contrato-${contrato.idContrato}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -104,10 +107,10 @@
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">Você realmente deseja excluir o serviço ${servico.nome}?</div>
+                                                            <div class="modal-body">Você realmente deseja excluir o contrato ${contrato.idContrato}?</div>
                                                             <div class="modal-footer">
                                                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
-                                                                <a class="btn btn-danger" href="gerenciar_servico.do?acao=deletar&idServico=${servico.idServico}">Sim</a>
+                                                                <a class="btn btn-danger" href="gerenciar_contrato.do?acao=deletar&idContrato=${contrato.idContrato}">Sim</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -181,5 +184,3 @@
     </body>
 
 </html>
-
-

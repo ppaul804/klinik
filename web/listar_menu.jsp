@@ -57,7 +57,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary float-left pt-1">Menus Cadastrados</h6>
-                                <a href="gerenciar_menu.do?acao=cadastrar" class="btn btn-success btn-sm float-right" ><i class="fas fa-user-plus"></i>&nbsp;Novo</a>
+                                <a href="gerenciar_menu.do?acao=cadastrar" class="btn btn-success btn-sm float-right" ><i class="far fa-plus-square"></i>&nbsp;Novo</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">

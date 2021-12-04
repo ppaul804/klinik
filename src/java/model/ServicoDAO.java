@@ -16,26 +16,7 @@ import java.util.ArrayList;
  */
 public class ServicoDAO extends DataBaseDAO{
     
-    public ServicoDAO() throws Exception{}
-    
-    public ArrayList<Servico> getLista() throws Exception{
-        
-        ArrayList<Servico> lista = new ArrayList<Servico>();
-        String sql = "SELECT * FROM servico";
-        this.conectar();
-        Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery(sql);
-        while(rs.next()){
-            Servico servico = new Servico();
-            servico.setIdServico(rs.getInt("IdSERVICO"));
-            servico.setNome(rs.getString("NOME"));
-            servico.setQuantidade(rs.getInt("QUANTIDADE"));
-            servico.setValor(rs.getDouble("VALOR"));
-            lista.add(servico);
-        }
-        this.desconectar();
-        return lista;
-    }
+    public ServicoDAO() throws Exception{}   
     
     public boolean gravar (Servico servico) {
         try{
@@ -83,7 +64,7 @@ public class ServicoDAO extends DataBaseDAO{
     public Servico getCarregaPorID(int idServico) throws Exception{
         
         Servico servico = new Servico();
-        String sql = "SELECT * FROM servico WHERE idSERVICO=?";
+        String sql = "SELECT * FROM servico WHERE idSERVICO = ?";
         this.conectar();
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, idServico);
@@ -96,6 +77,25 @@ public class ServicoDAO extends DataBaseDAO{
         }
         this.desconectar();
         return servico;
+    }
+    
+    public ArrayList<Servico> getLista() throws Exception{
+        
+        ArrayList<Servico> lista = new ArrayList<Servico>();
+        String sql = "SELECT * FROM servico";
+        this.conectar();
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery(sql);
+        while(rs.next()){
+            Servico servico = new Servico();
+            servico.setIdServico(rs.getInt("IdSERVICO"));
+            servico.setNome(rs.getString("NOME"));
+            servico.setQuantidade(rs.getInt("QUANTIDADE"));
+            servico.setValor(rs.getDouble("VALOR"));
+            lista.add(servico);
+        }
+        this.desconectar();
+        return lista;
     }
 }
 

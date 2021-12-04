@@ -24,11 +24,11 @@
     
         <c:if test="${usuarioLogado != null && usuarioLogado.idPerfil != null}">
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
-                <c:if test="${menu.nome == 'Index'}">
-                    <li class="nav-item <c:if test="${!empty(activeI)}">active</c:if>">
-                        <a class="nav-link" href="gerenciar_index.do?acao=index">
-                            <i class="fas fa-home"></i>
-                            <span>Página Inicial</span>
+                <c:if test="${menu.nome == 'Página Inicial'}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="${menu.link}">
+                            <i class="${menu.icone}"></i>
+                            <span>${menu.nome}</span>
                         </a>
                     </li>
                 </c:if>
@@ -47,10 +47,24 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.nome == 'Clientes'}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeC)}">active</c:if>">
-                        <a class="nav-link" href="gerenciar_cliente.do?acao=listar">
-                            <i class="fas fa-users"></i>
-                            <span>Clientes</span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${menu.link}">
+                            <i class="${menu.icone}"></i>
+                            <span>${menu.nome}</span>
+                        </a>
+                    </li>
+                </c:if>
+            </c:forEach>
+        </c:if>
+                    
+        <c:if test="${usuarioLogado != null && usuarioLogado.idPerfil != null}">
+            <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
+                <c:if test="${menu.nome == 'Contratos'}">
+                    <!-- Nav Item - Tables -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="${menu.link}">
+                            <i class="${menu.icone}"></i>
+                            <span>${menu.nome}</span>
                         </a>
                     </li>
                 </c:if>
@@ -61,10 +75,10 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.nome == 'Serviços'}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeS)}">active</c:if>">
-                        <a class="nav-link" href="gerenciar_servico.do?acao=listar">
-                            <i class="fas fa-briefcase"></i>
-                            <span>Serviços</span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${menu.link}">
+                            <i class="${menu.icone}"></i>
+                            <span>${menu.nome}</span>
                         </a>
                     </li>
                 </c:if>
@@ -83,10 +97,10 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.nome == 'Usuarios'}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeU)}">active</c:if>">
-                        <a class="nav-link" href="gerenciar_usuarios.do?acao=listar">
-                            <i class="fas fa-users"></i>
-                            <span>Usuários</span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${menu.link}">
+                            <i class="${menu.icone}"></i>
+                            <span>${menu.nome}</span>
                         </a>
                     </li>
                 </c:if>
@@ -97,10 +111,10 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.nome == 'Menus'}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeM)}">active</c:if>">
-                        <a class="nav-link" href="gerenciar_menu.do?acao=listar">
-                            <i class="fas fa fa-list"></i>
-                            <span>Menus</span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${menu.link}">
+                            <i class="${menu.icone}"></i>
+                            <span>${menu.nome}</span>
                         </a>
                     </li>
                 </c:if>
@@ -111,10 +125,10 @@
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.nome == 'Perfil'}">
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item <c:if test="${!empty(activeP)}">active</c:if>">
-                        <a class="nav-link" href="gerenciar_perfil.do?acao=listar">
-                            <i class="fas fa-user-alt"></i>
-                            <span>Perfis</span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${menu.link}">
+                            <i class="${menu.icone}"></i>
+                            <span>${menu.nome}</span>
                         </a>
                     </li>
                 </c:if>

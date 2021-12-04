@@ -47,16 +47,23 @@ public class GerenciarCarrinho extends HttpServlet {
                     Servico servico = new Servico();
                     int idServico = Integer.parseInt(request.getParameter("idServico"));
                     servico = sDAO.getCarregaPorID(idServico);
-                    //int quantidade = Integer.parseInt(request.getParameter("quantidade"));
+                    int quantidade = Integer.parseInt(request.getParameter("quantidade"));
                     
                     ContratoServico contratoServico = new ContratoServico();
                     contratoServico.setServico(servico);
+                    contratoServico.setQuantidade(quantidade);
                     contratoServico.setValor(servico.getValor());
                     carrinho.add(contratoServico);
                     contrato.setCarrinho(carrinho);
                     session.setAttribute("contrato", contrato);
-                    response.sendRedirect("form_contrato.jsp?acao=carrinho");
+                    response.sendRedirect("form_contrato.jsp?acao=c");
                     
+                } else if(acao.equals("deletar")) {
+                    int index = Integer.parseInt(request.getParameter("index"));
+                    carrinho.remove(index);
+                    contrato.setCarrinho(carrinho);
+                    session.setAttribute("contrato", contrato);
+                    response.sendRedirect("form_finalizar_contrato.jsp");
                 }
                 
                 
