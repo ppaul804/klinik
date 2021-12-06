@@ -4,6 +4,10 @@
     Author     : COUGAR
 --%>
 
+<%@page import="model.ContratoDAO"%>
+<%@page import="model.Contrato"%>
+<%@page import="model.ContratoServicoDAO"%>
+<%@page import="model.ContratoServico"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.time.LocalDate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -60,13 +64,38 @@
                 <div class="card shadow mb-4">
 
                     <div class="card-body">
+                        <h2 class="text-primary text-center mb-4">Serviços do Contrato</h2>
+                        <table class="table table-bordered pb-6" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>ID Contrato</th>
+                                    <th>Serviço</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <jsp:useBean class="model.ContratoServicoDAO" id="csDAO" />
+                            <tbody>
+                                <c:forEach var="cs" items="${csDAO.getCarregaPorId(contrato.idContrato)}">
+                                    <tr>
+                                        <td class="text-center"> ${cs.contrato.idContrato} </td>
+                                        <td> ${cs.servico.nome} </td>
+                                        <td> ${cs.quantidade} </td>
+                                        <td> ${cs.valor} </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                         <form method="post" name="form_add" action="gerenciar_contrato.do">
-                            <fieldset class="mt-2 border p-2 mb-4">
+                            <fieldset class="mt-6 border p-2 mb-4">
                                 <legend class="font-small form-control text-center text-primary"> <i class="fas fa-file-signature text-primary"></i>&nbsp;Dados Contrato </legend>
                                 <div class="form-group row mb-4">
                                     <div class="col-md-3">
+                                        
+                                    </div>
+                                    <div class="col-md-3">
                                         <label>Data Contrato</label>
-                                        <input type="datetime-local" class="form-control" name="data_contrato" value="${contrato.data_contrato}" required=""> 
+                                        <input type="datetime-local" class="form-control" name="data_contrato" value="${data}" required=""> 
                                     </div>
                                     <div class="col-md-3">
                                         <label>Status</label>
@@ -81,11 +110,13 @@
                             </fieldset>
                                 
                             <input type="hidden" name="idContrato" value="${contrato.idContrato}">
-                            <input type="hidden" name="idCliente" value="${contrato.idCliente}">
-                            <input type="hidden" name="idUsuario" value="${contrato.idUsuario}">
-                            <button type="submit" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Gravar</button>
+                            <input type="hidden" name="idCliente" value="${contrato.idCliente.idCliente}">
+                            <input type="hidden" name="idUsuario" value="${contrato.atendente.idUsuario}">
+                            <button type="submit" class="btn btn-primary btn-sm float-right ml-2" <c:if test="${usuarioLogado.idPerfil.nome == 'Atendente' && contrato.status == 'finalizado'}">disabled=""</c:if>><i class="fas fa-save"></i>&nbsp;Gravar</button>
                             <a title="Voltar" href="gerenciar_contrato.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
                         </form>
+                            
+                        
                     </div>
                 </div>
 

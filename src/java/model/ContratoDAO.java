@@ -4,7 +4,7 @@ import com.mysql.jdbc.Statement;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class ContratoDAO extends DataBaseDAO {
@@ -24,7 +24,7 @@ public class ContratoDAO extends DataBaseDAO {
                 pstm.setInt(1, contrato.getIdCliente().getIdCliente());
                 pstm.setInt(2, contrato.getAtendente().getIdUsuario());
                 pstm.setString(3, contrato.getStatus());
-                pstm.setDate(4, new Date(contrato.getData_contrato().getTime()));
+                pstm.setTimestamp(4, new Timestamp(contrato.getData_contrato().getTime()));
                 pstm.execute();
                 ResultSet rs = pstm.getGeneratedKeys();
 
@@ -48,12 +48,36 @@ public class ContratoDAO extends DataBaseDAO {
                 pstm.setInt(1, contrato.getIdCliente().getIdCliente());
                 pstm.setInt(2, contrato.getAtendente().getIdUsuario());
                 pstm.setString(3, contrato.getStatus());
-                pstm.setDate(4, new Date(contrato.getData_contrato().getTime()));
+                pstm.setTimestamp(4, new Timestamp(contrato.getData_contrato().getTime()));
                 if (contrato.getIdContrato() > 0) {
                     pstm.setInt(5, contrato.getIdContrato());
                 }
                 pstm.execute();
             }
+            
+            this.desconectar();
+            return true;
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+    
+    public boolean deletar(Contrato contrato) {
+        
+        try {
+            
+            this.conectar();
+            String sqlCS = "DELETE FROM contrato_servico WHERE idContrato = ?";
+            PreparedStatement pstmCS = conn.prepareStatement(sqlCS);
+            pstmCS.setInt(1, contrato.getIdContrato());
+            pstmCS.execute();
+            
+            String sqlC = "DELETE FROM contrato WHERE idContrato = ?";
+            PreparedStatement pstmC = conn.prepareStatement(sqlC);
+            pstmC.setInt(1, contrato.getIdContrato());
+            pstmC.execute();
             
             this.desconectar();
             return true;
@@ -76,7 +100,7 @@ public class ContratoDAO extends DataBaseDAO {
         
         if (rs.next()) {
             contrato.setIdContrato(rs.getInt("idCONTRATO"));
-            contrato.setData_contrato(rs.getDate("DATA_CONTRATO"));
+            contrato.setData_contrato(new Date(rs.getTimestamp("DATA_CONTRATO").getTime()));
             contrato.setStatus(rs.getString("STATUS"));
             ClienteDAO cDAO = new ClienteDAO();
             contrato.setIdCliente(cDAO.getCarregaPorId(rs.getInt("idCLIENTE")));

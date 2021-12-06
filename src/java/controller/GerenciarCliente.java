@@ -83,10 +83,10 @@ public class GerenciarCliente extends HttpServlet {
                     if (GerenciarLogin.verificarPermissao(request, response)) {
                         c.setIdCliente(Integer.parseInt(idCliente));
                         if (cDAO.deletar(c)) {
-                            mensagem = "Cliente desativado com sucesso!";
+                            mensagem = "Cliente deletado com sucesso!";
 
                         } else {
-                            mensagem = "Erro ao desativar o Cliente!";
+                            mensagem = "Erro ao deletar o Cliente!";
                         }
                     } else {
                         mensagem = "Acesso Negado a está função!";

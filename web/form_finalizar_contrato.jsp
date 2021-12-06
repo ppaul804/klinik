@@ -150,9 +150,9 @@
                                         <label>Status</label>
                                         <select class="custom-select" name="status" required="">
                                             <option value="" disabled="">Escolha um Status</option>
-                                            <option value="cancelado" >Cancelado</option>
+                                            <option value="cancelado" disabled="">Cancelado</option>
                                             <option value="aberto" selected="">Em Aberto</option>
-                                            <option value="finalizado" >Finalizado</option>
+                                            <option value="finalizado" disabled="">Finalizado</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2">
@@ -161,10 +161,11 @@
                                     </div>
                                 </div>
                                 
+                                <input type="hidden" name="idContrato" value="">
                                 <button type="submit" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Finalizar Contrato</button>
                             </fieldset>
                         </form>
-                                
+                        
                         <a title="Continuar Contrato" href="form_contrato.jsp?acao=c" class="btn btn-info btn-sm float-right ml-2"><i class="fas fa-save"></i>&nbsp;Continuar Contrato</a>
                         <a title="Voltar" href="gerenciar_cliente.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Cancelar</a>                  
                     </div>

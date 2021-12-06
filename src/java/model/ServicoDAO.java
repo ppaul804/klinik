@@ -23,18 +23,19 @@ public class ServicoDAO extends DataBaseDAO{
            this.conectar();
            String sql;
            if(servico.getIdServico()==0){
-                sql = "INSERT INTO servico (NOME, VALOR, QUANTIDADE)"
-                        + "VALUES(?,?,?)";
+                sql = "INSERT INTO servico (NOME, VALOR, QUANTIDADE, STATUS)"
+                        + "VALUES(?,?,?,?)";
             }else{
-               sql = "UPDATE servico SET NOME = ?, VALOR = ?, QUANTIDADE = ? "
+               sql = "UPDATE servico SET NOME = ?, VALOR = ?, QUANTIDADE = ?, STATUS = ? "
                        +  "WHERE idSERVICO = ?";
            }
            PreparedStatement pstm = conn.prepareStatement(sql);
            pstm.setString(1, servico.getNome());
            pstm.setDouble(2, servico.getValor());
            pstm.setInt(3, servico.getQuantidade());
+           pstm.setInt(4, servico.getStatus());
            if(servico.getIdServico()>0){
-               pstm.setInt(4, servico.getIdServico());
+               pstm.setInt(5, servico.getIdServico());
            }
            pstm.execute();
            this.desconectar();
@@ -49,14 +50,14 @@ public class ServicoDAO extends DataBaseDAO{
     public boolean deletar(Servico servico){
         try{
           this.conectar();
-          String sql = "DELETE FROM servico where idSERVICO=?";
+          String sql = "UPDATE servico SET STATUS = 0 WHERE idSERVICO = ?";
           PreparedStatement pstm = conn.prepareStatement(sql);
           pstm.setInt(1, servico.getIdServico());
           pstm.execute();
           this.desconectar();
           return true;
         }catch(Exception e){
-            System.out.println("");
+            System.out.println(e);
             return false;
         }
     }
@@ -74,6 +75,7 @@ public class ServicoDAO extends DataBaseDAO{
             servico.setNome(rs.getString("NOME"));
             servico.setQuantidade(rs.getInt("QUANTIDADE"));
             servico.setValor(rs.getDouble("VALOR"));
+            servico.setStatus(rs.getInt("STATUS"));
         }
         this.desconectar();
         return servico;
@@ -92,6 +94,7 @@ public class ServicoDAO extends DataBaseDAO{
             servico.setNome(rs.getString("NOME"));
             servico.setQuantidade(rs.getInt("QUANTIDADE"));
             servico.setValor(rs.getDouble("VALOR"));
+            servico.setStatus(rs.getInt("STATUS"));
             lista.add(servico);
         }
         this.desconectar();

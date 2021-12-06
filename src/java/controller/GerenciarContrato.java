@@ -8,6 +8,9 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -69,6 +72,11 @@ public class GerenciarContrato extends HttpServlet {
                     if (contrato.getIdContrato()> 0) {
                         RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_altera_contrato.jsp");
                         request.setAttribute("contrato", contrato);
+                        
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                        String data = sdf.format(contrato.getData_contrato().getTime());
+                                
+                        request.setAttribute("data", data);
                         request.setAttribute("titulo", "Alterar Contrato");
                         disp.forward(request, response);
 
@@ -79,42 +87,25 @@ public class GerenciarContrato extends HttpServlet {
                     mensagem = "Acesso Negado a está função!";
                 }
             }
-
             
+            if (acao.equals("deletar")) {
+                if (GerenciarLogin.verificarPermissao(request, response)) {
+                    contrato.setIdContrato(Integer.parseInt(idContrato));
+                    if (ctDAO.deletar(contrato)) {
+                        mensagem = "Contrato deletado com sucesso!";
 
+                    } else {
+                        mensagem = "Erro ao deletar o Contrato!";
+                    }
+                } else {
+                    mensagem = "Acesso Negado a está função!";
+                }
+            }
+            
         } catch (Exception e) {
             out.print(e);
             mensagem = "Erro ao executar!";
         }
-        
-        /*if (acao.equals("novo")) {
-            if (GerenciarLogin.verificarPermissao(request, response)) {
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_contrato.jsp");
-                request.setAttribute("titulo", "Novo Contrato");
-                request.setAttribute("novo", acao);
-                request.setAttribute("idCliente", idCliente);
-                request.setAttribute("activeCT", "active");
-                request.setAttribute("acao", "contrato");
-                disp.forward(request, response);
-                
-            } else {
-                mensagem = "Acesso Negado a está função!";
-            }
-        }
-        
-        if (acao.equals("finalizar")) {
-            if (GerenciarLogin.verificarPermissao(request, response)) {
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_finalizar_contrato.jsp");
-                request.setAttribute("titulo", "Finalizar Contrato");
-                request.setAttribute("idCliente", idCliente);
-                request.setAttribute("activeCT", "active");
-                request.setAttribute("acao", "contrato");
-                disp.forward(request, response);
-                
-            } else {
-                mensagem = "Acesso Negado a está função!";
-            }
-        }*/
         
         out.println("<script type='text/javascript'>");
         out.println("alert('"+mensagem+"');");
@@ -135,12 +126,12 @@ public class GerenciarContrato extends HttpServlet {
             String idContrato = request.getParameter("idContrato");
             String idCliente = request.getParameter("idCliente");
             String idUsuario = request.getParameter("idUsuario");
-            String data_contrato = request.getParameter("data_contrato");
+            String data_hora = request.getParameter("data_contrato");
             String mensagem = "";
             
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Usuario usuario = new Usuario();
             Cliente cliente = new Cliente();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             
             if (!idContrato.isEmpty()) {
                 Contrato contrato = new Contrato();
@@ -155,7 +146,15 @@ public class GerenciarContrato extends HttpServlet {
                     contrato.setAtendente(usuario = uDAO.getCarregaPorId(Integer.parseInt(idUsuario)));
                     contrato.setIdCliente(cliente = cDAO.getCarregaPorId(Integer.parseInt(idCliente)));
                     contrato.setStatus(status);
-                    contrato.setData_contrato(sdf.parse(data_contrato));
+                    
+                    Date data = sdf.parse(data_hora);
+                    contrato.setData_contrato(data);
+                    
+                    if (conDAO.gravar(contrato)) {
+                        mensagem = "Contrato realizada com sucesso!";
+                    } else {
+                        mensagem  = "Erro ao gravar no banco de dados!";
+                    }
                     
                 } catch (Exception e) {
                     out.println(e);
@@ -163,14 +162,17 @@ public class GerenciarContrato extends HttpServlet {
             } else {
             
                 try {
+                
                     ContratoDAO conDAO = new ContratoDAO();
                     Contrato contrato = (Contrato) session.getAttribute("contrato");
                     contrato.setStatus(status);
-                    contrato.setData_contrato(sdf.parse(data_contrato));
+
+                    Date data = sdf.parse(data_hora);
+                    contrato.setData_contrato(data);
 
 
                     if (conDAO.gravar(contrato)) {
-                        mensagem = "Contrato realizada com sucesso!";
+                        mensagem = "Contrato alterado com sucesso!";
                     } else {
                         mensagem  = "Erro ao gravar no banco de dados!";
                     }
@@ -182,7 +184,7 @@ public class GerenciarContrato extends HttpServlet {
             
             out.println("<script type='text/javascript'>");
             out.println("alert('"+mensagem+"');");
-            out.println("location.href = 'gerenciar_cliente.do?acao=listar';");
+            out.println("location.href = 'gerenciar_contrato.do?acao=listar';");
             out.println("</script>");
         
     }

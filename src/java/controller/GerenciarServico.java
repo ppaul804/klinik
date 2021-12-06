@@ -88,9 +88,9 @@ public class GerenciarServico extends HttpServlet {
                 if (GerenciarLogin.verificarPermissao(request, response)) {
                     servico.setIdServico(Integer.parseInt(idServico));
                     if(servicoDAO.deletar(servico)){
-                        mensagem = "Serviço deletado com sucesso";
+                        mensagem = "Serviço desativado com sucesso";
                     }else{
-                        mensagem = "Erro ao deletar o serviço do banco de dados";
+                        mensagem = "Erro ao desativar o serviço do banco de dados";
                     }
                 } else {
                     mensagem = "Acesso Negado a está função!";
@@ -124,6 +124,7 @@ public class GerenciarServico extends HttpServlet {
         String nome = request.getParameter("nome");
         String quantidade = request.getParameter("quantidade");
         String valor = request.getParameter("valor");
+        String status = request.getParameter("status");
         String mensagem = "";
         
         Servico servico = new Servico();
@@ -145,6 +146,7 @@ public class GerenciarServico extends HttpServlet {
                 novoValor = Double.parseDouble(valor.replace(".","").replace(",","."));
             }
             servico.setValor(novoValor);
+            servico.setStatus(Integer.parseInt(status));
             try{
                 ServicoDAO servicoDAO = new ServicoDAO();
                 if(servicoDAO.gravar(servico)){

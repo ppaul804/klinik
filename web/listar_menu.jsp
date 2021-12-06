@@ -68,7 +68,7 @@
                                                 <th>Nome Menu</th>
                                                 <th>Link</th>
                                                 <th>Ícone</th>
-                                                <th>Exibir</th>
+                                                <th class="text-center">Exibir</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
                                         </thead>
@@ -82,12 +82,12 @@
                                                     <td>${menu.nome}</td>
                                                     <td>${menu.link}</td>
                                                     <td>${menu.icone}</td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <c:if test="${menu.exibir == 1}">
-                                                            Sim
+                                                            <span class="btn badge badge-primary">Sim</span>
                                                         </c:if>
                                                         <c:if test="${menu.exibir == 0}">
-                                                            Não
+                                                            <span class="btn badge badge-secondary">Não</span>
                                                         </c:if>
                                                     </td>
                                                     <td  class="text-right">

@@ -109,21 +109,23 @@
                                 </tr>
                             </thead>
                         <c:forEach var="servico" items="${servicoDAO.lista}">
-                            <div id="serv${servico.idServico}">
-                                <form action="gerenciar_carrinho.do" method="GET">
-                                        <tbody>
-                                            <tr>
-                                                <td>${servico.idServico}</td>
-                                                <td>${servico.nome}</td>
-                                                <td><input class="form-control text-center" style="width: 100px;" name="quantidade" value="${servico.quantidade}"></td>
-                                                <td class="text-center"><button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></button></td>
-                                            </tr>
-                                        </tbody>
-                                    <input type="hidden" name="acao" value="add">
-                                    <input type="hidden" name="idServico" value="${servico.idServico}">
-                                    
-                                </form>
-                            </div>
+                            <c:if test="${servico.status == 1}">
+                                <div id="serv${servico.idServico}">
+                                    <form action="gerenciar_carrinho.do" method="GET">
+                                            <tbody>
+                                                <tr>
+                                                    <td>${servico.idServico}</td>
+                                                    <td>${servico.nome}</td>
+                                                    <td><input class="form-control text-center" style="width: 100px;" name="quantidade" value="${servico.quantidade}"></td>
+                                                    <td class="text-center"><button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        <input type="hidden" name="acao" value="add">
+                                        <input type="hidden" name="idServico" value="${servico.idServico}">
+
+                                    </form>
+                                </div>
+                            </c:if>
                         </c:forEach>
                         </table>
                         

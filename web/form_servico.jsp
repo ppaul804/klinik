@@ -70,7 +70,7 @@
                                         <label>Nome</label>
                                         <input type="text" class="form-control" name="nome" placeholder="Nome do Serviço " value="${servico.nome}" maxlength="45" required=""> 
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <label>Quantidade</label>
                                         <c:if test="${servico.quantidade == null}">
                                             <input type="text" class="form-control" name="quantidade" placeholder="Quantidade do Serviço" value="0" maxlength="45">
@@ -79,9 +79,17 @@
                                             <input type="text" class="form-control" name="quantidade" placeholder="Quantidade do Serviço" value="${servico.quantidade}" maxlength="45">
                                         </c:if>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Valor (R$)</label>
                                         <input type="text" class="form-control" name="valor" placeholder="Valor do Serviço" value="<fmt:formatNumber pattern="#,##0.00" value="${servico.valor}"/>" required="">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Status</label>
+                                        <select class="custom-select" name="status" required="">
+                                            <option value="" disabled="" selected="">Escolha um Status</option>
+                                            <option value="0" <c:if test="${servico.status == 0}">selected=""</c:if>>Inativo</option>
+                                            <option value="1" <c:if test="${servico.status == 1}">selected=""</c:if>>Ativo</option>
+                                        </select>
                                     </div>
                                 </div>
                             </fieldset>

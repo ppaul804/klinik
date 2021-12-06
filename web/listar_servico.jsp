@@ -75,6 +75,7 @@
                                                 <th>Nome</th>
                                                 <th>Quantidade</th>
                                                 <th>Valor</th>
+                                                <th class="text-center">Status</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
                                         </thead>
@@ -88,7 +89,14 @@
                                                     <td>${servico.nome}</td>
                                                     <td>${servico.quantidade}</td>
                                                     <td>R$ <fmt:formatNumber pattern="#,##0.00" value="${servico.valor}"></fmt:formatNumber></td>
-    
+                                                    <td class="text-center">
+                                                        <c:if test="${servico.status == 1}">
+                                                            <span class="btn badge badge-primary">ATIVO</span>
+                                                        </c:if>
+                                                        <c:if test="${servico.status == 0}">
+                                                            <span class="btn badge badge-secondary">INATIVO</span>
+                                                        </c:if>
+                                                    </td>
                                                     <td  class="text-right">
                                                         <a title="Editar" href="gerenciar_servico.do?acao=alterar&idServico=${servico.idServico}" class="btn btn sm btn-primary"> <i class="fas fa-edit"></i> </a>
                                                         <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#servico-${servico.idServico}" class="btn btn sm btn-danger"> <i class="fas fa-trash-alt"></i> </a>
@@ -99,12 +107,12 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja deletar?</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja desativar?</h5>
                                                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">Você realmente deseja excluir o serviço ${servico.nome}?</div>
+                                                            <div class="modal-body">Você realmente deseja desativar o serviço ${servico.nome}?</div>
                                                             <div class="modal-footer">
                                                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
                                                                 <a class="btn btn-danger" href="gerenciar_servico.do?acao=deletar&idServico=${servico.idServico}">Sim</a>
