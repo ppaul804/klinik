@@ -83,7 +83,7 @@ public class GerenciarLogin extends HttpServlet {
                 
                 usuario = uDAO.getRecuperarUsuario(login);
                 //&& usuario.getSenha().equals(senha)  && BCrypt.checkpw(senha, usuario.getSenha())
-                if (usuario.getIdUsuario() > 0 && usuario.getSenha().equals(senha)) {
+                if (usuario.getIdUsuario() > 0 && BCrypt.checkpw(senha, usuario.getSenha())) {
                     if (usuario.getStatus() == 1) {
                         HttpSession sessao = request.getSession();
                         sessao.setAttribute("usuarioLogado", usuario);
