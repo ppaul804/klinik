@@ -1,30 +1,25 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
  * @author Pedro Paul
  */
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Consulta {
 
     private int idConsulta;
     private Cliente cliente;
-    private Usuario usuario;
+    private Usuario atendente;
     private String status;
-    private LocalDate data;
-    private LocalTime hora;
-    private String valor;
+    private LocalDateTime data_consulta;
+    private List<ServicoConsulta> carrinho;
 
 }

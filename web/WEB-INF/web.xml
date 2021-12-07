@@ -37,8 +37,16 @@
         <servlet-class>controller.GerenciarContrato</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GerenciarConsulta</servlet-name>
+        <servlet-class>controller.GerenciarConsulta</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>GerenciarCarrinho</servlet-name>
         <servlet-class>controller.GerenciarCarrinho</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GerenciarCarrinhoConsulta</servlet-name>
+        <servlet-class>controller.GerenciarCarrinhoConsulta</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GerenciarIndex</servlet-name>
@@ -77,8 +85,16 @@
         <url-pattern>/gerenciar_contrato.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>GerenciarConsulta</servlet-name>
+        <url-pattern>/gerenciar_consulta.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>GerenciarCarrinho</servlet-name>
         <url-pattern>/gerenciar_carrinho.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarCarrinhoConsulta</servlet-name>
+        <url-pattern>/gerenciar_carrinho_consulta.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

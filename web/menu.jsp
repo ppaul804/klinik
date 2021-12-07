@@ -73,6 +73,20 @@
                     
         <c:if test="${usuarioLogado != null && usuarioLogado.idPerfil != null}">
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
+                <c:if test="${menu.nome == 'Consultas'}">
+                    <!-- Nav Item - Tables -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="${menu.link}">
+                            <i class="${menu.icone}"></i>
+                            <span>${menu.nome}</span>
+                        </a>
+                    </li>
+                </c:if>
+            </c:forEach>
+        </c:if>
+                    
+        <c:if test="${usuarioLogado != null && usuarioLogado.idPerfil != null}">
+            <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
                 <c:if test="${menu.nome == 'Serviços'}">
                     <!-- Nav Item - Tables -->
                     <li class="nav-item">

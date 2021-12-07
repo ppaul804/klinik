@@ -1,4 +1,6 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.time.LocalDate"%>
+<%@page import="model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -11,7 +13,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-       
 
         <title>KLINIK | ${titulo}</title>
 
@@ -24,7 +25,7 @@
 
         <!-- Custom styles for this page -->
         <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        
+
     </head>
 
     <body id="page-top">
@@ -33,13 +34,13 @@
         <div id="wrapper">
 
             <jsp:include page="menu.jsp"/>
-            
+
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
                 <div id="content">
-                    
+
                     <jsp:include page="topbar.jsp"/>
 
                     <!-- Begin Page Content -->
@@ -56,8 +57,7 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary float-left pt-1">Clientes Cadastrados</h6>
-                                <a href="gerenciar_cliente.do?acao=cadastrar" class="btn btn-success btn-sm float-right" ><i class="fas fa-user-plus"></i>&nbsp;Novo</a>
+                                <h6 class="m-0 font-weight-bold text-primary float-left pt-1">Consultas Cadastradas</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -65,48 +65,57 @@
                                         <thead class="text-primary">
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Nome</th>
-                                                <th>Email</th>
-                                                <th>Telefone</th>
-                                                <th>CPF</th>
+                                                <th>Atendente</th>
+                                                <th>Cliente</th>
+                                                <th>Data Consulta</th>
+                                                <th class="text-center">Status</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
                                         </thead>
-                                        <jsp:useBean class="model.ClienteDAO" id="cDAO" />
+
+                                        <jsp:useBean class="model.ConsultaDAO" id="conDAO" />
                                         <tbody>
-                                             <c:forEach var="c" items="${cDAO.lista}">
-                                            <tr>
-                                                
-                                                <td>${c.idCliente}</td>
-                                                <td>${c.nome}</td>
-                                                <td>${c.email}</td>
-                                                <td>${c.telefone}</td>
-                                                <td>${c.cpf}</td>
-                                                <td  class="text-right">
-                                                    <a title="Cadastrar Consulta" href="form_consulta.jsp?acao=novo&idCliente=${c.idCliente}" class="btn btn sm btn-info"> <i class="fas fa-stethoscope"></i> </a>
-                                                    <a title="Cadastrar Contrato" href="form_contrato.jsp?acao=novo&idCliente=${c.idCliente}" class="btn btn sm btn-dark"> <i class="fas fa-file-signature"></i> </a>
-                                                    <a title="Editar" href="gerenciar_cliente.do?acao=alterar&idCliente=${c.idCliente}" class="btn btn sm btn-primary"> <i class="fas fa-user-edit"></i> </a>
-                                                    <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#cliente-${c.idCliente}" class="btn btn sm btn-danger"> <i class="fas fa-user-times"></i> </a>
-                                                </td>
-                                            </tr>
-                                        <div class="modal fade" id="cliente-${c.idCliente}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja deletar?</h5>
-                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">×</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">Você realmente deseja deletar o Cliente ${c.nome}?</div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
-                                                        <a class="btn btn-danger" href="gerenciar_cliente.do?acao=deletar&cliente_id=${c.idCliente}">Sim</a>
+                                            <c:forEach var="consulta" items="${conDAO.lista}">
+                                                <tr>
+                                                    <td>${consulta.idConsulta}</td>
+                                                    <td>${consulta.atendente.nome}</td>
+                                                    <td>${consulta.cliente.nome}</td>
+                                                    <td>${consulta.data_consulta}</td>
+                                                    <td class="text-center">
+                                                        <c:if test="${consulta.status == 'finalizado'}">
+                                                            <span class="btn badge badge-success">Finalizado</span>
+                                                        </c:if>
+                                                        <c:if test="${consulta.status == 'aberto'}">
+                                                            <span class="btn badge badge-warning">Em Aberto</span>
+                                                        </c:if>
+                                                        <c:if test="${consulta.status == 'cancelado'}">
+                                                            <span class="btn badge badge-danger">Cancelado</span>
+                                                        </c:if>
+                                                    </td>
+                                                    <td  class="text-right">
+                                                        <a title="Editar" href="gerenciar_consulta.do?acao=alterar&idConsulta=${consulta.idConsulta}" class="btn btn sm btn-primary"> <i class="fas fa-edit"></i> </a>
+                                                        <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#consulta-${consulta.idConsulta}" class="btn btn sm btn-danger"> <i class="fas fa-trash-alt"></i> </a>
+                                                    </td>
+                                                </tr>
+
+                                            <div class="modal fade" id="consulta-${consulta.idConsulta}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja deletar?</h5>
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">Você realmente deseja excluir o consulta ${consulta.idConsulta}?</div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Não</button>
+                                                            <a class="btn btn-danger" href="gerenciar_consulta.do?acao=deletar&idConsulta=${consulta.idConsulta}">Sim</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                             </c:forEach>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

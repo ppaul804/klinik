@@ -4,25 +4,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class ContratoServicoDAO extends DataBaseDAO {
+public class ServicoConsultaDAO extends DataBaseDAO {
 
-    public ContratoServicoDAO() throws Exception {}
+    public ServicoConsultaDAO() throws Exception {}
     
-    public ArrayList<ContratoServico> getCarregaPorId(int idContrato) throws Exception {
+    public ArrayList<ServicoConsulta> getCarregaPorId(int idConsulta) throws Exception {
         
         this.conectar();
-        String sql = "SELECT * FROM contrato_servico WHERE idContrato = ?";
+        String sql = "SELECT * FROM servico_consulta WHERE idCONSULTA = ?";
         
         PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setInt(1, idContrato);
+        pstm.setInt(1, idConsulta);
         ResultSet rs = pstm.executeQuery();
-        ArrayList<ContratoServico> lista = new ArrayList<ContratoServico>();
+        ArrayList<ServicoConsulta> lista = new ArrayList<ServicoConsulta>();
         
         while (rs.next()) {            
-            ContratoServico contratoServico = new ContratoServico();
+            ServicoConsulta contratoServico = new ServicoConsulta();
             
-            ContratoDAO conDAO = new ContratoDAO();
-            contratoServico.setContrato(conDAO.getCarregaPorId(rs.getInt("idCONSULTA")));
+            ConsultaDAO conDAO = new ConsultaDAO();
+            contratoServico.setConsulta(conDAO.getCarregaPorId(rs.getInt("idCONSULTA")));
             ServicoDAO sDAO = new ServicoDAO();
             contratoServico.setServico(sDAO.getCarregaPorID(rs.getInt("idSERVICO")));
             contratoServico.setQuantidade(rs.getInt("QUANTIDADE"));

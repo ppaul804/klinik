@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -151,7 +144,7 @@ public class GerenciarContrato extends HttpServlet {
                     contrato.setData_contrato(data);
                     
                     if (conDAO.gravar(contrato)) {
-                        mensagem = "Contrato realizada com sucesso!";
+                        mensagem = "Contrato alterado com sucesso!";
                     } else {
                         mensagem  = "Erro ao gravar no banco de dados!";
                     }
@@ -172,7 +165,7 @@ public class GerenciarContrato extends HttpServlet {
 
 
                     if (conDAO.gravar(contrato)) {
-                        mensagem = "Contrato alterado com sucesso!";
+                        mensagem = "Contrato realizada com sucesso!";
                     } else {
                         mensagem  = "Erro ao gravar no banco de dados!";
                     }
