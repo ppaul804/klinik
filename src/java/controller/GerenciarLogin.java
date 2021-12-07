@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import model.Menu;
 import model.Usuario;
 import model.UsuarioDAO;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -81,6 +82,7 @@ public class GerenciarLogin extends HttpServlet {
                 Usuario usuario = new Usuario();
                 
                 usuario = uDAO.getRecuperarUsuario(login);
+                //&& usuario.getSenha().equals(senha)  && BCrypt.checkpw(senha, usuario.getSenha())
                 if (usuario.getIdUsuario() > 0 && usuario.getSenha().equals(senha)) {
                     if (usuario.getStatus() == 1) {
                         HttpSession sessao = request.getSession();

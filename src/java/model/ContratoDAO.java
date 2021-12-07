@@ -124,7 +124,7 @@ public class ContratoDAO extends DataBaseDAO {
         while (rs.next()) {            
             Contrato contrato = new Contrato();
             contrato.setIdContrato(rs.getInt("idCONTRATO"));
-            contrato.setData_contrato(rs.getDate("DATA_CONTRATO"));
+            contrato.setData_contrato(new Date(rs.getTimestamp("DATA_CONTRATO").getTime()));
             contrato.setStatus(rs.getString("STATUS"));
             ClienteDAO cDAO = new ClienteDAO();
             contrato.setIdCliente(cDAO.getCarregaPorId(rs.getInt("idCLIENTE")));
@@ -136,5 +136,5 @@ public class ContratoDAO extends DataBaseDAO {
         this.desconectar();
         return lista;
     }
-    
+       
 }

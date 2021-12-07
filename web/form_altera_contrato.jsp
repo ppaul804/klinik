@@ -76,7 +76,7 @@
                             </thead>
                             <jsp:useBean class="model.ContratoServicoDAO" id="csDAO" />
                             <tbody>
-                                <c:forEach var="cs" items="${csDAO.getCarregaPorId(contrato.idContrato)}">
+                                <c:forEach var="cs" items="${csDAO.getCarregaPorId(id)}">
                                     <tr>
                                         <td class="text-center"> ${cs.contrato.idContrato} </td>
                                         <td> ${cs.servico.nome} </td>

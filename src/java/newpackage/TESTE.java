@@ -53,7 +53,7 @@ public class TESTE {
 //        }
 
         ContratoServicoDAO csDAO = new ContratoServicoDAO();
-        System.out.println(csDAO.getCarregaPorId(16));
+        System.out.println(csDAO.getCarregaPorId(1));
         
     }
 }

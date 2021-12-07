@@ -132,4 +132,27 @@ public class ClienteDAO extends DataBaseDAO {
         return cliente;
         
     }
+      
+    public ArrayList<Cliente> ultimosCadastrados() throws Exception{
+        
+        ArrayList<Cliente> lista = new ArrayList<Cliente>();
+        String sql = "SELECT idCLIENTE, NOME, CPF FROM cliente ORDER BY idCLIENTE desc LIMIT 5";
+        
+        this.conectar();
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        ResultSet rs = pstm.executeQuery();
+        
+        while (rs.next()) {            
+            Cliente cliente = new Cliente();
+            cliente.setIdCliente(rs.getInt("cliente.idCliente"));
+  
+            cliente.setNome(rs.getString("cliente.NOME"));
+            cliente.setCpf(rs.getString("cliente.CPF"));
+            lista.add(cliente);
+        }
+        
+        this.desconectar();
+        return lista;
+        
+    }
 }

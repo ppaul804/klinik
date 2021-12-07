@@ -47,7 +47,160 @@
                             <h1 class="h3 mb-0 text-gray-800">Página Inicial</h1>
                         </div>
 
-                        
+                        <!-- Content Row -->
+                        <div class="row">
+
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <a href="gerenciar_cliente.do?acao=listar">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-lg font-weight-bold text-primary text-uppercase ml-5">Clientes</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa fa-child fa-3x text-primary"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <a href="gerenciar_consulta.do?acao=listar">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-lg font-weight-bold text-success text-uppercase ml-5">Consultas</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-stethoscope fa-3x text-success"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <a href="gerenciar_contrato.do?acao=listar">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-lg font-weight-bold text-info text-uppercase ml-5">Contratos</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-file-signature fa-3x text-info"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Pending Requests Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <a href="gerenciar_servico.do?acao=listar">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                        <div class="text-lg font-weight-bold text-warning text-uppercase ml-5">Serviços</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-briefcase fa-3x text-warning"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Row -->
+
+                        <div class="row">
+
+                            <div class="col-lg-6 mb-4">
+
+                                <!-- Illustrations -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Consultas de Em Aberto</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15rem;" src="assets/img/consultas.svg" alt="">
+                                        </div>
+
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-borderless">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nome Cliente</th>
+                                                        <th class="text-center">Data Consulta</th>
+                                                    </tr>
+                                                </thead>
+                                                <jsp:useBean class="model.ConsultaDAO" id="ctDAO"/>
+                                                <tbody>
+                                                    <c:forEach var="consulta" items="${ctDAO.consultasEmAberto()}">
+                                                        <tr>
+                                                            <td>${consulta.idConsulta}</td>
+                                                            <td>${consulta.cliente.nome}</td>
+                                                            <td class="text-center">${consulta.data_consulta}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+
+                                <!-- Illustrations -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Últimos clientes cadastrados</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 14rem;" src="assets/img/clientes.svg" alt="">
+                                        </div>
+
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-borderless">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nome</th>
+                                                        <th class="text-center">CPF</th>
+                                                    </tr>
+                                                </thead>
+                                                <jsp:useBean class="model.ClienteDAO" id="cDAO"/>
+                                                <tbody>
+                                                    <c:forEach var="cliente" items="${cDAO.ultimosCadastrados()}">
+                                                        <tr>
+                                                            <td>${cliente.idCliente}</td>
+                                                            <td>${cliente.nome}</td>
+                                                            <td class="text-center">${cliente.cpf}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <!-- /.container-fluid -->
 

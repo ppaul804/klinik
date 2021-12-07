@@ -5,8 +5,7 @@
  */
 package controller;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
-//import org.mindrot.jbcrypt.BCrypt;
+import org.mindrot.jbcrypt.BCrypt;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -165,16 +164,16 @@ public class GerenciarUsuarios extends HttpServlet {
                 UsuarioDAO uDAO = new UsuarioDAO();
                 
                 if (acao.equals("cadastrar")) {
-                    //String complexidade = BCrypt.gensalt(10);
-                    //senha = BCrypt.hashpw(senha, complexidade);
+                    String complexidade = BCrypt.gensalt(10);
+                    senha = BCrypt.hashpw(senha, complexidade);
                     u.setSenha(senha);
                 } else {
                     if (senha.equals("")) {
                         uAlterar = uDAO.getCarregaPorId(Integer.parseInt(idUsuario));
                         u.setSenha(uAlterar.getSenha());
                     } else {
-                        //String complexidade = BCrypt.gensalt(10);
-                        //senha = BCrypt.hashpw(senha, complexidade);
+                        String complexidade = BCrypt.gensalt(10);
+                        senha = BCrypt.hashpw(senha, complexidade);
                         u.setSenha(senha);
                     }
                 }

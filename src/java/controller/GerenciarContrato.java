@@ -65,6 +65,7 @@ public class GerenciarContrato extends HttpServlet {
                     if (contrato.getIdContrato()> 0) {
                         RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_altera_contrato.jsp");
                         request.setAttribute("contrato", contrato);
+                        request.setAttribute("id", contrato.getIdContrato());
                         
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                         String data = sdf.format(contrato.getData_contrato().getTime());

@@ -22,7 +22,7 @@ public class ContratoServicoDAO extends DataBaseDAO {
             ContratoServico contratoServico = new ContratoServico();
             
             ContratoDAO conDAO = new ContratoDAO();
-            contratoServico.setContrato(conDAO.getCarregaPorId(rs.getInt("idCONSULTA")));
+            contratoServico.setContrato(conDAO.getCarregaPorId(rs.getInt("idCONTRATO")));
             ServicoDAO sDAO = new ServicoDAO();
             contratoServico.setServico(sDAO.getCarregaPorID(rs.getInt("idSERVICO")));
             contratoServico.setQuantidade(rs.getInt("QUANTIDADE"));

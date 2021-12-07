@@ -98,14 +98,18 @@
                 </c:if>
             </c:forEach>
         </c:if>
-        
-        <!-- Divider -->
-        <hr class="sidebar-divider">
 
-        <!-- Heading -->
-        <div class="sidebar-heading text-center">
-            Configurações
-        </div>
+        <c:if test="${usuarioLogado != null && usuarioLogado.idPerfil != null}">
+            <c:if test="${usuarioLogado.idPerfil.nome != 'Atendente' && usuarioLogado.idPerfil.nome != 'Dentista'}">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                
+                <!-- Heading -->
+                <div class="sidebar-heading text-center">
+                    Configurações
+                </div>
+            </c:if>
+        </c:if>
         
         <c:if test="${usuarioLogado != null && usuarioLogado.idPerfil != null}">
             <c:forEach var="menu" items="${usuarioLogado.idPerfil.menus}">
