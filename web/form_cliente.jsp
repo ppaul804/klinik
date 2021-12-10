@@ -97,17 +97,25 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
-                                    <div class="col-md-5">
+                                    <div class="col-md-4">
                                         <label>Endereço</label>
                                         <input type="text" class="form-control" name="endereco" placeholder="Seu endereço" value="${cliente.endereco}" maxlength="45" required=""> 
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label>Complemento</label>
                                         <input type="text" class="form-control" name="complemento" placeholder="Seu complemento" value="${cliente.complemento}" maxlength="45">
                                     </div>
                                     <div class="col-md-3">
                                         <label>Cidade</label>
                                         <input type="text" class="form-control" name="cidade" placeholder="Sua cidade" value="${cliente.cidade}" maxlength="45" required="">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Status</label>
+                                        <select class="custom-select" name="status" required="">
+                                            <option value="" disabled="" selected="">Escolha um Status</option>
+                                            <option value="0" <c:if test="${cliente.status == 0}">selected=""</c:if>>Inativo</option>
+                                            <option value="1" <c:if test="${cliente.status == 1}">selected=""</c:if>>Ativo</option>
+                                        </select>
                                     </div>
                                 </div>
                             </fieldset>

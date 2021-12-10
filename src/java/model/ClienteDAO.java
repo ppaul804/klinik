@@ -28,6 +28,7 @@ public class ClienteDAO extends DataBaseDAO {
             cliente.setRg(rs.getString("cliente.RG"));
             cliente.setEmail(rs.getString("cliente.EMAIL"));
             cliente.setTelefone(rs.getString("cliente.TELEFONE"));
+            cliente.setStatus(rs.getInt("cliente.STATUS"));
             cliente.setEndereco(rs.getString("cliente.ENDERECO"));
             cliente.setComplemento(rs.getString("cliente.COMPLEMENTO"));
             cliente.setCidade(rs.getString("cliente.CIDADE"));
@@ -51,9 +52,9 @@ public class ClienteDAO extends DataBaseDAO {
             this.conectar();
             
             if (cliente.getIdCliente() == 0) {
-                sql = "INSERT INTO cliente (NOME,CPF, RG, EMAIL, TELEFONE, ENDERECO, COMPLEMENTO, CIDADE, SEXO, DATA_DE_NASCIMENTO,OBSERVACAO) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "INSERT INTO cliente (NOME, CPF, RG, EMAIL, TELEFONE, STATUS, ENDERECO, COMPLEMENTO, CIDADE, SEXO, DATA_DE_NASCIMENTO,OBSERVACAO) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             } else {
-                sql = "UPDATE cliente SET NOME = ?, CPF = ?, RG = ?, EMAIL = ?, TELEFONE = ?, ENDERECO = ?, COMPLEMENTO = ?, CIDADE = ?, SEXO = ?, DATA_DE_NASCIMENTO = ?,OBSERVACAO = ? WHERE idCLIENTE=?";
+                sql = "UPDATE cliente SET NOME = ?, CPF = ?, RG = ?, EMAIL = ?, TELEFONE = ?, STATUS = ?, ENDERECO = ?, COMPLEMENTO = ?, CIDADE = ?, SEXO = ?, DATA_DE_NASCIMENTO = ?,OBSERVACAO = ? WHERE idCLIENTE=?";
             }
             
             PreparedStatement pstm = conn.prepareStatement(sql);
@@ -62,15 +63,16 @@ public class ClienteDAO extends DataBaseDAO {
             pstm.setString(3, cliente.getRg());
             pstm.setString(4, cliente.getEmail());
             pstm.setString(5, cliente.getTelefone());
-            pstm.setString(6, cliente.getEndereco());
-            pstm.setString(7, cliente.getComplemento());
-            pstm.setString(8, cliente.getCidade());
-            pstm.setString(9, Character.toString(cliente.getSexo()));
-            pstm.setDate(10, new Date(cliente.getData_de_nascimento().getTime()));
-            pstm.setString(11, cliente.getObservacao());
+            pstm.setInt(6, cliente.getStatus());
+            pstm.setString(7, cliente.getEndereco());
+            pstm.setString(8, cliente.getComplemento());
+            pstm.setString(9, cliente.getCidade());
+            pstm.setString(10, Character.toString(cliente.getSexo()));
+            pstm.setDate(11, new Date(cliente.getData_de_nascimento().getTime()));
+            pstm.setString(12, cliente.getObservacao());
            
             if(cliente.getIdCliente() > 0) {
-                pstm.setInt(12, cliente.getIdCliente());
+                pstm.setInt(13, cliente.getIdCliente());
             }
             
             pstm.execute();
@@ -88,7 +90,8 @@ public class ClienteDAO extends DataBaseDAO {
        
         try{
             this.conectar();
-            String sql = "DELETE FROM cliente WHERE idCliente=?";
+            String sql = "UPDATE cliente SET STATUS = 0 WHERE idCLIENTE=?";
+
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1,cliente.getIdCliente());
             pstm.execute();
@@ -120,6 +123,7 @@ public class ClienteDAO extends DataBaseDAO {
             cliente.setRg(rs.getString("cliente.RG"));
             cliente.setEmail(rs.getString("cliente.EMAIL"));
             cliente.setTelefone(rs.getString("cliente.TELEFONE"));
+            cliente.setStatus(rs.getInt("cliente.STATUS"));
             cliente.setEndereco(rs.getString("cliente.ENDERECO"));
             cliente.setComplemento(rs.getString("cliente.COMPLEMENTO"));
             cliente.setCidade(rs.getString("cliente.CIDADE"));

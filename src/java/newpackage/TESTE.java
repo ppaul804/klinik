@@ -2,6 +2,8 @@ package newpackage;
 
 
 import java.text.SimpleDateFormat;
+import model.Cliente;
+import model.ClienteDAO;
 import model.ContratoServicoDAO;
 import model.Menu;
 import model.Perfil;
@@ -14,6 +16,8 @@ public class TESTE {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         UsuarioDAO uDAO = new UsuarioDAO();
         Usuario u = new Usuario();
+        Cliente c = new Cliente();
+        ClienteDAO cDAO = new ClienteDAO();
         int idUsuario = 1;
         //String data = "2003-09-03";
         String sexo = "M";
@@ -52,8 +56,9 @@ public class TESTE {
 //            System.out.println(m);
 //        }
 
-        ContratoServicoDAO csDAO = new ContratoServicoDAO();
-        System.out.println(csDAO.getCarregaPorId(1));
+//        ContratoServicoDAO csDAO = new ContratoServicoDAO();
+//        System.out.println(csDAO.getCarregaPorId(1));
+          System.out.println(cDAO.getLista());
         
     }
 }

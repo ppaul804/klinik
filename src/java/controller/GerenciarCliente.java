@@ -83,10 +83,10 @@ public class GerenciarCliente extends HttpServlet {
                     if (GerenciarLogin.verificarPermissao(request, response)) {
                         c.setIdCliente(Integer.parseInt(idCliente));
                         if (cDAO.deletar(c)) {
-                            mensagem = "Cliente deletado com sucesso!";
+                            mensagem = "Cliente desativado com sucesso!";
 
                         } else {
-                            mensagem = "Erro ao deletar o Cliente!";
+                            mensagem = "Erro ao desativar o Cliente!";
                         }
                     } else {
                         mensagem = "Acesso Negado a está função!";
@@ -124,6 +124,7 @@ public class GerenciarCliente extends HttpServlet {
         String cpf = request.getParameter("cpf");
         String rg = request.getParameter("rg");
         String telefone = request.getParameter("telefone");
+        String status = request.getParameter("status");
         String sexo = request.getParameter("sexo");
         String endereco = request.getParameter("endereco");
         String complemento = request.getParameter("complemento");
@@ -152,6 +153,7 @@ public class GerenciarCliente extends HttpServlet {
                 c.setCpf(cpf);
                 c.setRg(rg);
                 c.setTelefone(telefone);
+                c.setStatus(Integer.parseInt(status));
                 c.setSexo(sexo.charAt(0));
                 c.setEndereco(endereco);
                 c.setComplemento(complemento);
