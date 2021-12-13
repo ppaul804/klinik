@@ -3,8 +3,7 @@ package controller;
 import helper.Helper;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +26,8 @@ import model.UsuarioDAO;
 public class GerenciarConsulta extends HttpServlet {
 
     private Helper helper = new Helper();
+
+    final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -121,9 +122,7 @@ public class GerenciarConsulta extends HttpServlet {
                 consulta.setAtendente(usuario = uDAO.getCarregaPorId(Integer.parseInt(idUsuario)));
                 consulta.setCliente(cliente = cDAO.getCarregaPorId(Integer.parseInt(idCliente)));
                 consulta.setStatus(status);
-
-                LocalDateTime data = LocalDateTime.parse(data_hora, DateTimeFormatter.ISO_DATE_TIME);
-                consulta.setData_consulta(data);
+                consulta.setData_consulta(sdf.parse(data_hora));
 
                 if (conDAO.gravar(consulta)) {
                     mensagem = "Consulta alterado com sucesso!";
@@ -141,9 +140,7 @@ public class GerenciarConsulta extends HttpServlet {
                 ConsultaDAO conDAO = new ConsultaDAO();
                 Consulta consulta = (Consulta) session.getAttribute("consulta");
                 consulta.setStatus(status);
-
-                LocalDateTime data = LocalDateTime.parse(data_hora, DateTimeFormatter.ISO_DATE_TIME);
-                consulta.setData_consulta(data);
+                consulta.setData_consulta(sdf.parse(data_hora));
 
                 if (conDAO.gravar(consulta)) {
                     mensagem = "Consulta realizada com sucesso!";
@@ -173,13 +170,6 @@ public class GerenciarConsulta extends HttpServlet {
             mensagem = "Acesso Negado a está função!";
         }
         return mensagem;
-    }
-
-    private void exibirMensagemServlet(final PrintWriter out, String mensagem, String link) {
-        out.println("<script type='text/javascript'>");
-        out.println("alert('" + mensagem != null ? mensagem : "" + "');");
-        out.println("location.href = '" + link + "';");
-        out.println("</script>");
     }
 
     @Override

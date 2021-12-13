@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +19,7 @@ public class Consulta {
     private Cliente cliente;
     private Usuario atendente;
     private String status;
-    private LocalDateTime data_consulta;
+    private Date data_consulta;
     private List<ServicoConsulta> carrinho;
 
 }

@@ -80,7 +80,9 @@
                                                     <td>${consulta.idConsulta}</td>
                                                     <td>${consulta.atendente.nome}</td>
                                                     <td>${consulta.cliente.nome}</td>
-                                                    <td>${consulta.data_consulta}</td>
+                                                    <td>
+                                                        <fmt:formatDate value="${consulta.data_consulta}" pattern="dd/MM/yyyy 'às' HH:mm" />
+                                                    </td>
                                                     <td class="text-center">
                                                         <c:if test="${consulta.status == 'finalizado'}">
                                                             <span class="btn badge badge-success">Finalizado</span>

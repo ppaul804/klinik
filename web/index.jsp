@@ -1,6 +1,7 @@
 <%@page import="java.time.LocalDate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -50,7 +51,7 @@
                         <!-- Content Row -->
                         <div class="row">
 
-                            <!-- Earnings (Monthly) Card Example -->
+                            <!-- Clientes -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <a href="gerenciar_cliente.do?acao=listar">
@@ -68,7 +69,7 @@
                                 </div>
                             </div>
 
-                            <!-- Earnings (Monthly) Card Example -->
+                            <!-- Consultas -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <a href="gerenciar_consulta.do?acao=listar">
@@ -86,7 +87,7 @@
                                 </div>
                             </div>
 
-                            <!-- Earnings (Monthly) Card Example -->
+                            <!-- Contratos -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-info shadow h-100 py-2">
                                     <a href="gerenciar_contrato.do?acao=listar">
@@ -104,7 +105,7 @@
                                 </div>
                             </div>
 
-                            <!-- Pending Requests Card Example -->
+                            <!-- Serviços -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-warning shadow h-100 py-2">
                                     <a href="gerenciar_servico.do?acao=listar">
@@ -154,7 +155,9 @@
                                                         <tr>
                                                             <td>${consulta.idConsulta}</td>
                                                             <td>${consulta.cliente.nome}</td>
-                                                            <td class="text-center">${consulta.data_consulta}</td>
+                                                            <td class="text-center">
+                                                                <fmt:formatDate value="${consulta.data_consulta}" pattern="dd/MM/yyyy 'às' HH:mm" />
+                                                            </td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>

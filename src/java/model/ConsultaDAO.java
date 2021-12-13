@@ -23,7 +23,7 @@ public class ConsultaDAO extends DataBaseDAO {
                 pstm.setInt(1, consulta.getCliente().getIdCliente());
                 pstm.setInt(2, consulta.getAtendente().getIdUsuario());
                 pstm.setString(3, consulta.getStatus());
-                pstm.setTimestamp(4, Timestamp.valueOf(consulta.getData_consulta()));
+                pstm.setTimestamp(4, (Timestamp) consulta.getData_consulta());
                 pstm.execute();
                 ResultSet rs = pstm.getGeneratedKeys();
 
@@ -47,7 +47,7 @@ public class ConsultaDAO extends DataBaseDAO {
                 pstm.setInt(1, consulta.getCliente().getIdCliente());
                 pstm.setInt(2, consulta.getAtendente().getIdUsuario());
                 pstm.setString(3, consulta.getStatus());
-                pstm.setTimestamp(4, Timestamp.valueOf(consulta.getData_consulta()));
+                pstm.setTimestamp(4, (Timestamp) consulta.getData_consulta());
                 if (consulta.getIdConsulta() > 0) {
                     pstm.setInt(5, consulta.getIdConsulta());
                 }
@@ -103,8 +103,7 @@ public class ConsultaDAO extends DataBaseDAO {
             consulta.setCliente(clienteDAO.getCarregaPorId(rs.getInt("idCLIENTE")));
             consulta.setAtendente(usuarioDAO.getCarregaPorId(rs.getInt("idUSUARIO")));
             consulta.setStatus(rs.getString("STATUS"));
-            Timestamp timestamp = rs.getTimestamp("DATA_CONSULTA");
-            consulta.setData_consulta(timestamp.toLocalDateTime());
+            consulta.setData_consulta(rs.getTimestamp("DATA_CONSULTA"));
         }
 
         this.desconectar();
@@ -128,8 +127,7 @@ public class ConsultaDAO extends DataBaseDAO {
             consulta.setCliente(clienteDAO.getCarregaPorId(rs.getInt("idCLIENTE")));
             consulta.setAtendente(usuarioDAO.getCarregaPorId(rs.getInt("idUSUARIO")));
             consulta.setStatus(rs.getString("STATUS"));
-            Timestamp timestamp = rs.getTimestamp("DATA_CONSULTA");
-            consulta.setData_consulta(timestamp.toLocalDateTime());
+            consulta.setData_consulta(rs.getTimestamp("DATA_CONSULTA"));
             lista.add(consulta);
         }
 
@@ -149,7 +147,7 @@ public class ConsultaDAO extends DataBaseDAO {
         while (rs.next()) {
             Consulta consulta = new Consulta();
             consulta.setIdConsulta(rs.getInt("idCONSULTA"));
-            consulta.setData_consulta(rs.getTimestamp("DATA_CONSULTA").toLocalDateTime());
+            consulta.setData_consulta(rs.getTimestamp("DATA_CONSULTA"));
             ClienteDAO cDAO = new ClienteDAO();
             consulta.setCliente(cDAO.getCarregaPorId(rs.getInt("idCLIENTE")));
             lista.add(consulta);

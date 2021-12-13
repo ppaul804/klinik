@@ -81,7 +81,10 @@
                                                     <td>${contrato.idContrato}</td>
                                                     <td>${contrato.atendente.nome}</td>
                                                     <td>${contrato.idCliente.nome}</td>
-                                                    <td>${contrato.data_contrato}</td>
+                                                    <td>
+                                                        
+                                                        <fmt:formatDate value="${contrato.data_contrato}" pattern="dd/MM/yyyy 'às' HH:mm" />
+                                                    </td>
                                                     <td class="text-center">
                                                         <c:if test="${contrato.status == 'finalizado'}">
                                                             <span class="btn badge badge-success">Finalizado</span>
