@@ -81,7 +81,7 @@
                                         <td class="text-center"> ${cs.consulta.idConsulta} </td>
                                         <td> ${cs.servico.nome} </td>
                                         <td> ${cs.quantidade} </td>
-                                        <td> ${cs.valor} </td>
+                                        <td> R$ ${cs.valor} </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -112,7 +112,7 @@
                             <input type="hidden" name="idConsulta" value="${consulta.idConsulta}">
                             <input type="hidden" name="idCliente" value="${consulta.cliente.idCliente}">
                             <input type="hidden" name="idUsuario" value="${consulta.atendente.idUsuario}">
-                            <button type="submit" class="btn btn-primary btn-sm float-right ml-2" <c:if test="${usuarioLogado.idPerfil.nome == 'Atendente' && consulta.status == 'finalizado'}">disabled=""</c:if>><i class="fas fa-save"></i>&nbsp;Gravar</button>
+                            <button type="submit" class="btn btn-primary btn-sm float-right ml-2" <c:if test="${usuarioLogado.idPerfil.nome == 'Atendente' && consulta.status != 'aberto'}">disabled=""</c:if>><i class="fas fa-save"></i>&nbsp;Gravar</button>
                             <a title="Voltar" href="gerenciar_consulta.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
                         </form>
                             

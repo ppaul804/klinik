@@ -81,7 +81,7 @@
                                         <td class="text-center"> ${cs.contrato.idContrato} </td>
                                         <td> ${cs.servico.nome} </td>
                                         <td> ${cs.quantidade} </td>
-                                        <td> ${cs.valor} </td>
+                                        <td> R$ ${cs.valor} </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -112,7 +112,7 @@
                             <input type="hidden" name="idContrato" value="${contrato.idContrato}">
                             <input type="hidden" name="idCliente" value="${contrato.idCliente.idCliente}">
                             <input type="hidden" name="idUsuario" value="${contrato.atendente.idUsuario}">
-                            <button type="submit" class="btn btn-primary btn-sm float-right ml-2" <c:if test="${usuarioLogado.idPerfil.nome == 'Atendente' && contrato.status == 'finalizado'}">disabled=""</c:if>><i class="fas fa-save"></i>&nbsp;Gravar</button>
+                            <button type="submit" class="btn btn-primary btn-sm float-right ml-2" <c:if test="${usuarioLogado.idPerfil.nome == 'Atendente' && contrato.status != 'aberto'}">disabled=""</c:if>><i class="fas fa-save"></i>&nbsp;Gravar</button>
                             <a title="Voltar" href="gerenciar_contrato.do?acao=listar" class="btn btn-success btn-sm float-right"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</a>
                         </form>
                             

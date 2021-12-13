@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.time.LocalDate"%>
 <%@page import="model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
