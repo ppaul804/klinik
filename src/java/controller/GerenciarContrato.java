@@ -68,9 +68,9 @@ public class GerenciarContrato extends HttpServlet {
                         request.setAttribute("id", contrato.getIdContrato());
                         
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                        String data = sdf.format(contrato.getData_contrato().getTime());
-                                
+                        String data = sdf.format(contrato.getData_contrato().getTime());   
                         request.setAttribute("data", data);
+                        
                         request.setAttribute("titulo", "Alterar Contrato");
                         disp.forward(request, response);
 

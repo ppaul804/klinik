@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label>Data Consulta</label>
-                                        <input type="datetime-local" class="form-control" name="data_consulta" value="${consulta.data_consulta}" required=""> 
+                                        <input type="datetime-local" class="form-control" name="data_consulta" value="${data}" required=""> 
                                     </div>
                                     <div class="col-md-3">
                                         <label>Status</label>

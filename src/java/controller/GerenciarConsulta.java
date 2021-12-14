@@ -4,6 +4,7 @@ import helper.Helper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +28,7 @@ public class GerenciarConsulta extends HttpServlet {
 
     private Helper helper = new Helper();
 
-    final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -57,8 +58,12 @@ public class GerenciarConsulta extends HttpServlet {
                     if (consulta.getIdConsulta() > 0) {
                         RequestDispatcher disp = getServletContext().getRequestDispatcher("/form_altera_consulta.jsp");
                         request.setAttribute("consulta", consulta);
+                        
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                        String data = sdf.format(consulta.getData_consulta().getTime());   
+                        request.setAttribute("data", data);
+                        
                         request.setAttribute("titulo", "Alterar Consulta");
-                        request.setAttribute("activeC", "active");
                         disp.forward(request, response);
                     } else {
                         mensagem = "Consulta não encontrada";
@@ -122,7 +127,9 @@ public class GerenciarConsulta extends HttpServlet {
                 consulta.setAtendente(usuario = uDAO.getCarregaPorId(Integer.parseInt(idUsuario)));
                 consulta.setCliente(cliente = cDAO.getCarregaPorId(Integer.parseInt(idCliente)));
                 consulta.setStatus(status);
-                consulta.setData_consulta(sdf.parse(data_hora));
+                
+                Date data = sdf.parse(data_hora);
+                consulta.setData_consulta(data);
 
                 if (conDAO.gravar(consulta)) {
                     mensagem = "Consulta alterado com sucesso!";
@@ -140,7 +147,9 @@ public class GerenciarConsulta extends HttpServlet {
                 ConsultaDAO conDAO = new ConsultaDAO();
                 Consulta consulta = (Consulta) session.getAttribute("consulta");
                 consulta.setStatus(status);
-                consulta.setData_consulta(sdf.parse(data_hora));
+                
+                Date data = sdf.parse(data_hora);
+                consulta.setData_consulta(data);
 
                 if (conDAO.gravar(consulta)) {
                     mensagem = "Consulta realizada com sucesso!";

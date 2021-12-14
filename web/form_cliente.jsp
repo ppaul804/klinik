@@ -76,7 +76,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-3">
                                         <label>CPF</label>
-                                        <input type="text" class="form-control" name="cpf" placeholder="Seu CPF" value="${cliente.cpf}" maxlength="11" required=""> 
+                                        <input type="text" class="form-control" name="cpf" placeholder="Seu CPF" value="${cliente.cpf}" minlength="11" maxlength="11" required=""> 
                                     </div>
                                     <div class="col-md-3">
                                         <label>RG</label>
