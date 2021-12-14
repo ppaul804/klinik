@@ -67,7 +67,7 @@
                                                 <th>ID</th>
                                                 <th>Nome</th>
                                                 <th>Email</th>
-                                                <th>Telefone</th>
+                                                <th>CPF</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-right">Ação</th>
                                             </tr>
@@ -80,7 +80,7 @@
                                                 <td>${c.idCliente}</td>
                                                 <td>${c.nome}</td>
                                                 <td>${c.email}</td>
-                                                <td>${c.telefone}</td>
+                                                <td>${c.cpf}</td>
                                                 <td class="text-center">
                                                         <c:if test="${c.status == 1}">
                                                             <span class="btn badge badge-primary">ATIVO</span>

@@ -82,7 +82,6 @@
                                                     <td>${contrato.atendente.nome}</td>
                                                     <td>${contrato.idCliente.nome}</td>
                                                     <td>
-                                                        
                                                         <fmt:formatDate value="${contrato.data_contrato}" pattern="dd/MM/yyyy 'às' HH:mm" />
                                                     </td>
                                                     <td class="text-center">
